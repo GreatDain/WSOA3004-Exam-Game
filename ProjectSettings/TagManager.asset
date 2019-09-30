@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Grass
   - Gravel
+  - Wall
+  - Cage
+  - Tree
+  - Waypoint
   layers:
   - Default
   - TransparentFX
@@ -15,9 +19,9 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
+  - Player
+  - Enemy
+  - Obstacle
   - 
   - 
   - 
