@@ -7,64 +7,71 @@ public class SoundTester : MonoBehaviour
 {
 
     /////////////////Does not replace SoundTesting Script///////////////////
-    //public float delaySound;
+    //  AUDIO SOURCES
     public AudioSource grassAudioSource;         //Audio source ref/var
     public AudioSource gravelAudioSource;         //Audio source ref/var
     public AudioSource walkAudioSource;         //Audio source ref/var
     public AudioSource bgSound;
     public AudioSource breatheAudioSource;
-
+    //AUDIO CLIPS
     public AudioClip grassSFX;             //Actual Sound ref/var
     public AudioClip gravelSFX;            //Actual Sound ref/var
     public AudioClip walkSFX;             //Actual Sound ref/var
-                                          //Testing Sound
     public AudioClip breatheSFX;
     public AudioClip bgSFX;
-
+    //TEXTURE BOOLEANS
     public bool onGrass = false;            //is the player on grass?
     public bool onGravel = false;
-    //manage stamina
+    //SPRINT TOGGLE
     private bool isRunning = false;
+    //CONSTANT AUDIO LEVELING
+    /*
+    [Range (1f, 3f)]
+    public float runPitch, sneakPitch, normPitch;           //
+    [Range(0.1f, 10f)]
+    public float runVol, sneakVol, normVol;                 //
+   */
     
 
     // Start is called before the first frame update
     void Start()
     {
-        //The player starts  breathing when the game starts
-        //IdleBreathing();                //Breathing Sound when player is Idling
-        bgSound.Play();                 //plau background sound
+        bgSound.Play();                 //play background sound
     }
 
     // Update is called once per frame
+   
     void Update()
     {
-        if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0 && onGrass == true)      //checked if player is moving on the grass
+        
+        if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0 && onGrass == true)      //(Movement inputs) checked if player is moving on the grass
         {   
             Moving();                           //play step movement sound (stomp)
-            print("Now playing Grass SFX");
             OnGrass();                          //Play grass sfx
-            //RunningBreathe();
-            //Change breathing sound Pitch to make it faster
+            print("Now playing Grass SFX");
+            //Change breathing sound Pitch to make it faster when player is running
             grassAudioSource.loop = true;       //loop the grass sound while player is moving
             walkAudioSource.loop = true;        //loop moving sound
         }
-        else //On gravel Sound FX
-        if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0 && onGravel == true)         ////checked if player is not moving on grass but gravel
+        else if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0 && onGravel == true)         ////checked if player is not moving on grass but gravel
         {
+            //On gravel Sound FX
             Moving();                           //play step movement sound (stomp)
             OnGravel();                         //play gravel sfx
             walkAudioSource.loop = true;        //loop moving sound
+            gravelAudioSource.loop = true;
             print("Now playing Gravel SFX");
         }
       
-        //Check if the player is still pressing the button|| else stop playing the sound
-     
-        //Check if player is printing - increase pitch and volume
-        if(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+        //Check if player is sprinting - increase pitch and volume
+        if(Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0 && Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
         {
-            print("Player is ready to sprint");
-        }
+            //player is moving while pressing shift = sprint
+            print("Player is sprinting");
+            breatheAudioSource.pitch = 1.3f;
 
+        }
+        
     }
 
     private void OnTriggerStay(Collider other)
@@ -102,7 +109,6 @@ public class SoundTester : MonoBehaviour
 
     }
 
-
     //Sound Functions
     //When player is moving
     void Moving()
@@ -117,6 +123,7 @@ public class SoundTester : MonoBehaviour
     {
         IdleBreathing();
         breatheAudioSource.pitch = 1.8f;
+        breatheAudioSource.volume = 1f;
     }
 
     //when player is stationary
@@ -125,6 +132,7 @@ public class SoundTester : MonoBehaviour
         //breatheAudioSource.volume = Random.Range(.3f, .7f);
         breatheAudioSource.pitch = 1.3f;           //randomise pitch
         breatheAudioSource.PlayOneShot(breatheSFX,.7f);                                      //randomise volume
+        breatheAudioSource.loop = true;
 
     }
 

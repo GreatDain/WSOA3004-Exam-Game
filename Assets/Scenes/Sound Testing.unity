@@ -307,6 +307,12 @@ MonoBehaviour:
   bgSFX: {fileID: 8300000, guid: d7d311fd0a3e1044bb10b03a085f381c, type: 3}
   onGrass: 0
   onGravel: 0
+  runPitch: 1
+  sneakPitch: 1
+  normPitch: 1
+  runVol: 0.1
+  sneakVol: 0.1
+  normVol: 0.1
 --- !u!1 &694719830
 GameObject:
   m_ObjectHideFlags: 0
@@ -750,7 +756,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -7305495966151518166, guid: be690f2cbbbe9df4c93dbc9e241b3f02,
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 85ff7d2f92c126d4e8cd8c2c713a13db, type: 3}
-  m_PlayOnAwake: 0
+  m_PlayOnAwake: 1
   m_Volume: 0.5
   m_Pitch: 1.1
   Loop: 1
@@ -891,7 +897,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -5589837759388022974, guid: be690f2cbbbe9df4c93dbc9e241b3f02,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: d9338f3fd29817d4197d1282f62d4dc7, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 692c1ad7c83084541965b1f565e58620, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.5
   m_Pitch: 1.1
@@ -1616,7 +1622,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - soundClip: {fileID: 8300000, guid: d7d311fd0a3e1044bb10b03a085f381c, type: 3}
+  - soundClip: {fileID: 8300000, guid: 692c1ad7c83084541965b1f565e58620, type: 3}
     name: BG Sound
     volume: 1
     pitch: 1.1
