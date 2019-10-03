@@ -8,8 +8,10 @@ public class Tutorial : MonoBehaviour
 {
     public Text objective1;
     public Text objective2;
-    public Text objective3;
-    public Text objective4;
+    public Text constantObjText;
+    public Text sprintUnlocked;
+    public Text howToSprint;
+    public Canvas objectivesTab;
     GameObject FPS;
     public GameObject prefab;
     GameObject oldPrefab;
@@ -21,16 +23,30 @@ public class Tutorial : MonoBehaviour
     void Start()
     {
         FPS = GameObject.FindGameObjectWithTag("Player");
+        //objectivesTab.enabled = true;
+        StartCoroutine("Objectives");
         objective1.enabled = true;
         objective2.enabled = false;
-        objective3.enabled = false;
-        objective4.enabled = false;
+
         counter = 0;
+        constantObjText.enabled = true;
+
+        sprintUnlocked.enabled = false;
+        howToSprint.enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Tab) && objectivesTab.enabled == true)
+        {
+            objectivesTab.enabled = false;
+        }
+        else if (Input.GetKeyDown(KeyCode.Tab) && objectivesTab.enabled == false)
+        {
+            objectivesTab.enabled = true;
+        }
+
         if (FPS.GetComponent<FPCharacterController>().cageOpen == true && counter == 0)
         {
             ObjectiveOne();
@@ -60,36 +76,63 @@ public class Tutorial : MonoBehaviour
 
     public void ObjectiveTwo()
     {
-        objective2.enabled = true;
-        prefab = Instantiate(prefab, new Vector3(-71f, 7.7f, 69f), transform.rotation);
-        sprintAbility = true;
+        prefab = Instantiate(prefab, new Vector3(-353f, 0, 132f), transform.rotation);
+        //sprintAbility = true;
         counter++;
     }
 
     public void ObjectiveThree()
     {
+        StartCoroutine("Objectives");
         Debug.Log("Obj 3");
         oldPrefab = prefab;
         prefab.GetComponent<PlayerWaypoint>().checkpoint = false;
-        prefab = Instantiate(prefab, new Vector3(-54f, 0, -142f), transform.rotation);
+        prefab = Instantiate(prefab, new Vector3(-315.2f, 0, -197.7f), transform.rotation);
         Destroy(GameObject.Find("WaypointMarker(Clone)"));
         Destroy(oldPrefab);
-        objective2.enabled = false;
-        objective3.enabled = true;
-        sneakAbility = true;
+        StartCoroutine("Sprint");
+        sprintAbility = true;
+        objective2.enabled = true;
+        //sneakAbility = true;
         counter++;
     }
 
     public void ObjectiveFour()
     {
-        Debug.Log("Obj 4");
+        //StartCoroutine("Objectives");
         oldPrefab = prefab;
-        objective3.enabled = false;
-        objective4.enabled = true;
         prefab.GetComponent<PlayerWaypoint>().checkpoint = false;
-        prefab = Instantiate(prefab, new Vector3(-54f, 0, -60f), transform.rotation);
+        prefab = Instantiate(prefab, new Vector3(-54f, 0, -142f), transform.rotation);
         Destroy(GameObject.Find("WaypointMarker(Clone)"));
         Destroy(oldPrefab);
         counter++;
+    }
+
+    /*public void ObjectiveFive()
+    {
+        StartCoroutine("Objectives");
+        oldPrefab = prefab;
+        prefab.GetComponent<PlayerWaypoint>().checkpoint = false;
+        prefab = Instantiate(prefab, new Vector3(-54f, 0, -142f), transform.rotation);
+        Destroy(GameObject.Find("WaypointMarker(Clone)"));
+        Destroy(oldPrefab);
+        counter++;
+    }*/
+
+    private IEnumerator Sprint()
+    {
+        sprintUnlocked.enabled = true;
+        yield return new WaitForSeconds(1.5f);
+        sprintUnlocked.enabled = false;
+        howToSprint.enabled = true;
+        yield return new WaitForSeconds(3f);
+        howToSprint.enabled = false;
+    }
+
+    private IEnumerator Objectives()
+    {
+        objectivesTab.enabled = true;
+        yield return new WaitForSeconds(10f);
+        objectivesTab.enabled = false;
     }
 }

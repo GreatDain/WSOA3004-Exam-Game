@@ -17,7 +17,7 @@ public class PlayerWaypoint : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        var canvas = GameObject.Find("Canvas").transform;
+        var canvas = GameObject.Find("WaypointCanvas").transform;
 
         waypoint = Instantiate(prefab, canvas);
         distanceText = waypoint.GetComponentInChildren<Text>();
