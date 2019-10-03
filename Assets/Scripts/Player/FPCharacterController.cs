@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.UI;
 
 public class FPCharacterController : MonoBehaviour
 {
 
-    private float speedNorm = 30f;
-    private float sprint = 60f;
-    private float speed = 40f;
-    private float sneak = 20f;
+    private float speedNorm = 15f;
+    private float sprint = 30f;
+    private float speed = 15f;
+    private float sneak = 8f;
     public bool isSprint = false;
     public bool isSneak = false;
     public AudioSource audioSource;
@@ -19,6 +20,7 @@ public class FPCharacterController : MonoBehaviour
     public GameObject GM;
     public Animator animator;
     public Animator walkCycle;
+    public Text interactCage;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +28,7 @@ public class FPCharacterController : MonoBehaviour
         stableVol = audioSource.volume;
         animator.SetBool("isOpen", false);
         walkCycle.SetBool("isMove", false);
+        interactCage.enabled = false;
     }
 
     // Update is called once per frame
@@ -60,17 +63,19 @@ public class FPCharacterController : MonoBehaviour
                 isSprint = true;
                 audioSource.volume = 0.9f;
                 stableVol = audioSource.volume;
+                walkCycle.speed = 2f;
             }
             else if (Input.GetKeyUp(KeyCode.LeftShift))
             {
                 speed = speedNorm;
                 isSprint = false;
                 audioSource.volume = stableVol;
+                walkCycle.speed = 1f;
             }
         }
 
         //Adds enhanced sneak functionality. Still needs lower noise levels.
-        if (GM.GetComponent<Tutorial>().sneakAbiilty == true)
+        if (GM.GetComponent<Tutorial>().sneakAbility == true)
         {
             if (Input.GetKeyDown(KeyCode.LeftControl))
             {
@@ -78,12 +83,14 @@ public class FPCharacterController : MonoBehaviour
                 speed = sneak;
                 isSneak = true;
                 stableVol = audioSource.volume;
+                walkCycle.speed = 0.5f;
             }
             else if (Input.GetKeyUp(KeyCode.LeftControl))
             {
                 speed = speedNorm;
                 isSneak = false;
                 audioSource.volume = stableVol;
+                walkCycle.speed = 1f;
             }
         }
     }
@@ -107,6 +114,23 @@ public class FPCharacterController : MonoBehaviour
             //other.gameObject.transform.rotation = Quaternion.Slerp(other.gameObject.transform.rotation, Quaternion.Euler(-90, 0, 0), 2 * Time.deltaTime);
             animator.SetBool("isOpen", true);
             cageOpen = true;
+            interactCage.enabled = false;
+        }
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Cage")
+        {
+            interactCage.enabled = true;
+        }
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Cage")
+        {
+            interactCage.enabled = false;
         }
     }
 }

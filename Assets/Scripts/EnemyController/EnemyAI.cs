@@ -20,6 +20,8 @@ public class EnemyAI : MonoBehaviour
 
     public GameObject playerTracker;
 
+    public Animator walkCycle;
+
     public Vector3 anchorPos;
     Vector3 playerPos;
     Vector3 soundPos;
@@ -43,12 +45,20 @@ public class EnemyAI : MonoBehaviour
     {
         anchorPos = gameObject.transform.position;
 
+        walkCycle.SetBool("isEnemyWalk", false);
+
         navigator = this.GetComponent<NavMeshAgent>();
 
-        if(patrolPath !=null && patrolPath.Count > 2)
+        if (patrolPath != null && patrolPath.Count >= 2)
         {
             currentPath = 0;
             patrol();
+        }
+
+        else {
+
+            currentState = AISTATE.DETECT;
+
         }
 
     }
@@ -78,9 +88,9 @@ public class EnemyAI : MonoBehaviour
 
                 if (navigator.remainingDistance == 0) {
 
-
                     currentState = AISTATE.CHANGE;
 
+                    walkCycle.SetBool("isEnemyWalk", false);
                 }
 
 
@@ -103,6 +113,7 @@ public class EnemyAI : MonoBehaviour
                         currentState = AISTATE.RETURN;
                         searching = false;
                         changing = false;
+                        walkCycle.SetBool("isEnemyWalk", false);
                     }
                 }
 
@@ -134,11 +145,19 @@ public class EnemyAI : MonoBehaviour
 
                 returnToPath();
 
-                if (navigator.remainingDistance == 0 && patrolPath.Count>0) {
+                if (navigator.remainingDistance == 0 && patrolPath.Count > 0)
+                {
 
                     navigator.SetDestination(patrolPath[currentPath].transform.position);
+                    //walkCycle.SetBool("isEnemyWalk", false);
 
                     currentState = AISTATE.PATROL;
+                }
+
+                else {
+
+                    currentState = AISTATE.DETECT;
+
                 }
 
                 break;
@@ -154,6 +173,7 @@ public class EnemyAI : MonoBehaviour
 
         if (playerSeen == true)
         {
+            walkCycle.SetBool("isEnemyWalk", true);
 
             currentState = AISTATE.PURSUE;
         }
@@ -162,6 +182,7 @@ public class EnemyAI : MonoBehaviour
         {
             
             soundPos = Player.gameObject.transform.position;
+            //walkCycle.SetBool("isEnemyWalk", true);
 
             currentState = AISTATE.SEARCH;
         }
@@ -186,19 +207,21 @@ public class EnemyAI : MonoBehaviour
         float step = speed * Time.deltaTime;
 
         navigator.SetDestination(playerPos);
+        walkCycle.SetBool("isEnemyWalk", true);
 
     }
 
     public void trackSound() {
 
         navigator.SetDestination(soundPos);
-
+        walkCycle.SetBool("isEnemyWalk", true);
 
     }
 
     public void patrol() {
 
         navigator.SetDestination(patrolPath[currentPath].transform.position);
+        walkCycle.SetBool("isEnemyWalk", true);
 
         currentState = AISTATE.PATROL;
     }
@@ -211,6 +234,7 @@ public class EnemyAI : MonoBehaviour
         float step = speed * Time.deltaTime;
 
         navigator.SetDestination(anchorPos);
+        walkCycle.SetBool("isEnemyWalk", true);
 
     }
 

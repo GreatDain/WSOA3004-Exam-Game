@@ -12,6 +12,8 @@ public class PlayerWaypoint : MonoBehaviour
     private Transform player;
     private Text distanceText;
 
+    public bool checkpoint;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +23,8 @@ public class PlayerWaypoint : MonoBehaviour
         distanceText = waypoint.GetComponentInChildren<Text>();
 
         player = GameObject.FindGameObjectWithTag("Player").transform;
+
+        checkpoint = false;
     }
 
     // Update is called once per frame
@@ -32,5 +36,13 @@ public class PlayerWaypoint : MonoBehaviour
         waypoint.gameObject.SetActive(screenPos.z > 0);
 
         distanceText.text = Vector3.Distance(player.position, transform.position).ToString("0") + " m";
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            checkpoint = true;
+        }
     }
 }

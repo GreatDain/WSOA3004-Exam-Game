@@ -10,6 +10,7 @@ TagManager:
   - Cage
   - Tree
   - Waypoint
+  - Enemy
   layers:
   - Default
   - TransparentFX
