@@ -10,7 +10,9 @@ public class Tutorial : MonoBehaviour
     public Text objective2;
     public Text constantObjText;
     public Text sprintUnlocked;
+    public Text sneakUnlocked;
     public Text howToSprint;
+    public Text howToSneak;
     public Canvas objectivesTab;
     GameObject FPS;
     public GameObject prefab;
@@ -33,6 +35,8 @@ public class Tutorial : MonoBehaviour
 
         sprintUnlocked.enabled = false;
         howToSprint.enabled = false;
+        sneakUnlocked.enabled = false;
+        howToSneak.enabled = false;
     }
 
     // Update is called once per frame
@@ -52,14 +56,19 @@ public class Tutorial : MonoBehaviour
             ObjectiveOne();
         }
 
-        if (prefab.GetComponent<PlayerWaypoint>().checkpoint == true && counter == 1f)
+        else if (prefab.GetComponent<PlayerWaypoint>().checkpoint == true && counter == 1f)
         {
             ObjectiveThree();
         }
 
-        if (prefab.GetComponent<PlayerWaypoint>().checkpoint == true && counter == 2f)
+        else if (prefab.GetComponent<PlayerWaypoint>().checkpoint == true && counter == 2f)
         {
             ObjectiveFour();
+        }
+
+        else if (prefab.GetComponent<PlayerWaypoint>().checkpoint == true && counter == 3f)
+        {
+            ObjectiveFive();
         }
     }
 
@@ -102,22 +111,31 @@ public class Tutorial : MonoBehaviour
         //StartCoroutine("Objectives");
         oldPrefab = prefab;
         prefab.GetComponent<PlayerWaypoint>().checkpoint = false;
-        prefab = Instantiate(prefab, new Vector3(-54f, 0, -142f), transform.rotation);
+        prefab = Instantiate(prefab, new Vector3(-353f, 0, -299f), transform.rotation);
         Destroy(GameObject.Find("WaypointMarker(Clone)"));
         Destroy(oldPrefab);
         counter++;
     }
 
-    /*public void ObjectiveFive()
+    public void ObjectiveFive()
     {
         StartCoroutine("Objectives");
         oldPrefab = prefab;
         prefab.GetComponent<PlayerWaypoint>().checkpoint = false;
-        prefab = Instantiate(prefab, new Vector3(-54f, 0, -142f), transform.rotation);
+        prefab = Instantiate(prefab, new Vector3(-132f, 0, -298f), transform.rotation);
         Destroy(GameObject.Find("WaypointMarker(Clone)"));
         Destroy(oldPrefab);
+        StartCoroutine("Sneak");
+        sneakAbility = true;
         counter++;
-    }*/
+    }
+
+    private IEnumerator Objectives()
+    {
+        objectivesTab.enabled = true;
+        yield return new WaitForSeconds(10f);
+        objectivesTab.enabled = false;
+    }
 
     private IEnumerator Sprint()
     {
@@ -129,10 +147,13 @@ public class Tutorial : MonoBehaviour
         howToSprint.enabled = false;
     }
 
-    private IEnumerator Objectives()
+    private IEnumerator Sneak()
     {
-        objectivesTab.enabled = true;
-        yield return new WaitForSeconds(10f);
-        objectivesTab.enabled = false;
+        sneakUnlocked.enabled = true;
+        yield return new WaitForSeconds(1.5f);
+        sneakUnlocked.enabled = false;
+        howToSneak.enabled = true;
+        yield return new WaitForSeconds(3f);
+        howToSneak.enabled = false;
     }
 }
