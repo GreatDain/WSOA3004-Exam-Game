@@ -12,7 +12,16 @@ public class LineofSight : MonoBehaviour
     public float lineOfSightAngle;
 
     [SerializeField]
+    public float shootRange;
+
+    [SerializeField]
+    [Range(0,360)]
+    public float shootAngle;
+
+    [SerializeField]
     float variableDelay = 0.2f;
+
+    
 
     float senseZoneRadius;
 
@@ -20,6 +29,7 @@ public class LineofSight : MonoBehaviour
     public LayerMask obstacleMask;
 
     public List<Transform> visibleTargets;
+    public List<Transform> inRangeTargets;
 
 
     void Start()
@@ -77,7 +87,47 @@ public class LineofSight : MonoBehaviour
                 gameObject.GetComponent<EnemyAI>().setSeen(false);
             }
         }
-        
+
+        inRangeTargets.Clear();
+        Collider[] targetsInRange = Physics.OverlapSphere(transform.position, senseZoneRadius, targetMask);
+
+
+        for (int i = 0; i < targetsInRange.Length; i++)
+        {
+            Transform target = targetsInRange[i].transform;
+            Vector3 dirToTarget = (target.position - transform.position).normalized;
+
+            if (Vector3.Angle(transform.forward, dirToTarget) < shootAngle / 2)
+            {
+                float targetDistance = Vector3.Distance(transform.position, target.position);
+
+                if (!Physics.Raycast(transform.position, dirToTarget, targetDistance, obstacleMask))
+                {
+                    if (targetDistance <= shootRange)
+                    {
+
+                        gameObject.GetComponent<EnemyAI>().setInRange(true);
+
+                        inRangeTargets.Add(target);
+
+                    }
+
+                    else
+                    {
+                        gameObject.GetComponent<EnemyAI>().setInRange(false);
+                    }
+
+                }
+
+
+            }
+
+            else
+            {
+                gameObject.GetComponent<EnemyAI>().setSeen(false);
+            }
+        }
+
     }
 
     public Vector3 directionAngle(float angleInDegrees, bool globalAngle)

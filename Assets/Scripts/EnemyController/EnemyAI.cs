@@ -19,6 +19,8 @@ public class EnemyAI : MonoBehaviour
     public AISTATE currentState;
 
     public GameObject playerTracker;
+    public GameObject gunBarrelPoint;
+    public GameObject enemyBullet;
 
     public Animator walkCycle;
 
@@ -28,8 +30,10 @@ public class EnemyAI : MonoBehaviour
 
    
     bool changing = false;
+    bool shooting = false;
     public bool searching = false;
     public bool playerSeen = false;
+    public bool playerInShootingRange = false;
 
     [SerializeField]
     List<Waypoint> patrolPath;
@@ -37,7 +41,10 @@ public class EnemyAI : MonoBehaviour
     float speed = 15f;
 
     [SerializeField]
-    float waitTime = 5f;
+    float waitTime;
+
+    [SerializeField]
+    float shootDelayTime;
 
     public int currentPath;
 
@@ -126,15 +133,30 @@ public class EnemyAI : MonoBehaviour
 
             case (AISTATE.PURSUE):
 
-                if (playerSeen == true)
+                if (playerSeen == true && playerInShootingRange == false)
                 {
 
                     trackPlayer();
 
                 }
 
-                else if (playerSeen == false) {
+                else if (playerSeen == true && playerInShootingRange == true) {
 
+                    navigator.SetDestination(gameObject.transform.position);
+
+                    if (shooting == false) {
+
+                        StartCoroutine("enemyShoot");
+
+                    }
+
+
+                }
+
+                else if (playerSeen == false && playerInShootingRange == false)
+                {
+
+                    StopAllCoroutines();
                     currentState = AISTATE.SEARCH;
 
                 }
@@ -168,24 +190,30 @@ public class EnemyAI : MonoBehaviour
     void OnTriggerStay(Collider Player)
     {
 
-        playerTracker = Player.gameObject;
+        if (Player.gameObject.tag.Equals("Player")) {
 
 
-        if (playerSeen == true)
-        {
-            walkCycle.SetBool("isEnemyWalk", true);
+            playerTracker = Player.gameObject;
 
-            currentState = AISTATE.PURSUE;
+
+            if (playerSeen == true && shooting == false)
+            {
+                walkCycle.SetBool("isEnemyWalk", true);
+
+                currentState = AISTATE.PURSUE;
+            }
+
+            if (Player.gameObject.GetComponent<FPCharacterController>().stableVol >= 0.4f && playerSeen == false)
+            {
+
+                soundPos = Player.gameObject.transform.position;
+                //walkCycle.SetBool("isEnemyWalk", true);
+
+                currentState = AISTATE.SEARCH;
+            }
         }
 
-        if (Player.gameObject.GetComponent<FPCharacterController>().stableVol >= 0.4f && playerSeen == false)
-        {
-            
-            soundPos = Player.gameObject.transform.position;
-            //walkCycle.SetBool("isEnemyWalk", true);
-
-            currentState = AISTATE.SEARCH;
-        }
+        
 
         
 
@@ -252,6 +280,49 @@ public class EnemyAI : MonoBehaviour
             playerSeen = false;
 
         }
+    }
+
+    public void setInRange(bool inRange) {
+
+
+        if (inRange == true)
+        {
+
+            playerInShootingRange= true;
+        }
+
+        else if (inRange == false)
+        {
+
+            playerInShootingRange = false;
+
+        }
+
+
+
+    }
+
+    public void shootAtPlayer() {
+
+
+        GameObject firedBullet = Instantiate(enemyBullet, gunBarrelPoint.transform.position,gunBarrelPoint.transform.rotation);
+        firedBullet.GetComponent<Rigidbody>().AddForce(gunBarrelPoint.transform.forward * 500);
+
+        shooting = false;
+        currentState = AISTATE.PURSUE;
+
+    }
+
+    IEnumerator enemyShoot() {
+
+        shooting = true;
+
+        currentState = AISTATE.IDLE;
+
+        yield return new WaitForSeconds(shootDelayTime);
+
+        shootAtPlayer();
+
     }
 
     IEnumerator changePatrolPath()
