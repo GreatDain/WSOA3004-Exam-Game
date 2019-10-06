@@ -22,7 +22,7 @@ public class Pickups : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player" && gm.GetComponent<Tutorial>().counter >= 4f)
         {
             interact.enabled = true;
 

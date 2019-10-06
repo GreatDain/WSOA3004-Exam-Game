@@ -8,6 +8,7 @@ public class Tutorial : MonoBehaviour
 {
     public Text objective1;
     public Text objective2;
+    public Text foodObjective;
     public Text constantObjText;
     public Text sprintUnlocked;
     public Text sneakUnlocked;
@@ -17,6 +18,7 @@ public class Tutorial : MonoBehaviour
     GameObject FPS;
     public GameObject prefab;
     GameObject oldPrefab;
+    public GameObject banana;
     public bool sprintAbility = false;
     public bool sneakAbility = false;
     public int counter;
@@ -29,6 +31,7 @@ public class Tutorial : MonoBehaviour
         StartCoroutine("Objectives");
         objective1.enabled = true;
         objective2.enabled = false;
+        foodObjective.enabled = false;
 
         counter = 0;
         constantObjText.enabled = true;
@@ -37,6 +40,8 @@ public class Tutorial : MonoBehaviour
         howToSprint.enabled = false;
         sneakUnlocked.enabled = false;
         howToSneak.enabled = false;
+
+        banana.SetActive(false);
     }
 
     // Update is called once per frame
@@ -69,6 +74,11 @@ public class Tutorial : MonoBehaviour
         else if (prefab.GetComponent<PlayerWaypoint>().checkpoint == true && counter == 3f)
         {
             ObjectiveFive();
+        }
+
+        else if (prefab.GetComponent<PlayerWaypoint>().checkpoint == true && counter == 4f)
+        {
+            ObjectiveSix();
         }
     }
 
@@ -130,6 +140,19 @@ public class Tutorial : MonoBehaviour
         //sneakAbility = true;
         StartCoroutine("Sprint");
         sprintAbility = true;
+        counter++;
+    }
+
+    public void ObjectiveSix()
+    {
+        banana.SetActive(true);
+        StartCoroutine("Objectives");
+        foodObjective.enabled = true;
+        oldPrefab = prefab;
+        prefab.GetComponent<PlayerWaypoint>().checkpoint = false;
+        prefab = Instantiate(prefab, new Vector3(-122.9f, 14.3f, -155.6f), transform.rotation);
+        Destroy(GameObject.Find("WaypointMarker(Clone)"));
+        Destroy(oldPrefab);
         counter++;
     }
 
