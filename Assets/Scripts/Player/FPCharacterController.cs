@@ -20,6 +20,7 @@ public class FPCharacterController : MonoBehaviour
     public Animator animator;
     public Animator walkCycle;
     public Text interactCage;
+    public bool isGrounded;
 
     // Start is called before the first frame update
     void Start()
@@ -100,11 +101,13 @@ public class FPCharacterController : MonoBehaviour
         {
             audioSource.volume = 0.4f;
             stableVol = audioSource.volume;
+            isGrounded = true;
         }
         else if (other.gameObject.tag == "Gravel" && isSneak == false && isSprint == false)
         {
             audioSource.volume = 0.6f;
             stableVol = audioSource.volume;
+            isGrounded = true;
         }
 
         if (other.gameObject.tag == "Cage" && Input.GetKeyUp(KeyCode.E))
@@ -130,6 +133,11 @@ public class FPCharacterController : MonoBehaviour
         if (other.gameObject.tag == "Cage")
         {
             interactCage.enabled = false;
+        }
+
+        if (other.gameObject.tag == "Gravel" || other.gameObject.tag == "Grass")
+        {
+            isGrounded = false;
         }
     }
 }
