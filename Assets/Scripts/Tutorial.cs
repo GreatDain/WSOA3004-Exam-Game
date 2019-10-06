@@ -99,10 +99,11 @@ public class Tutorial : MonoBehaviour
         prefab = Instantiate(prefab, new Vector3(-315.2f, 0, -197.7f), transform.rotation);
         Destroy(GameObject.Find("WaypointMarker(Clone)"));
         Destroy(oldPrefab);
-        StartCoroutine("Sprint");
-        sprintAbility = true;
-        objective2.enabled = true;
-        //sneakAbility = true;
+        //StartCoroutine("Sprint");
+        //sprintAbility = true;
+        StartCoroutine("Sneak");
+        sneakAbility = true;
+        //objective2.enabled = true;
         counter++;
     }
 
@@ -125,8 +126,10 @@ public class Tutorial : MonoBehaviour
         prefab = Instantiate(prefab, new Vector3(-132f, 0, -298f), transform.rotation);
         Destroy(GameObject.Find("WaypointMarker(Clone)"));
         Destroy(oldPrefab);
-        StartCoroutine("Sneak");
-        sneakAbility = true;
+        //StartCoroutine("Sneak");
+        //sneakAbility = true;
+        StartCoroutine("Sprint");
+        sprintAbility = true;
         counter++;
     }
 

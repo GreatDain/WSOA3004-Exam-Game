@@ -1732,7 +1732,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aaca9858f87f9443b9f09c30a6c3a26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeOutTexture: {fileID: 2800000, guid: 2db27f401665cdf4fbd0852a8f1e8626, type: 3}
+  fadeOutTexture: {fileID: 2800000, guid: da2018e7f555b9c4fab5989660af8108, type: 3}
   fadeSpeed: 0.8
 --- !u!1001 &122513142
 PrefabInstance:
@@ -5694,7 +5694,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 517063039}
   m_LocalRotation: {x: 0.08715578, y: 0, z: 0, w: 0.9961947}
-  m_LocalPosition: {x: 1.44, y: -3.9, z: -1}
+  m_LocalPosition: {x: 1.44, y: -3.9, z: -0.85}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1000796959}
