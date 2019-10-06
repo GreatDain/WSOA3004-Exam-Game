@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class FPCharacterController : MonoBehaviour
 {
-
     private float speedNorm = 15f;
     private float sprint = 30f;
     private float speed = 15f;

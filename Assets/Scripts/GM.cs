@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GM : MonoBehaviour
 {
@@ -30,6 +31,11 @@ public class GM : MonoBehaviour
             health = numberOfGorillas;
         }
 
+        if (numberOfGorillas == 0 || Input.GetKeyDown(KeyCode.R))
+        {
+            StartCoroutine("Fade");
+        }
+
         for (int i = 0; i < gorillas.Length; i++)
         {
             if (i < health)
@@ -56,5 +62,12 @@ public class GM : MonoBehaviour
     private void Quit()
     {
         Application.Quit();
+    }
+
+    IEnumerator Fade()
+    {
+        float fadeTime = gameObject.GetComponent<Fading>().BeginFade(1);
+        yield return new WaitForSeconds(fadeTime);
+        SceneManager.LoadScene(0);
     }
 }
