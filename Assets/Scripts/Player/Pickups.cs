@@ -9,7 +9,7 @@ public class Pickups : MonoBehaviour
     public Text interact;
     public GameObject gm;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         interact.enabled = false;
     }

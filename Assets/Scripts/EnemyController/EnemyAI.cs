@@ -21,6 +21,7 @@ public class EnemyAI : MonoBehaviour
     public GameObject playerTracker;
     public GameObject gunBarrelPoint;
     public GameObject enemyBullet;
+    public GameObject gm;
 
     public Animator walkCycle;
 
@@ -273,6 +274,8 @@ public class EnemyAI : MonoBehaviour
         {
 
             playerSeen = true;
+            gm.GetComponent<GM>().StartCoroutine("Fade");
+
         }
 
         else if (seen == false) {
@@ -307,7 +310,7 @@ public class EnemyAI : MonoBehaviour
 
         GameObject firedBullet = Instantiate(enemyBullet, gunBarrelPoint.transform.position,gunBarrelPoint.transform.rotation);
         firedBullet.GetComponent<Rigidbody>().AddForce(gunBarrelPoint.transform.forward * 500);
-
+        //gm.GetComponent<GM>().StartCoroutine("Fade");
         shooting = false;
         currentState = AISTATE.PURSUE;
 

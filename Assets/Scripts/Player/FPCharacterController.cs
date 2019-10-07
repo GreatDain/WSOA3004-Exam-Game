@@ -10,6 +10,7 @@ public class FPCharacterController : MonoBehaviour
     private float sprint = 30f;
     private float speed = 15f;
     private float sneak = 8f;
+    private float jump = 20f;
     public bool isSprint = false;
     public bool isSneak = false;
     public AudioSource audioSource;
@@ -54,6 +55,13 @@ public class FPCharacterController : MonoBehaviour
         }
         // transform.Translate(0, 0, translation);
 
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            //transform.Translate(0, jump * speed, 0);
+            gameObject.GetComponent<Rigidbody>().velocity += jump * Vector3.up;
+            isGrounded = false;
+        }
+
         //Adds sprint functionality. Still needs higher noise levels.
         if (GM.GetComponent<Tutorial>().sprintAbility == true)
         {
@@ -97,17 +105,22 @@ public class FPCharacterController : MonoBehaviour
 
     public void OnTriggerStay(Collider other)
     {
+        if (other.gameObject.tag == "Grass" || other.gameObject.tag == "Gravel")
+        {
+            isGrounded = true;
+        }
+
         if (other.gameObject.tag == "Grass" && isSneak == false && isSprint == false)
         {
             audioSource.volume = 0.4f;
             stableVol = audioSource.volume;
-            isGrounded = true;
+            //isGrounded = true;
         }
         else if (other.gameObject.tag == "Gravel" && isSneak == false && isSprint == false)
         {
             audioSource.volume = 0.6f;
             stableVol = audioSource.volume;
-            isGrounded = true;
+            //isGrounded = true;
         }
 
         if (other.gameObject.tag == "Cage" && Input.GetKeyUp(KeyCode.E))
