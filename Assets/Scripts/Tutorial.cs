@@ -147,6 +147,7 @@ public class Tutorial : MonoBehaviour
     {
         banana.SetActive(true);
         StartCoroutine("Objectives");
+        objective2.enabled = false;
         foodObjective.enabled = true;
         oldPrefab = prefab;
         prefab.GetComponent<PlayerWaypoint>().checkpoint = false;
