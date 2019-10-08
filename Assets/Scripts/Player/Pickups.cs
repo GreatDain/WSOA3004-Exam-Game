@@ -19,13 +19,15 @@ public class Pickups : MonoBehaviour
     {
         
     }
-
+    
+    //Allows interaction with food objects within a certain distance of it.
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "Player" && gm.GetComponent<Tutorial>().counter >= 4f)
         {
             interact.enabled = true;
-
+            /*Checks how much health the player. If some is missing, the interaction is allowed, if full, prevents the player
+             from interacting with it.*/
             if (Input.GetKeyDown(KeyCode.E) && gm.GetComponent<GM>().health < 3f)
             {
                 gm.GetComponent<GM>().health += 1;

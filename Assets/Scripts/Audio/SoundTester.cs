@@ -98,7 +98,7 @@ public class SoundTester : MonoBehaviour
 
         //other collisions
         //check if player is not on either grass nor gravel
-        if (other.gameObject.tag != "Gravel" && other.gameObject.tag != "Grass")
+        /*if (other.gameObject.tag != "Gravel" && other.gameObject.tag != "Grass")
         {
             //print("Now player is in contact with the tree");
             //Do not play grass or gravel SFX if player in not in contact
@@ -107,7 +107,7 @@ public class SoundTester : MonoBehaviour
             
             gravelAudioSource.Stop();
             grassAudioSource.Stop();
-        }
+        }*/
 
 
     }

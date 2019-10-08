@@ -35,7 +35,7 @@ public class FPCharacterController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Basic Player strafing style movement for prototype
+        //Detecting axes and initiating movement
         audioSource.volume = stableVol;
         float translation = Input.GetAxis("Vertical") * speed;
 
@@ -45,6 +45,7 @@ public class FPCharacterController : MonoBehaviour
 
         transform.Translate(strafe, 0, translation);
 
+        //Checks that the player is/isnt moving and either starts or stops the walk cycle animation
         if (translation != 0 || strafe != 0)
         {
             walkCycle.SetBool("isMove", true);
@@ -62,7 +63,7 @@ public class FPCharacterController : MonoBehaviour
             isGrounded = false;
         }
 
-        //Adds sprint functionality. Still needs higher noise levels.
+        //Adds sprint functionality. Speeds up animation accordingly.
         if (GM.GetComponent<Tutorial>().sprintAbility == true)
         {
             if (Input.GetKeyDown(KeyCode.LeftShift))
@@ -82,7 +83,7 @@ public class FPCharacterController : MonoBehaviour
             }
         }
 
-        //Adds enhanced sneak functionality. Still needs lower noise levels.
+        //Adds enhanced sneak functionality. Slows down animation accordingly.
         if (GM.GetComponent<Tutorial>().sneakAbility == true)
         {
             if (Input.GetKeyDown(KeyCode.LeftControl))
@@ -105,11 +106,13 @@ public class FPCharacterController : MonoBehaviour
 
     public void OnTriggerStay(Collider other)
     {
+        //Detects if the player is on the ground.
         if (other.gameObject.tag == "Grass" || other.gameObject.tag == "Gravel")
         {
             isGrounded = true;
         }
 
+        //Detects what terrain the player is walking on (either gravel or grass and sets sounds conditions accordingly.
         if (other.gameObject.tag == "Grass" && isSneak == false && isSprint == false)
         {
             audioSource.volume = 0.4f;
@@ -123,6 +126,7 @@ public class FPCharacterController : MonoBehaviour
             //isGrounded = true;
         }
 
+        //Player interaction with the cage
         if (other.gameObject.tag == "Cage" && Input.GetKeyUp(KeyCode.E))
         {
             other.gameObject.GetComponent<Collider>().enabled = false;
@@ -133,6 +137,7 @@ public class FPCharacterController : MonoBehaviour
         }
     }
 
+    //Trigger to allow for cage interaction within a certain distance.
     public void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Cage")
