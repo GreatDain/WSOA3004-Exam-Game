@@ -113,7 +113,7 @@ public class Tutorial : MonoBehaviour
         //sprintAbility = true;
         StartCoroutine("Sneak");
         sneakAbility = true;
-        //objective2.enabled = true;
+        objective2.enabled = true;
         counter++;
     }
 
@@ -122,7 +122,7 @@ public class Tutorial : MonoBehaviour
         //StartCoroutine("Objectives");
         oldPrefab = prefab;
         prefab.GetComponent<PlayerWaypoint>().checkpoint = false;
-        prefab = Instantiate(prefab, new Vector3(-353f, 0, -299f), transform.rotation);
+        prefab = Instantiate(prefab, new Vector3(-301.6f, 0, -302.4f), transform.rotation);
         Destroy(GameObject.Find("WaypointMarker(Clone)"));
         Destroy(oldPrefab);
         counter++;
@@ -147,6 +147,7 @@ public class Tutorial : MonoBehaviour
     {
         banana.SetActive(true);
         StartCoroutine("Objectives");
+        objective2.enabled = false;
         foodObjective.enabled = true;
         oldPrefab = prefab;
         prefab.GetComponent<PlayerWaypoint>().checkpoint = false;

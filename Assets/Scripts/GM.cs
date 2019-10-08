@@ -64,7 +64,7 @@ public class GM : MonoBehaviour
         Application.Quit();
     }
 
-    IEnumerator Fade()
+    public IEnumerator Fade()
     {
         float fadeTime = gameObject.GetComponent<Fading>().BeginFade(1);
         yield return new WaitForSeconds(fadeTime);
