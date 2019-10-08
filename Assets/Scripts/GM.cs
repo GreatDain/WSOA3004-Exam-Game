@@ -16,11 +16,17 @@ public class GM : MonoBehaviour
     void Start()
     {
         Cursor.visible = false;
+        health = 1;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.L) && health < 3)
+        {
+            health++;
+        }
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Quit();
@@ -31,7 +37,7 @@ public class GM : MonoBehaviour
             health = numberOfGorillas;
         }
 
-        if (numberOfGorillas == 0 || Input.GetKeyDown(KeyCode.R))
+        if (health == 0 || Input.GetKeyDown(KeyCode.R))
         {
             StartCoroutine("Fade");
         }
@@ -57,6 +63,11 @@ public class GM : MonoBehaviour
                 gorillas[i].enabled = false;
             }
         }
+    }
+
+    public void healthInc()
+    {
+        health++;
     }
 
     private void Quit()

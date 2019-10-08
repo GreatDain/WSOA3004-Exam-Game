@@ -28,9 +28,9 @@ public class Pickups : MonoBehaviour
             interact.enabled = true;
             /*Checks how much health the player. If some is missing, the interaction is allowed, if full, prevents the player
              from interacting with it.*/
-            if (Input.GetKeyDown(KeyCode.E) && gm.GetComponent<GM>().health < 3f)
+            if (Input.GetKeyDown(KeyCode.E) && gm.GetComponent<GM>().health != 3f)
             {
-                gm.GetComponent<GM>().health += 1;
+                gm.GetComponent<GM>().healthInc();
                 Destroy(gameObject);
                 interact.enabled = false;
             }

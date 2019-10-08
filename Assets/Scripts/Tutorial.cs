@@ -41,12 +41,27 @@ public class Tutorial : MonoBehaviour
         sneakUnlocked.enabled = false;
         howToSneak.enabled = false;
 
-        banana.SetActive(false);
+        //banana.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            sprintAbility = true;
+        }
+
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            sneakAbility = true;
+        }
+
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            counter++;
+        }
+
         if (Input.GetKeyDown(KeyCode.Tab) && objectivesTab.enabled == true)
         {
             objectivesTab.enabled = false;
@@ -145,7 +160,7 @@ public class Tutorial : MonoBehaviour
 
     public void ObjectiveSix()
     {
-        banana.SetActive(true);
+        //banana.SetActive(true);
         StartCoroutine("Objectives");
         objective2.enabled = false;
         foodObjective.enabled = true;
