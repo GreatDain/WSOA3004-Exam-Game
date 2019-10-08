@@ -44,7 +44,7 @@ public class SoundTester : MonoBehaviour
     void Update()
     {
         
-        if ((Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0) && onGrass == true)      //(Movement inputs) checked if player is moving on the grass
+        if ((Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0) && onGrass == false)      //(Movement inputs) checked if player is moving on the grass
         {   
             Moving();                           //play step movement sound (stomp)
             OnGrass();                          //Play grass sfx
@@ -53,7 +53,7 @@ public class SoundTester : MonoBehaviour
             grassAudioSource.loop = true;       //loop the grass sound while player is moving
             walkAudioSource.loop = true;        //loop moving sound
         }
-        else if ((Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical")!= 0) && onGravel == true)         ////checked if player is not moving on grass but gravel
+        else if ((Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical")!= 0) && onGravel == false)         ////checked if player is not moving on grass but gravel
         {
             //On gravel Sound FX
             Moving();                           //play step movement sound (stomp)
@@ -64,7 +64,15 @@ public class SoundTester : MonoBehaviour
         }
       
         //Check if player is sprinting - increase pitch and volume
-        if((Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0) && Input.GetKeyDown(KeyCode.LeftShift))
+        if (gameObject.GetComponent<FPCharacterController>().isSprint == true)
+        {
+            Running();
+        }
+        else
+        {
+            
+        }
+        /*if((Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0) && Input.GetKeyDown(KeyCode.LeftShift))
         {
             //player is moving while pressing shift = sprint
             //print("Player is sprinting");
@@ -73,7 +81,7 @@ public class SoundTester : MonoBehaviour
         else
         {
             //print("Player is Walking");
-        }
+        }*/
         
     }
 
@@ -124,9 +132,11 @@ public class SoundTester : MonoBehaviour
     //when player is sprinting (pressed shift)
     void Running()
     {
-        IdleBreathing();
+        //IdleBreathing();
         breatheAudioSource.pitch = 1.8f;
         breatheAudioSource.volume = 1f;
+        breatheAudioSource.PlayOneShot(breatheSFX, .7f);
+        breatheAudioSource.loop = true;
     }
 
     //when player is stationary
