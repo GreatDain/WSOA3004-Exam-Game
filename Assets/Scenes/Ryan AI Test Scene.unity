@@ -1016,8 +1016,13 @@ MonoBehaviour:
   patrolPath:
   - {fileID: 333674149}
   - {fileID: 825284979}
+  moveSpeed: 15
+  pursueSpeed: 20
+  rotationSpeed: 10
   waitTime: 5
   shootDelayTime: 0
+  rotationDelay: 0
+  patrolRotationAngle: 0
   currentPath: 0
 --- !u!195 &49208030
 NavMeshAgent:
@@ -2399,18 +2404,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 131530499}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &131530501 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 227852182235215404, guid: d2f955711f40efe4180555bec0250f28,
-    type: 3}
-  m_PrefabInstance: {fileID: 131530499}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0746cfbdb39c86047a460f69b8e5cfcd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &139836195
 GameObject:
   m_ObjectHideFlags: 0
@@ -2507,6 +2500,7 @@ MonoBehaviour:
   animator: {fileID: 1456124014}
   walkCycle: {fileID: 1802345608}
   interactCage: {fileID: 676161921}
+  isGrounded: 0
 --- !u!82 &139836200
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3201,18 +3195,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 209802429}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &209802431 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 227852182235215404, guid: d2f955711f40efe4180555bec0250f28,
-    type: 3}
-  m_PrefabInstance: {fileID: 209802429}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0746cfbdb39c86047a460f69b8e5cfcd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &211983797
 GameObject:
   m_ObjectHideFlags: 0
@@ -4276,6 +4258,7 @@ MonoBehaviour:
   animator: {fileID: 0}
   walkCycle: {fileID: 0}
   interactCage: {fileID: 0}
+  isGrounded: 0
 --- !u!54 &333880871
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4717,18 +4700,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 388590468}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &388590470 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 227852182235215404, guid: d2f955711f40efe4180555bec0250f28,
-    type: 3}
-  m_PrefabInstance: {fileID: 388590468}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0746cfbdb39c86047a460f69b8e5cfcd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &391011247
 GameObject:
   m_ObjectHideFlags: 0
@@ -5455,6 +5426,7 @@ MonoBehaviour:
   animator: {fileID: 1456124014}
   walkCycle: {fileID: 459746587}
   interactCage: {fileID: 676161921}
+  isGrounded: 0
 --- !u!54 &459746591
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -8565,9 +8537,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objective1: {fileID: 1738581496}
   objective2: {fileID: 922980936}
-  objective3: {fileID: 901704484}
-  objective4: {fileID: 999749429}
+  foodObjective: {fileID: 0}
+  constantObjText: {fileID: 0}
+  sprintUnlocked: {fileID: 0}
+  sneakUnlocked: {fileID: 0}
+  howToSprint: {fileID: 0}
+  howToSneak: {fileID: 0}
+  objectivesTab: {fileID: 0}
   prefab: {fileID: 1043878457637733339, guid: ea1d43679d9711a44bf3b28459497628, type: 3}
+  banana: {fileID: 0}
   sprintAbility: 0
   sneakAbility: 0
   counter: 0
@@ -8583,6 +8561,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d45f330306f189469603419cb0c7264, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 0
+  numberOfGorillas: 0
+  gorillas: []
+  fullHP: {fileID: 0}
+  emptyHP: {fileID: 0}
 --- !u!4 &813192846
 Transform:
   m_ObjectHideFlags: 0
@@ -9361,8 +9344,13 @@ MonoBehaviour:
   - {fileID: 1371106785}
   - {fileID: 1134389440}
   - {fileID: 1384763903}
+  moveSpeed: 15
+  pursueSpeed: 20
+  rotationSpeed: 10
   waitTime: 5
   shootDelayTime: 0
+  rotationDelay: 0
+  patrolRotationAngle: 0
   currentPath: 0
 --- !u!195 &855520099
 NavMeshAgent:
@@ -9566,6 +9554,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d45f330306f189469603419cb0c7264, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 0
+  numberOfGorillas: 0
+  gorillas: []
+  fullHP: {fileID: 0}
+  emptyHP: {fileID: 0}
 --- !u!1 &901704482
 GameObject:
   m_ObjectHideFlags: 0
@@ -10146,8 +10139,13 @@ MonoBehaviour:
   patrolPath:
   - {fileID: 825284979}
   - {fileID: 1893575517}
+  moveSpeed: 15
+  pursueSpeed: 20
+  rotationSpeed: 10
   waitTime: 5
   shootDelayTime: 0
+  rotationDelay: 0
+  patrolRotationAngle: 0
   currentPath: 0
 --- !u!195 &931272590
 NavMeshAgent:
@@ -12767,8 +12765,13 @@ MonoBehaviour:
   - {fileID: 847254182}
   - {fileID: 932779938}
   - {fileID: 663062208}
+  moveSpeed: 15
+  pursueSpeed: 20
+  rotationSpeed: 10
   waitTime: 5
   shootDelayTime: 0
+  rotationDelay: 0
+  patrolRotationAngle: 0
   currentPath: 0
 --- !u!195 &1247879503
 NavMeshAgent:
@@ -16179,8 +16182,13 @@ MonoBehaviour:
   - {fileID: 114651961}
   - {fileID: 1095227520}
   - {fileID: 114651961}
+  moveSpeed: 15
+  pursueSpeed: 20
+  rotationSpeed: 10
   waitTime: 5
   shootDelayTime: 0
+  rotationDelay: 0
+  patrolRotationAngle: 0
   currentPath: 0
 --- !u!195 &1666678554
 NavMeshAgent:
@@ -16455,6 +16463,7 @@ MonoBehaviour:
   animator: {fileID: 1456124014}
   walkCycle: {fileID: 459746587}
   interactCage: {fileID: 676161921}
+  isGrounded: 0
 --- !u!82 &1678835611
 AudioSource:
   m_ObjectHideFlags: 0
@@ -17682,6 +17691,21 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 2502203975881118265, guid: f24b65f9406c65b449d523530450cf9f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 748748645750174535, guid: f24b65f9406c65b449d523530450cf9f,
+        type: 3}
+      propertyPath: m_TagString
+      value: Cage
+      objectReference: {fileID: 0}
+    - target: {fileID: 748748645750174535, guid: f24b65f9406c65b449d523530450cf9f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: f24b65f9406c65b449d523530450cf9f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -17757,21 +17781,6 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 009ebf84af6dc534691f7d8da26584a3, type: 2}
-    - target: {fileID: 748748645750174535, guid: f24b65f9406c65b449d523530450cf9f,
-        type: 3}
-      propertyPath: m_TagString
-      value: Cage
-      objectReference: {fileID: 0}
-    - target: {fileID: 748748645750174535, guid: f24b65f9406c65b449d523530450cf9f,
-        type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2502203975881118265, guid: f24b65f9406c65b449d523530450cf9f,
-        type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 4196040851096478221, guid: f24b65f9406c65b449d523530450cf9f,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -19318,13 +19327,14 @@ MonoBehaviour:
   searching: 0
   playerSeen: 0
   playerInShootingRange: 0
-  patrolPath:
-  - {fileID: 131530501}
-  - {fileID: 209802431}
-  - {fileID: 1968173258}
-  - {fileID: 388590470}
+  patrolPath: []
+  moveSpeed: 10
+  pursueSpeed: 40
+  rotationSpeed: 10
   waitTime: 5
   shootDelayTime: 2
+  rotationDelay: 2
+  patrolRotationAngle: 60
   currentPath: 0
 --- !u!195 &1918366218
 NavMeshAgent:
@@ -19584,18 +19594,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1968173256}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1968173258 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 227852182235215404, guid: d2f955711f40efe4180555bec0250f28,
-    type: 3}
-  m_PrefabInstance: {fileID: 1968173256}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0746cfbdb39c86047a460f69b8e5cfcd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2009601240
 GameObject:
   m_ObjectHideFlags: 0

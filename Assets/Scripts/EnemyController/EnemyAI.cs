@@ -31,6 +31,8 @@ public class EnemyAI : MonoBehaviour
    
     bool changing = false;
     bool shooting = false;
+    bool rotating = false;
+    bool rotated = false;
     public bool searching = false;
     public bool playerSeen = false;
     public bool playerInShootingRange = false;
@@ -38,13 +40,31 @@ public class EnemyAI : MonoBehaviour
     [SerializeField]
     List<Waypoint> patrolPath;
 
-    float speed = 15f;
+    [SerializeField]
+    float moveSpeed = 15f;
+    [SerializeField]
+    float pursueSpeed = 20f;
+    [SerializeField]
+    float rotationSpeed = 10f;
 
     [SerializeField]
     float waitTime;
 
     [SerializeField]
     float shootDelayTime;
+
+    [SerializeField]
+    float rotationDelay;
+
+    [SerializeField]
+    [Range(0,360)]
+    float patrolRotationAngle;
+
+    [SerializeField]
+    Quaternion rotation;
+
+    [SerializeField]
+    int count;
 
     public int currentPath;
 
@@ -82,6 +102,12 @@ public class EnemyAI : MonoBehaviour
 
             case (AISTATE.CHANGE):
 
+                if (navigator.remainingDistance == 0) {
+
+                    setEndRotation(patrolPath[currentPath].transform);
+
+                }
+
                 if (changing == false)
                 {
                     StartCoroutine("changePatrolPath"); // stops state changing multiple times
@@ -90,6 +116,8 @@ public class EnemyAI : MonoBehaviour
                 break;
             
             case (AISTATE.PATROL):
+
+                navigator.speed = moveSpeed;
 
                 anchorPos = gameObject.transform.position;
 
@@ -104,6 +132,8 @@ public class EnemyAI : MonoBehaviour
                 break;
 
             case (AISTATE.SEARCH):
+
+                navigator.speed = moveSpeed;
 
                 if (changing == false)
                 {
@@ -129,9 +159,36 @@ public class EnemyAI : MonoBehaviour
 
             case (AISTATE.DETECT):
 
+                if (count == 0)
+                {
+                    StartCoroutine("setRotation");
+                }
+
+
+                transform.rotation = Quaternion.Slerp(transform.rotation,rotation,Time.deltaTime * rotationSpeed);
+
+                if (transform.rotation == rotation && count < 2) {
+
+                    if (rotating == false)
+                    {
+
+                        StartCoroutine("changeRotation");
+                    }
+                }
+
+                if (patrolPath.Count > 0 && rotated == true) {
+
+                    patrol();
+                    currentState = AISTATE.PATROL;
+                }
+
+                
+
                 break;
 
             case (AISTATE.PURSUE):
+
+                navigator.speed = pursueSpeed;
 
                 if (playerSeen == true && playerInShootingRange == false)
                 {
@@ -164,6 +221,8 @@ public class EnemyAI : MonoBehaviour
                 break;
 
             case (AISTATE.RETURN):
+
+                navigator.speed = moveSpeed;
 
                 returnToPath();
 
@@ -232,8 +291,6 @@ public class EnemyAI : MonoBehaviour
 
         playerPos = playerTracker.gameObject.transform.position;
 
-        float step = speed * Time.deltaTime;
-
         navigator.SetDestination(playerPos);
         walkCycle.SetBool("isEnemyWalk", true);
 
@@ -258,8 +315,6 @@ public class EnemyAI : MonoBehaviour
 
     public void returnToPath()
     {
-
-        float step = speed * Time.deltaTime;
 
         navigator.SetDestination(anchorPos);
         walkCycle.SetBool("isEnemyWalk", true);
@@ -313,6 +368,14 @@ public class EnemyAI : MonoBehaviour
 
     }
 
+
+    private void setEndRotation(Transform target) {
+
+        transform.rotation = Quaternion.Slerp(transform.rotation, target.rotation, Time.deltaTime * rotationSpeed);
+
+
+    }
+
     IEnumerator enemyShoot() {
 
         shooting = true;
@@ -336,11 +399,45 @@ public class EnemyAI : MonoBehaviour
 
             currentPath = (currentPath + 1) % patrolPath.Count;
 
-            patrol();
+            currentState = AISTATE.DETECT;
 
         }
 
         changing = false;
+    }
+
+    IEnumerator setRotation() {
+
+        yield return new WaitForSeconds(rotationDelay);
+
+        rotation = Quaternion.Euler(0, transform.rotation.y + Mathf.Pow(-1, count) * patrolRotationAngle, 0);
+
+    }
+
+    IEnumerator changeRotation() {
+
+        rotating = true;
+
+        if(rotating == true) {
+
+            yield return new WaitForSeconds(rotationDelay);
+
+            count++;
+
+            rotation = Quaternion.Euler(0, transform.rotation.y + Mathf.Pow(-1, count) * patrolRotationAngle, 0);
+
+            if (count == 2)
+            {
+
+                rotated = true;
+            }
+
+           
+
+        }
+
+        rotating = false;
+
     }
 
     IEnumerator searchSound() {
