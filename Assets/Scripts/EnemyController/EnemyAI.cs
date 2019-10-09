@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Audio;
 
 public class EnemyAI : MonoBehaviour
 {
@@ -37,6 +38,9 @@ public class EnemyAI : MonoBehaviour
     public bool searching = false;
     public bool playerSeen = false;
     public bool playerInShootingRange = false;
+
+    public AudioSource ShootingSource;
+    public AudioSource ReloadSource;
 
     [SerializeField]
     LayerMask targetMask;
@@ -385,7 +389,8 @@ public class EnemyAI : MonoBehaviour
         if (Physics.Raycast(transform.position, dirToTarget, targetDistance,targetMask)) {
 
             Debug.Log("hit player with raycast");
-
+            ShootingSource.Play();
+            gm.GetComponent<GM>().StartCoroutine("Fade");
         }
        
         //gm.GetComponent<GM>().StartCoroutine("Fade");
@@ -407,6 +412,8 @@ public class EnemyAI : MonoBehaviour
         shooting = true;
 
         currentState = AISTATE.IDLE;
+
+        ReloadSource.PlayOneShot(ReloadSource.clip);
 
         yield return new WaitForSeconds(shootDelayTime);
 

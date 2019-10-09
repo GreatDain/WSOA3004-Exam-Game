@@ -29,7 +29,7 @@ public class Sounds : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetAxis("Vertical") > 0)
+        /*if (Input.GetAxis("Vertical") > 0)
         {
             walkAudioSource.Play();
         }
@@ -37,12 +37,17 @@ public class Sounds : MonoBehaviour
         if (Input.GetAxis("Vertical") == 0)
         {
             walkAudioSource.Stop();
-        }
+        }*/
         //controller.walkCycle.GetBool("isMove") == true &&
         if (controller.isSprint == true)
         {
             breatheAudioSource.pitch = 1.8f;
             breatheAudioSource.volume = 0.7f;
+        }
+        else if (controller.isSneak == true)
+        {
+            breatheAudioSource.pitch = 0.8f;
+            breatheAudioSource.volume = 0.3f;
         }
         else
         {
