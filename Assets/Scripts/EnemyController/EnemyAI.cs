@@ -39,6 +39,9 @@ public class EnemyAI : MonoBehaviour
     public bool playerInShootingRange = false;
 
     [SerializeField]
+    LayerMask targetMask;
+
+    [SerializeField]
     List<Waypoint> patrolPath;
 
     [SerializeField]
@@ -104,7 +107,10 @@ public class EnemyAI : MonoBehaviour
         {
 
             case (AISTATE.IDLE): // does nothing in this state
-
+                if (playerSeen == false && playerInShootingRange == false)// if any player exits range
+                {
+                    StopAllCoroutines(); // cancels shooting function
+                }
                 break;
 
             case (AISTATE.CHANGE): // is called when enemy is deciding on next destination
@@ -224,7 +230,7 @@ public class EnemyAI : MonoBehaviour
 
                 }
 
-                else if (playerSeen == false && playerInShootingRange == false)// if any player exits range
+                if (playerSeen == false && playerInShootingRange == false)// if any player exits range
                 {
                     StopAllCoroutines(); // cancels shooting function
                     currentState = AISTATE.SEARCH; // sets player to search for sound
@@ -335,7 +341,7 @@ public class EnemyAI : MonoBehaviour
 
     public void setSeen(bool seen) // sets whether the player has been seen or not
     {
-        Debug.Log("setting seen");
+       
         if (seen == true)
         {
 
@@ -353,7 +359,7 @@ public class EnemyAI : MonoBehaviour
 
     public void setInRange(bool inRange) { // sets whether or not the player is in shooting range or not
 
-        Debug.Log("setting range");
+
         if (inRange == true)
         {
 
@@ -373,9 +379,15 @@ public class EnemyAI : MonoBehaviour
 
     public void shootAtPlayer() { // function to shoot at enemy
 
+        Vector3 dirToTarget = (playerTracker.transform.position - transform.position).normalized;
+        float targetDistance = Vector3.Distance(transform.position, playerTracker.transform.position);
 
-        GameObject firedBullet = Instantiate(enemyBullet, gunBarrelPoint.transform.position,gunBarrelPoint.transform.rotation);
-        firedBullet.GetComponent<Rigidbody>().AddForce(gunBarrelPoint.transform.forward * 500);
+        if (Physics.Raycast(transform.position, dirToTarget, targetDistance,targetMask)) {
+
+            Debug.Log("hit player with raycast");
+
+        }
+       
         //gm.GetComponent<GM>().StartCoroutine("Fade");
         shooting = false;
         currentState = AISTATE.PURSUE;
