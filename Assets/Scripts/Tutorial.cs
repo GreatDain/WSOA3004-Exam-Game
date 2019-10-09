@@ -166,7 +166,7 @@ public class Tutorial : MonoBehaviour
         foodObjective.enabled = true;
         oldPrefab = prefab;
         prefab.GetComponent<PlayerWaypoint>().checkpoint = false;
-        prefab = Instantiate(prefab, new Vector3(-122.9f, 14.3f, -155.6f), transform.rotation);
+        prefab = Instantiate(prefab, new Vector3(-6.6f, 14.3f, -115.5f), transform.rotation);
         Destroy(GameObject.Find("WaypointMarker(Clone)"));
         Destroy(oldPrefab);
         counter++;
