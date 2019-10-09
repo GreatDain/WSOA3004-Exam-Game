@@ -1008,11 +1008,15 @@ MonoBehaviour:
   playerTracker: {fileID: 0}
   gunBarrelPoint: {fileID: 0}
   enemyBullet: {fileID: 0}
+  gm: {fileID: 0}
   walkCycle: {fileID: 1178325789}
   anchorPos: {x: 0, y: 0, z: 0}
   searching: 0
   playerSeen: 0
   playerInShootingRange: 0
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 0
   patrolPath:
   - {fileID: 333674149}
   - {fileID: 825284979}
@@ -1023,6 +1027,8 @@ MonoBehaviour:
   shootDelayTime: 0
   rotationDelay: 0
   patrolRotationAngle: 0
+  rotation: {x: 0, y: 0, z: 0, w: 0}
+  count: 0
   currentPath: 0
 --- !u!195 &49208030
 NavMeshAgent:
@@ -9333,11 +9339,15 @@ MonoBehaviour:
   playerTracker: {fileID: 0}
   gunBarrelPoint: {fileID: 0}
   enemyBullet: {fileID: 0}
+  gm: {fileID: 0}
   walkCycle: {fileID: 956652382}
   anchorPos: {x: 0, y: 0, z: 0}
   searching: 0
   playerSeen: 0
   playerInShootingRange: 0
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 0
   patrolPath:
   - {fileID: 1513697503}
   - {fileID: 391980416}
@@ -9351,6 +9361,8 @@ MonoBehaviour:
   shootDelayTime: 0
   rotationDelay: 0
   patrolRotationAngle: 0
+  rotation: {x: 0, y: 0, z: 0, w: 0}
+  count: 0
   currentPath: 0
 --- !u!195 &855520099
 NavMeshAgent:
@@ -10131,11 +10143,15 @@ MonoBehaviour:
   playerTracker: {fileID: 0}
   gunBarrelPoint: {fileID: 0}
   enemyBullet: {fileID: 0}
+  gm: {fileID: 0}
   walkCycle: {fileID: 1585469114}
   anchorPos: {x: 0, y: 0, z: 0}
   searching: 0
   playerSeen: 0
   playerInShootingRange: 0
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 0
   patrolPath:
   - {fileID: 825284979}
   - {fileID: 1893575517}
@@ -10146,6 +10162,8 @@ MonoBehaviour:
   shootDelayTime: 0
   rotationDelay: 0
   patrolRotationAngle: 0
+  rotation: {x: 0, y: 0, z: 0, w: 0}
+  count: 0
   currentPath: 0
 --- !u!195 &931272590
 NavMeshAgent:
@@ -12756,11 +12774,15 @@ MonoBehaviour:
   playerTracker: {fileID: 0}
   gunBarrelPoint: {fileID: 0}
   enemyBullet: {fileID: 0}
+  gm: {fileID: 0}
   walkCycle: {fileID: 15892771}
   anchorPos: {x: 0, y: 0, z: 0}
   searching: 0
   playerSeen: 0
   playerInShootingRange: 0
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 0
   patrolPath:
   - {fileID: 847254182}
   - {fileID: 932779938}
@@ -12772,6 +12794,8 @@ MonoBehaviour:
   shootDelayTime: 0
   rotationDelay: 0
   patrolRotationAngle: 0
+  rotation: {x: 0, y: 0, z: 0, w: 0}
+  count: 0
   currentPath: 0
 --- !u!195 &1247879503
 NavMeshAgent:
@@ -16172,11 +16196,15 @@ MonoBehaviour:
   playerTracker: {fileID: 0}
   gunBarrelPoint: {fileID: 0}
   enemyBullet: {fileID: 0}
+  gm: {fileID: 0}
   walkCycle: {fileID: 999450392}
   anchorPos: {x: 0, y: 0, z: 0}
   searching: 0
   playerSeen: 0
   playerInShootingRange: 0
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 0
   patrolPath:
   - {fileID: 1384763903}
   - {fileID: 114651961}
@@ -16189,6 +16217,8 @@ MonoBehaviour:
   shootDelayTime: 0
   rotationDelay: 0
   patrolRotationAngle: 0
+  rotation: {x: 0, y: 0, z: 0, w: 0}
+  count: 0
   currentPath: 0
 --- !u!195 &1666678554
 NavMeshAgent:
@@ -19322,11 +19352,15 @@ MonoBehaviour:
   gunBarrelPoint: {fileID: 38432738}
   enemyBullet: {fileID: 4068960297653465910, guid: bf4b3d283804e1b43a4788fc8ceaa3d9,
     type: 3}
+  gm: {fileID: 0}
   walkCycle: {fileID: 208874553}
   anchorPos: {x: 0, y: 0, z: 0}
   searching: 0
   playerSeen: 0
   playerInShootingRange: 0
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 256
   patrolPath: []
   moveSpeed: 10
   pursueSpeed: 40
@@ -19335,6 +19369,8 @@ MonoBehaviour:
   shootDelayTime: 2
   rotationDelay: 2
   patrolRotationAngle: 60
+  rotation: {x: 0, y: 0, z: 0, w: 0}
+  count: 0
   currentPath: 0
 --- !u!195 &1918366218
 NavMeshAgent:
