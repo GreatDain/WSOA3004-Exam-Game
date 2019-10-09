@@ -50,11 +50,14 @@ public class LineofSight : MonoBehaviour
 
     void findVisibleTargets()
     {
+
         visibleTargets.Clear();
         Collider[] targetsInSight = Physics.OverlapSphere(transform.position, senseZoneRadius, targetMask);
 
         for (int i = 0; i < targetsInSight.Length; i++)
         {
+            Debug.Log("targetsint sight" + targetsInSight[0]);
+
             Transform target = targetsInSight[i].transform;
             Vector3 dirToTarget = (target.position - transform.position).normalized;
 
@@ -64,7 +67,11 @@ public class LineofSight : MonoBehaviour
 
                 if (!Physics.Raycast(transform.position, dirToTarget, targetDistance, obstacleMask))
                 {
+                    
+
                     if (targetDistance <= lineOfSightRadius) {
+
+                        Debug.Log("in range");
 
                         gameObject.GetComponent<EnemyAI>().setSeen(true);
 
@@ -94,6 +101,7 @@ public class LineofSight : MonoBehaviour
 
         for (int i = 0; i < targetsInRange.Length; i++)
         {
+
             Transform target = targetsInRange[i].transform;
             Vector3 dirToTarget = (target.position - transform.position).normalized;
 
