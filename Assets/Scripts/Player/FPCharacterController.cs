@@ -29,6 +29,9 @@ public class FPCharacterController : MonoBehaviour
         stableVol = audioSource.volume;
         animator.SetBool("isOpen", false);
         walkCycle.SetBool("isMove", false);
+        walkCycle.SetBool("isMoveBack", false);
+        walkCycle.SetBool("isStrafeLeft", false);
+        walkCycle.SetBool("isStrafeRight", false);
         interactCage.enabled = false;
     }
 
@@ -46,13 +49,36 @@ public class FPCharacterController : MonoBehaviour
         transform.Translate(strafe, 0, translation);
 
         //Checks that the player is/isnt moving and either starts or stops the walk cycle animation
-        if (translation != 0 || strafe != 0)
+        /*if (translation != 0 || strafe != 0)
         {
             walkCycle.SetBool("isMove", true);
         }
         else
         {
             walkCycle.SetBool("isMove", false);
+        }*/
+        if (translation > 0)
+        {
+            walkCycle.SetBool("isMove", true);
+        }
+        else if (translation < 0)
+        {
+            walkCycle.SetBool("isMoveBack", true);
+        }
+        else if (strafe < 0)
+        {
+            walkCycle.SetBool("isStrafeLeft", true);
+        }
+        else if (strafe > 0)
+        {
+            walkCycle.SetBool("isStrafeRight", true);
+        }
+        else
+        {
+            walkCycle.SetBool("isMove", false);
+            walkCycle.SetBool("isMoveBack", false);
+            walkCycle.SetBool("isStrafeLeft", false);
+            walkCycle.SetBool("isStrafeRight", false);
         }
         // transform.Translate(0, 0, translation);
 
