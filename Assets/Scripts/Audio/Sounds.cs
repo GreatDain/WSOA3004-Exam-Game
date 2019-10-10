@@ -34,7 +34,7 @@ public class Sounds : MonoBehaviour
             walkAudioSource.Play();
         }
 
-        if (Input.GetAxis("Vertical") == 0)
+        else if (Input.GetAxis("Vertical") == 0)
         {
             walkAudioSource.Stop();
         }*/
