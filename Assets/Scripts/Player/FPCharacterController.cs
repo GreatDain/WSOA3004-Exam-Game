@@ -32,6 +32,9 @@ public class FPCharacterController : MonoBehaviour
         walkCycle.SetBool("isMoveBack", false);
         walkCycle.SetBool("isStrafeLeft", false);
         walkCycle.SetBool("isStrafeRight", false);
+        walkCycle.SetBool("walkToStrafeL", false);
+        walkCycle.SetBool("walkToStrafeR", false);
+
         interactCage.enabled = false;
     }
 
@@ -59,11 +62,39 @@ public class FPCharacterController : MonoBehaviour
         }*/
         if (translation > 0)
         {
-            walkCycle.SetBool("isMove", true);
+            if(strafe < 0)
+            {
+                //walkCycle.SetBool("isMove", false);
+                walkCycle.SetBool("walkToStrafeL", true);
+            }
+            else if (strafe > 0)
+            {
+                walkCycle.SetBool("walkToStrafeR", true);
+            }
+            else
+            {
+                walkCycle.SetBool("walkToStrafeL", false);
+                walkCycle.SetBool("walkToStrafeR", false);
+                walkCycle.SetBool("isMove", true);
+            }
         }
         else if (translation < 0)
         {
-            walkCycle.SetBool("isMoveBack", true);
+            if (strafe < 0)
+            {
+                //walkCycle.SetBool("isMove", false);
+                walkCycle.SetBool("walkToStrafeL", true);
+            }
+            else if (strafe > 0)
+            {
+                walkCycle.SetBool("walkToStrafeR", true);
+            }
+            else
+            {
+                walkCycle.SetBool("walkToStrafeL", false);
+                walkCycle.SetBool("walkToStrafeR", false);
+                walkCycle.SetBool("isMoveBack", true);
+            }
         }
         else if (strafe < 0)
         {
@@ -79,6 +110,8 @@ public class FPCharacterController : MonoBehaviour
             walkCycle.SetBool("isMoveBack", false);
             walkCycle.SetBool("isStrafeLeft", false);
             walkCycle.SetBool("isStrafeRight", false);
+            walkCycle.SetBool("walkToStrafeL", false);
+            walkCycle.SetBool("walkToStrafeR", false);
         }
         // transform.Translate(0, 0, translation);
 
@@ -92,7 +125,7 @@ public class FPCharacterController : MonoBehaviour
         //Adds sprint functionality. Speeds up animation accordingly.
         if (GM.GetComponent<Tutorial>().sprintAbility == true)
         {
-            if (Input.GetKeyDown(KeyCode.LeftShift))
+            if (translation > 0 && Input.GetKeyDown(KeyCode.LeftShift))
             {
                 speed = sprint;
                 isSprint = true;
