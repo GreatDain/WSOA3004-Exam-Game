@@ -31,6 +31,9 @@ public class SoundTester : MonoBehaviour
     [Range(0.1f, 10f)]
     public float runVol, sneakVol, normVol;                 //
    */
+    //road to beta soundtesting
+    bool isMoving = false;                  //is is not moving when game starts
+
     
 
     // Start is called before the first frame update
@@ -46,8 +49,8 @@ public class SoundTester : MonoBehaviour
         
         if ((Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0) && onGrass == false)      //(Movement inputs) checked if player is moving on the grass
         {   
-            Moving();                           //play step movement sound (stomp)
-            OnGrass();                          //Play grass sfx
+           // Moving();                           //play step movement sound (stomp)
+            //OnGrass();                          //Play grass sfx
             print("Now playing Grass SFX");
             //Change breathing sound Pitch to make it faster when player is running
             grassAudioSource.loop = true;       //loop the grass sound while player is moving
@@ -56,8 +59,8 @@ public class SoundTester : MonoBehaviour
         else if ((Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical")!= 0) && onGravel == false)         ////checked if player is not moving on grass but gravel
         {
             //On gravel Sound FX
-            Moving();                           //play step movement sound (stomp)
-            OnGravel();                         //play gravel sfx
+            //Moving();                           //play step movement sound (stomp)
+            //OnGravel();                         //play gravel sfx
             walkAudioSource.loop = true;        //loop moving sound
             gravelAudioSource.loop = true;
             print("Now playing Gravel SFX");
@@ -68,21 +71,52 @@ public class SoundTester : MonoBehaviour
         {
             Running();
         }
-        else
+       
+        //Road to beta SoundTesting
+        //CHECK IF PLAYER IS MOVING
+        if ((Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0))
         {
-            
-        }
-        /*if((Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0) && Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            //player is moving while pressing shift = sprint
-            //print("Player is sprinting");
-            //breatheAudioSource.pitch = 1.3f;
+            print("Player is moving left");
+            isMoving = true;
         }
         else
+            isMoving = false;
+        //if player is moving play audio else stop audio
+        if (isMoving)
         {
-            //print("Player is Walking");
-        }*/
-        
+            if (!walkAudioSource.isPlaying)
+                walkAudioSource.Play();
+
+        }
+        else
+
+            walkAudioSource.Stop();
+
+        ////////////////////////////////////////////////////////////////////////////////////
+        ///
+        //Chck if player is on Grass
+        if ((Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0))
+        {
+            if (onGrass == true)
+            {
+                print("Player is moving on Grass");
+                onGravel = false;                   //player is onGrass not Gravel
+            }
+            else
+                onGravel = true;                    //if player is not on Grass s/he's on Gravel
+
+            //if player is moving play audio else stop audio
+            if (onGrass)
+            {
+                if (!grassAudioSource.isPlaying)
+                    grassAudioSource.Play();
+
+            }
+            else
+
+                grassAudioSource.Stop();
+        }
+
     }
 
     private void OnTriggerStay(Collider other)
@@ -92,7 +126,7 @@ public class SoundTester : MonoBehaviour
         {
             //print("Now player is in contact with Grass");
             onGrass = true;                 //Check if player has collided with grass
-            onGravel = false;               //if player is OnGrass, it is not on Gravel
+
         }
         
 
@@ -103,19 +137,6 @@ public class SoundTester : MonoBehaviour
             onGravel = true;                //If player is OnGravel, it is not on grass
             onGrass = false;                
         }
-
-        //other collisions
-        //check if player is not on either grass nor gravel
-        /*if (other.gameObject.tag != "Gravel" && other.gameObject.tag != "Grass")
-        {
-            //print("Now player is in contact with the tree");
-            //Do not play grass or gravel SFX if player in not in contact
-            onGravel = false;
-            onGrass = false;
-            
-            gravelAudioSource.Stop();
-            grassAudioSource.Stop();
-        }*/
 
 
     }
