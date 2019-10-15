@@ -8,12 +8,12 @@ public class EnemyAI : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField]
-     NavMeshAgent navigator;
+    NavMeshAgent navigator;
 
     public enum AISTATE
     {
 
-        IDLE,CHANGE, PATROL, DETECT, SEARCH, PURSUE, RETURN
+        IDLE, CHANGE, PATROL, DETECT, SEARCH, PURSUE, RETURN
 
     };
 
@@ -30,10 +30,9 @@ public class EnemyAI : MonoBehaviour
     Vector3 playerPos;
     Vector3 soundPos;
 
-   
+
     bool changing = false;
     bool shooting = false;
-    bool rotating = false;
     bool rotated = false;
     public bool searching = false;
     public bool playerSeen = false;
@@ -53,28 +52,39 @@ public class EnemyAI : MonoBehaviour
     [SerializeField]
     float pursueSpeed = 20f;
     [SerializeField]
-    float rotationSpeed = 10f;
-
-    [SerializeField]
     float waitTime;
-
     [SerializeField]
     float shootDelayTime;
-
-    [SerializeField]
-    float rotationDelay;
-
-    [SerializeField]
-    [Range(0,360)]
-    float patrolRotationAngle;
-
-    [SerializeField]
-    Quaternion rotation;
+  
+ 
 
     [SerializeField]
     int count;
 
     public int currentPath;
+
+    //  rotation
+
+    private int currentCount = 0;
+    [SerializeField]
+    [Range(0, 360)]
+    float detectRotation;
+    [SerializeField]
+    protected float rotationSpeed = 1f;
+    [SerializeField]
+    float rotationDelay = 1;
+    [SerializeField]
+    private float currentTimeCheck = 0;
+    private float currentGoal = 0;
+    private float initialAngle;
+
+    private bool isClockwise = false;
+    bool rotating = true;
+
+    private Quaternion initialRotation;
+    private Quaternion currentRotationGoal;
+    private Quaternion sourceRotation;
+
 
     void Start()
     {
@@ -91,10 +101,15 @@ public class EnemyAI : MonoBehaviour
         if (patrolPath != null && patrolPath.Count >= 2)
         {
             currentPath = 0;
-            patrol(); 
+            patrol();
         }
 
-        else {
+        else
+        {
+            initialAngle = transform.eulerAngles.y;
+            initialRotation = sourceRotation = transform.rotation;
+            currentGoal = isClockwise ? detectRotation : -detectRotation;
+            currentRotationGoal = transform.rotation * Quaternion.Euler(0, currentGoal, 0);
 
             currentState = AISTATE.DETECT;
 
@@ -111,167 +126,221 @@ public class EnemyAI : MonoBehaviour
         {
 
             case (AISTATE.IDLE): // does nothing in this state
-                if (playerSeen == false && playerInShootingRange == false)// if any player exits range
-                {
-                    StopAllCoroutines(); // cancels shooting function
-                }
+                IdleUpate();
                 break;
 
             case (AISTATE.CHANGE): // is called when enemy is deciding on next destination
 
-                if (navigator.remainingDistance == 0) {
-
-                    setEndRotation(patrolPath[currentPath].transform); // sets rotation of the enemy to the way points rotation
-
-                }
-
-                if (changing == false)// if statement prevents co routine from being called multiple times
-                {
-                    StartCoroutine("changePatrolPath"); // calls routine to change the enemy navigators destination
-                }
+                ChangeUpdate();
 
                 break;
-            
+
             case (AISTATE.PATROL): // behavior for patrolling preset paths according to waypoints
 
-                navigator.speed = moveSpeed; // sets standard move speed
-
-                anchorPos = gameObject.transform.position; // updates origin position while patrolling for when enemy needs to return to patrol
-
-                if (navigator.remainingDistance == 0) { // checks if destination has been reached
-
-                    currentState = AISTATE.CHANGE; // switchs state to change for next destination
-
-                    walkCycle.SetBool("isEnemyWalk", false);
-                }
-
+                PatrolUpdate();
 
                 break;
 
             case (AISTATE.SEARCH): // state for searching for player when a sound is detected
 
-                navigator.speed = moveSpeed;
+                SearchUpdate();
 
-                if (changing == false) // to prevent multiple calls
-                {
-                    StartCoroutine("searchSound"); // interupts patrol to search in the area of the sound
-                }
-
-                if (searching == true && changing == true) {
-
-                    trackSound(); // updates sound position due to new sounds
-
-                    if (navigator.remainingDistance == 0) // if reaches sound destination and has not detected the player, enemy returns to patrol
-                    {
-
-                        currentState = AISTATE.RETURN;
-                        searching = false;
-                        changing = false; // resets for future use
-                        walkCycle.SetBool("isEnemyWalk", false);
-                    }
-                }
-
-                
                 break;
 
             case (AISTATE.DETECT): // for rotating the enemy that is stationary or changing their patrol route
 
-                if (count == 0)
-                {
-                    StartCoroutine("setRotation");// sets rotation for initial look
-                }
-
-
-                transform.rotation = Quaternion.Slerp(transform.rotation,rotation,Time.deltaTime * rotationSpeed);
-
-                if (transform.rotation == rotation && count < 2) { // if statement to make the enemy rotate twice before continueing
-
-                    if (rotating == false)// [prevents multiple calls and allows enemy to rotate before rotation is updated
-                    {
-                        StartCoroutine("changeRotation");
-                    }
-                }
-
-                if (patrolPath.Count > 0 && rotated == true) { // continues with patrol path if it exists
-
-                    patrol();
-                    count = 0;
-                    rotated = false;
-                    currentState = AISTATE.PATROL;
-                }
-
-                else if (patrolPath.Count == 0 && rotated == true)
-                { // continues with patrol path if it exists
-
-                    count = 0;
-                    rotated = false;
-                   
-                }
-
-
+                DetectUpdate();
 
                 break;
 
             case (AISTATE.PURSUE): // pursueing a detected player
 
-                navigator.speed = pursueSpeed; // changes movement speed
-
-                if (playerSeen == true && playerInShootingRange == false)
-                {
-                    trackPlayer();// tracks player position and follows when in line of sight
-                }
-
-                else if (playerSeen == true && playerInShootingRange == true) { // if player is in shooting range
-
-                    navigator.SetDestination(gameObject.transform.position); // enemy stops moving
-
-                    if (shooting == false) {
-
-                        StartCoroutine("enemyShoot"); // calls shoot function
-
-                    }
-
-
-                }
-
-                if (playerSeen == false && playerInShootingRange == false)// if any player exits range
-                {
-                    StopAllCoroutines(); // cancels shooting function
-                    currentState = AISTATE.SEARCH; // sets player to search for sound
-                }
+                PursueUpdate();
 
                 break;
 
             case (AISTATE.RETURN): // returns to original position or last patrol position
 
-                navigator.speed = moveSpeed;
-
-                returnToPath();
-
-                if (navigator.remainingDistance == 0 && patrolPath.Count > 0) // returns to patrol after reaching orignal position
-                {
-
-                    navigator.SetDestination(patrolPath[currentPath].transform.position);
-                    //walkCycle.SetBool("isEnemyWalk", false);
-
-                    currentState = AISTATE.PATROL;
-                }
-
-                else {
-
-                    currentState = AISTATE.DETECT;// if not patrolling returns to origin for rotating patrol
-
-                }
+                ReturnUpdate();
 
                 break;
         }
 
     }
 
+    private void ReturnUpdate()
+    {
+        navigator.speed = moveSpeed;
+
+        returnToPath();
+
+        if (navigator.remainingDistance == 0 && patrolPath.Count > 0) // returns to patrol after reaching orignal position
+        {
+
+            patrol();
+            //walkCycle.SetBool("isEnemyWalk", false);
+
+            
+        }
+
+        else if(navigator.remainingDistance == 0 && patrolPath.Count == 0)
+        {
+
+            currentState = AISTATE.DETECT;// if not patrolling returns to origin for rotating patrol
+
+        }
+    }
+
+    private void PursueUpdate()
+    {
+        navigator.speed = pursueSpeed; // changes movement speed
+
+        if (playerSeen == true && playerInShootingRange == false)
+        {
+            trackPlayer();// tracks player position and follows when in line of sight
+        }
+
+        else if (playerSeen == true && playerInShootingRange == true)
+        { // if player is in shooting range
+
+            navigator.SetDestination(gameObject.transform.position); // enemy stops moving
+
+            if (shooting == false)
+            {
+
+                StartCoroutine("enemyShoot"); // calls shoot function
+
+            }
+
+
+        }
+
+        if (playerSeen == false && playerInShootingRange == false)// if any player exits range
+        {
+            StopAllCoroutines(); // cancels shooting function
+            currentState = AISTATE.SEARCH; // sets player to search for sound
+        }
+    }
+
+    private void DetectUpdate()
+    {
+        if (currentCount < 3 && rotating == true && navigator.remainingDistance == 0)
+        {
+
+            currentTimeCheck += Time.deltaTime * rotationSpeed;
+            var newZ = Mathf.Lerp(initialAngle, currentGoal, currentTimeCheck);
+            transform.rotation = Quaternion.Slerp(sourceRotation, currentRotationGoal, currentTimeCheck);
+        }
+
+        if (currentTimeCheck >= 1)
+        {
+            isClockwise = !isClockwise;
+            currentGoal = isClockwise ? detectRotation : -detectRotation;
+            currentTimeCheck = 0;
+            initialAngle = transform.eulerAngles.y;
+            sourceRotation = transform.rotation;
+            currentRotationGoal = initialRotation * Quaternion.Euler(0, currentGoal, 0);
+
+            currentCount++;
+
+            StartCoroutine("callRotationDelay");
+        }
+
+        if (currentCount == 3) {
+            rotated = true;
+            
+        }
+
+        if (patrolPath.Count > 0 && rotated == true)
+        { // continues with patrol path if it exists
+
+            
+            currentCount = 0;
+            rotated = false;
+            patrol();
+        }
+
+        else if (patrolPath.Count == 0 && rotated == true)
+        { // continues with patrol path if it exists
+
+            currentCount = 0;
+            rotated = false;
+
+        }
+    }
+
+    private void SearchUpdate()
+    {
+        navigator.speed = moveSpeed;
+
+        if (changing == false) // to prevent multiple calls
+        {
+            StartCoroutine("searchSound"); // interupts patrol to search in the area of the sound
+        }
+
+        if (searching == true && changing == true)
+        {
+
+            trackSound(); // updates sound position due to new sounds
+
+            if (navigator.remainingDistance == 0) // if reaches sound destination and has not detected the player, enemy returns to patrol
+            {
+
+                currentState = AISTATE.RETURN;
+                searching = false;
+                changing = false; // resets for future use
+                walkCycle.SetBool("isEnemyWalk", false);
+            }
+        }
+    }
+
+    private void PatrolUpdate()
+    {
+        navigator.speed = moveSpeed; // sets standard move speed
+
+        anchorPos = gameObject.transform.position; // updates origin position while patrolling for when enemy needs to return to patrol
+
+        
+
+        if (navigator.remainingDistance == 0)
+        { // checks if destination has been reached
+
+              
+
+            currentState = AISTATE.CHANGE; // switchs state to change for next destination
+
+            walkCycle.SetBool("isEnemyWalk", false);
+        }
+    }
+
+    private void ChangeUpdate()
+    {
+        if (navigator.remainingDistance == 0)
+        {
+
+            setEndRotation(patrolPath[currentPath].transform); // sets rotation of the enemy to the way points rotation
+
+        }
+
+        if (changing == false)// if statement prevents co routine from being called multiple times
+        {
+            StartCoroutine(changePatrolPath()); // calls routine to change the enemy navigators destination
+        }
+    }
+
+    private void IdleUpate()
+    {
+        if (playerSeen == false && playerInShootingRange == false)// if any player exits range
+        {
+            StopAllCoroutines(); // cancels shooting function
+        }
+    }
+
     void OnTriggerStay(Collider Player) // trigger for detecting and tracking player information
     {
 
-        if (Player.gameObject.tag.Equals("Player")) {
+        if (Player.gameObject.tag.Equals("Player"))
+        {
 
 
             playerTracker = Player.gameObject; // sets player tracker when player is in range
@@ -294,10 +363,6 @@ public class EnemyAI : MonoBehaviour
             }
         }
 
-        
-
-        
-
     }
 
 
@@ -314,18 +379,20 @@ public class EnemyAI : MonoBehaviour
         playerPos = playerTracker.gameObject.transform.position;
 
         navigator.SetDestination(playerPos);
-        walkCycle.SetBool("isEnemyWalk", true); 
+        walkCycle.SetBool("isEnemyWalk", true);
 
     }
 
-    public void trackSound() { // function for enemy to follow sound position
+    public void trackSound()
+    { // function for enemy to follow sound position
 
         navigator.SetDestination(soundPos);
         walkCycle.SetBool("isEnemyWalk", true);
 
     }
 
-    public void patrol() { // function for enemy to follow waypoint in patrol
+    public void patrol()
+    { // function for enemy to follow waypoint in patrol
 
         navigator.SetDestination(patrolPath[currentPath].transform.position);
         walkCycle.SetBool("isEnemyWalk", true);
@@ -333,7 +400,7 @@ public class EnemyAI : MonoBehaviour
         currentState = AISTATE.PATROL;
     }
 
-   
+
 
     public void returnToPath() // function for enemy to go to last saved position
     {
@@ -345,7 +412,7 @@ public class EnemyAI : MonoBehaviour
 
     public void setSeen(bool seen) // sets whether the player has been seen or not
     {
-       
+
         if (seen == true)
         {
 
@@ -354,20 +421,22 @@ public class EnemyAI : MonoBehaviour
 
         }
 
-        else if (seen == false) {
+        else if (seen == false)
+        {
 
             playerSeen = false;
 
         }
     }
 
-    public void setInRange(bool inRange) { // sets whether or not the player is in shooting range or not
+    public void setInRange(bool inRange)
+    { // sets whether or not the player is in shooting range or not
 
 
         if (inRange == true)
         {
 
-            playerInShootingRange= true;
+            playerInShootingRange = true;
         }
 
         else if (inRange == false)
@@ -381,18 +450,20 @@ public class EnemyAI : MonoBehaviour
 
     }
 
-    public void shootAtPlayer() { // function to shoot at enemy
+    public void shootAtPlayer()
+    { // function to shoot at enemy
 
         Vector3 dirToTarget = (playerTracker.transform.position - transform.position).normalized;
         float targetDistance = Vector3.Distance(transform.position, playerTracker.transform.position);
 
-        if (Physics.Raycast(transform.position, dirToTarget, targetDistance,targetMask)) {
+        if (Physics.Raycast(transform.position, dirToTarget, targetDistance, targetMask))
+        {
 
             Debug.Log("hit player with raycast");
             ShootingSource.Play();
             gm.GetComponent<GM>().StartCoroutine("Fade");
         }
-       
+
         //gm.GetComponent<GM>().StartCoroutine("Fade");
         shooting = false;
         currentState = AISTATE.PURSUE;
@@ -400,14 +471,16 @@ public class EnemyAI : MonoBehaviour
     }
 
 
-    private void setEndRotation(Transform target) { // sets enemy rotation to waypoint rotation
+    private void setEndRotation(Transform target)
+    { // sets enemy rotation to waypoint rotation
 
         transform.rotation = Quaternion.Slerp(transform.rotation, target.rotation, Time.deltaTime * rotationSpeed);
-
-
+        initialAngle = transform.rotation.eulerAngles.y;
+        initialRotation = sourceRotation = transform.rotation;
     }
 
-    IEnumerator enemyShoot() { // coroutine for shooting with delay
+    IEnumerator enemyShoot()
+    { // coroutine for shooting with delay
 
         shooting = true;
 
@@ -437,56 +510,33 @@ public class EnemyAI : MonoBehaviour
         }
 
         changing = false;
-    }
+    }    
 
-    IEnumerator setRotation() { // function for rotating enemy field of view
-
-        yield return new WaitForSeconds(rotationDelay);
-
-        rotation = Quaternion.Euler(0, transform.rotation.y + Mathf.Pow(-1, count) * patrolRotationAngle, 0);
-
-    }
-
-    IEnumerator changeRotation()
-    {// function for rotating enemy field of view
-
-        rotating = true;
-
-        if(rotating == true) {
-
-            yield return new WaitForSeconds(rotationDelay);
-
-            count++;
-
-            rotation = Quaternion.Euler(0, transform.rotation.y + Mathf.Pow(-1, count) * patrolRotationAngle, 0);
-
-            if (count == 2)
-            {
-
-                rotated = true;
-            }
-
-           
-
-        }
-
-        rotating = false;
-
-    }
-
-    IEnumerator searchSound() {// coroutine for delay before enemy seeks sound position
+    IEnumerator searchSound()
+    {// coroutine for delay before enemy seeks sound position
 
         changing = true;
 
         if (changing == true)
         {
-            
-            yield return new WaitForSeconds(waitTime/3);
+
+            yield return new WaitForSeconds(waitTime / 3);
 
             searching = true;
 
         }
 
     }
+
+    IEnumerator callRotationDelay() {
+
+        rotating = false;
+
+        yield return new WaitForSeconds(rotationDelay);
+
+
+        rotating = true;
+    }
+
 }
 
