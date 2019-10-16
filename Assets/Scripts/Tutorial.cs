@@ -14,6 +14,8 @@ public class Tutorial : MonoBehaviour
     public Text sneakUnlocked;
     public Text howToSprint;
     public Text howToSneak;
+    public Text gateObjective;
+    public Text escapeObjective;
     public Canvas objectivesTab;
     GameObject FPS;
     public GameObject prefab;
@@ -32,6 +34,8 @@ public class Tutorial : MonoBehaviour
         objective1.enabled = true;
         objective2.enabled = false;
         foodObjective.enabled = false;
+        gateObjective.enabled = false;
+        escapeObjective.enabled = false;
 
         counter = 0;
         constantObjText.enabled = true;
@@ -94,6 +98,16 @@ public class Tutorial : MonoBehaviour
         else if (prefab.GetComponent<PlayerWaypoint>().checkpoint == true && counter == 4f)
         {
             ObjectiveSix();
+        }
+
+        else if (prefab.GetComponent<PlayerWaypoint>().checkpoint == true && counter == 5f)
+        {
+            ObjectiveSeven();
+        }
+
+        else if (prefab.GetComponent<PlayerWaypoint>().checkpoint == true && counter == 6f)
+        {
+            ObjectiveEight();
         }
     }
 
@@ -166,7 +180,32 @@ public class Tutorial : MonoBehaviour
         foodObjective.enabled = true;
         oldPrefab = prefab;
         prefab.GetComponent<PlayerWaypoint>().checkpoint = false;
-        prefab = Instantiate(prefab, new Vector3(-6.6f, 14.3f, -115.5f), transform.rotation);
+        prefab = Instantiate(prefab, new Vector3(-59.8f, 3.9f, -155.6f), transform.rotation);
+        Destroy(GameObject.Find("WaypointMarker(Clone)"));
+        Destroy(oldPrefab);
+        counter++;
+    }
+
+    public void ObjectiveSeven()
+    {
+        StartCoroutine("Objectives");
+        foodObjective.enabled = false;
+        gateObjective.enabled = true;
+        oldPrefab = prefab;
+        prefab.GetComponent<PlayerWaypoint>().checkpoint = false;
+        prefab = Instantiate(prefab, new Vector3(20.8f, 3.9f, -155.6f), transform.rotation);
+        Destroy(GameObject.Find("WaypointMarker(Clone)"));
+        Destroy(oldPrefab);
+        counter++;
+    }
+
+    public void ObjectiveEight()
+    {
+        StartCoroutine("objectives");
+        gateObjective.enabled = false;
+        escapeObjective.enabled = true;
+        oldPrefab = prefab;
+        prefab.GetComponent<PlayerWaypoint>().checkpoint = false;
         Destroy(GameObject.Find("WaypointMarker(Clone)"));
         Destroy(oldPrefab);
         counter++;

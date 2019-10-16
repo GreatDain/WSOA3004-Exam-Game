@@ -17,10 +17,13 @@ public class FPCharacterController : MonoBehaviour
     public float stableVol;
     public bool isClimb = false;
     public bool cageOpen = false;
+    public bool gateOpen = false;
     public GameObject GM;
     public Animator animator;
     public Animator walkCycle;
+    public Animator gateAnim;
     public Text interactCage;
+    public Text interactGate;
     public bool isGrounded;
 
     // Start is called before the first frame update
@@ -34,8 +37,10 @@ public class FPCharacterController : MonoBehaviour
         walkCycle.SetBool("isStrafeRight", false);
         walkCycle.SetBool("walkToStrafeL", false);
         walkCycle.SetBool("walkToStrafeR", false);
+        gateAnim.SetBool("gateOpen", false);
 
         interactCage.enabled = false;
+        interactGate.enabled = false;
     }
 
     // Update is called once per frame
@@ -194,6 +199,14 @@ public class FPCharacterController : MonoBehaviour
             cageOpen = true;
             interactCage.enabled = false;
         }
+
+        if (other.gameObject.tag == "Gate" && Input.GetKeyUp(KeyCode.E))
+        {
+            other.gameObject.GetComponent<Collider>().enabled = false;
+            gateAnim.SetBool("gateOpen", true);
+            gateOpen = true;
+            interactGate.enabled = false;
+        }
     }
 
     //Trigger to allow for cage interaction within a certain distance.
@@ -203,6 +216,11 @@ public class FPCharacterController : MonoBehaviour
         {
             interactCage.enabled = true;
         }
+
+        if (other.gameObject.tag == "Gate")
+        {
+            interactGate.enabled = true;
+        }
     }
 
     public void OnTriggerExit(Collider other)
@@ -210,6 +228,11 @@ public class FPCharacterController : MonoBehaviour
         if (other.gameObject.tag == "Cage")
         {
             interactCage.enabled = false;
+        }
+
+        if (other.gameObject.tag == "Gate")
+        {
+            interactGate.enabled = false;
         }
 
         if (other.gameObject.tag == "Gravel" || other.gameObject.tag == "Grass")
