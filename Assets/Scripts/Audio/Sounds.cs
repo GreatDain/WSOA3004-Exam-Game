@@ -51,7 +51,7 @@ public class Sounds : MonoBehaviour
         }
         else
         {
-            breatheAudioSource.pitch = 1.3f;
+            breatheAudioSource.pitch = 1.15f;
             breatheAudioSource.volume = 0.5f;
         }
     }
