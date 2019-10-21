@@ -11,11 +11,6 @@ public class FPCharacterController : MonoBehaviour
     private float speed = 15f;
     private float sneak = 8f;
     private float jump = 20f;
-
-    public float sprintTimer = 0;
-    private float sprintDuration = 5f;
-    public bool cooldown;
-
     public bool isSprint = false;
     public bool isSneak = false;
     public AudioSource audioSource;
@@ -46,8 +41,6 @@ public class FPCharacterController : MonoBehaviour
 
         interactCage.enabled = false;
         interactGate.enabled = false;
-
-        cooldown = false;
     }
 
     // Update is called once per frame
@@ -127,31 +120,17 @@ public class FPCharacterController : MonoBehaviour
         }
         // transform.Translate(0, 0, translation);
 
-        /*if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             //transform.Translate(0, jump * speed, 0);
             gameObject.GetComponent<Rigidbody>().velocity += jump * Vector3.up;
             isGrounded = false;
-        }*/
-
-        if (Input.GetKey(KeyCode.LeftShift) && cooldown == false)
-        {
-            sprintTimer += Time.deltaTime;
-        }
-        else if (sprintTimer > 0)
-        {
-            cooldown = true;
-            sprintTimer -= Time.deltaTime;
-        }
-        else if (sprintTimer <= 0)
-        {
-            cooldown = false;
         }
 
         //Adds sprint functionality. Speeds up animation accordingly.
         if (GM.GetComponent<Tutorial>().sprintAbility == true)
         {
-            if (!isSprint && (translation > 0) && Input.GetKeyDown(KeyCode.LeftShift) && cooldown == false)
+            if (translation > 0 && Input.GetKeyDown(KeyCode.LeftShift))
             {
                 speed = sprint;
                 isSprint = true;
@@ -159,15 +138,13 @@ public class FPCharacterController : MonoBehaviour
                 stableVol = audioSource.volume;
                 walkCycle.speed = 2f;
             }
-            else if (isSprint && (Input.GetKeyUp(KeyCode.LeftShift) || sprintTimer > sprintDuration || cooldown == true))
+            else if (Input.GetKeyUp(KeyCode.LeftShift))
             {
                 speed = speedNorm;
                 isSprint = false;
                 audioSource.volume = stableVol;
                 walkCycle.speed = 1f;
-                    //StartCoroutine("SprintCooldown");
             }
-            sprintTimer = Mathf.Clamp(sprintTimer, 0, sprintDuration);
         }
 
         //Adds enhanced sneak functionality. Slows down animation accordingly.
@@ -263,14 +240,4 @@ public class FPCharacterController : MonoBehaviour
             isGrounded = false;
         }
     }
-
-    /*IEnumerator SprintCooldown()
-    {
-        sprintTimer -= Time.deltaTime;
-        if (sprintTimer == 0)
-        {
-            GM.GetComponent<Tutorial>().sprintAbility = true;
-            yield return new WaitForSeconds(0);
-        }
-    }*/
 }

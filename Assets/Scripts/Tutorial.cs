@@ -16,7 +16,6 @@ public class Tutorial : MonoBehaviour
     public Text howToSneak;
     public Text gateObjective;
     public Text escapeObjective;
-    public Text aboutFood;
     public Canvas objectivesTab;
     GameObject FPS;
     public GameObject prefab;
@@ -37,7 +36,6 @@ public class Tutorial : MonoBehaviour
         foodObjective.enabled = false;
         gateObjective.enabled = false;
         escapeObjective.enabled = false;
-        aboutFood.enabled = false;
 
         counter = 0;
         constantObjText.enabled = true;
@@ -193,7 +191,6 @@ public class Tutorial : MonoBehaviour
         StartCoroutine("Objectives");
         foodObjective.enabled = false;
         gateObjective.enabled = true;
-        FoodTut();
         oldPrefab = prefab;
         prefab.GetComponent<PlayerWaypoint>().checkpoint = false;
         prefab = Instantiate(prefab, new Vector3(20.8f, 3.9f, -155.6f), transform.rotation);
@@ -212,15 +209,6 @@ public class Tutorial : MonoBehaviour
         Destroy(GameObject.Find("WaypointMarker(Clone)"));
         Destroy(oldPrefab);
         counter++;
-    }
-
-    void FoodTut()
-    {
-        aboutFood.enabled = true;
-        if (aboutFood.enabled == true && Input.GetKeyDown(KeyCode.Return))
-        {
-            aboutFood.enabled = false;
-        }
     }
 
     private IEnumerator Objectives()
