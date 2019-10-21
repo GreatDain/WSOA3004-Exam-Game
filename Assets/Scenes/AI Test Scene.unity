@@ -384,6 +384,8 @@ MonoBehaviour:
   gunBarrelPoint: {fileID: 0}
   enemyBullet: {fileID: 0}
   gm: {fileID: 106750784}
+  isGravel: 0
+  isGrass: 0
   walkCycle: {fileID: 679756740}
   anchorPos: {x: 0, y: 0, z: 0}
   searching: 0
@@ -2081,6 +2083,8 @@ MonoBehaviour:
   gunBarrelPoint: {fileID: 0}
   enemyBullet: {fileID: 0}
   gm: {fileID: 106750784}
+  isGravel: 0
+  isGrass: 0
   walkCycle: {fileID: 515378430}
   anchorPos: {x: 0, y: 0, z: 0}
   searching: 0
@@ -3213,6 +3217,8 @@ MonoBehaviour:
   gunBarrelPoint: {fileID: 0}
   enemyBullet: {fileID: 0}
   gm: {fileID: 106750784}
+  isGravel: 0
+  isGrass: 0
   walkCycle: {fileID: 1786986879}
   anchorPos: {x: 0, y: 0, z: 0}
   searching: 0
@@ -6064,6 +6070,8 @@ MonoBehaviour:
   gunBarrelPoint: {fileID: 0}
   enemyBullet: {fileID: 0}
   gm: {fileID: 106750784}
+  isGravel: 0
+  isGrass: 0
   walkCycle: {fileID: 2138047925}
   anchorPos: {x: 0, y: 0, z: 0}
   searching: 0
@@ -10425,6 +10433,8 @@ MonoBehaviour:
   gunBarrelPoint: {fileID: 0}
   enemyBullet: {fileID: 0}
   gm: {fileID: 106750784}
+  isGravel: 0
+  isGrass: 0
   walkCycle: {fileID: 873814702}
   anchorPos: {x: 0, y: 0, z: 0}
   searching: 0
@@ -12021,7 +12031,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0.18359375, z: 0.0390625, w: -0.0390625}
+  m_BoundingSphereOverride: {x: 0.7418301, y: 0.76584464, z: 0.0694116, w: 0.4905062}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -21700,6 +21710,8 @@ MonoBehaviour:
   gunBarrelPoint: {fileID: 0}
   enemyBullet: {fileID: 0}
   gm: {fileID: 106750784}
+  isGravel: 0
+  isGrass: 0
   walkCycle: {fileID: 714381501}
   anchorPos: {x: 0, y: 0, z: 0}
   searching: 0
@@ -22067,6 +22079,8 @@ MonoBehaviour:
   gunBarrelPoint: {fileID: 0}
   enemyBullet: {fileID: 0}
   gm: {fileID: 106750784}
+  isGravel: 0
+  isGrass: 0
   walkCycle: {fileID: 1948629515}
   anchorPos: {x: 0, y: 0, z: 0}
   searching: 0
@@ -23458,6 +23472,8 @@ MonoBehaviour:
   gunBarrelPoint: {fileID: 0}
   enemyBullet: {fileID: 0}
   gm: {fileID: 106750784}
+  isGravel: 0
+  isGrass: 0
   walkCycle: {fileID: 1114896998}
   anchorPos: {x: 0, y: 0, z: 0}
   searching: 0
@@ -27532,6 +27548,8 @@ MonoBehaviour:
   gunBarrelPoint: {fileID: 0}
   enemyBullet: {fileID: 0}
   gm: {fileID: 106750784}
+  isGravel: 0
+  isGrass: 0
   walkCycle: {fileID: 1632731679}
   anchorPos: {x: 0, y: 0, z: 0}
   searching: 0
@@ -29679,6 +29697,8 @@ MonoBehaviour:
   gunBarrelPoint: {fileID: 0}
   enemyBullet: {fileID: 0}
   gm: {fileID: 106750784}
+  isGravel: 0
+  isGrass: 0
   walkCycle: {fileID: 499557621}
   anchorPos: {x: 0, y: 0, z: 0}
   searching: 0
@@ -30421,6 +30441,8 @@ MonoBehaviour:
   gunBarrelPoint: {fileID: 0}
   enemyBullet: {fileID: 0}
   gm: {fileID: 106750784}
+  isGravel: 0
+  isGrass: 0
   walkCycle: {fileID: 137307330}
   anchorPos: {x: 0, y: 0, z: 0}
   searching: 0
@@ -31070,6 +31092,8 @@ MonoBehaviour:
   gunBarrelPoint: {fileID: 0}
   enemyBullet: {fileID: 0}
   gm: {fileID: 106750784}
+  isGravel: 0
+  isGrass: 0
   walkCycle: {fileID: 1043923325}
   anchorPos: {x: 0, y: 0, z: 0}
   searching: 0
@@ -35850,6 +35874,8 @@ MonoBehaviour:
   gunBarrelPoint: {fileID: 0}
   enemyBullet: {fileID: 0}
   gm: {fileID: 106750784}
+  isGravel: 0
+  isGrass: 0
   walkCycle: {fileID: 422362013}
   anchorPos: {x: 0, y: 0, z: 0}
   searching: 0
@@ -37317,6 +37343,8 @@ MonoBehaviour:
   gunBarrelPoint: {fileID: 0}
   enemyBullet: {fileID: 0}
   gm: {fileID: 106750784}
+  isGravel: 0
+  isGrass: 0
   walkCycle: {fileID: 2006736869}
   anchorPos: {x: 0, y: 0, z: 0}
   searching: 0
@@ -37354,7 +37382,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 50
+  m_Radius: 30
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1607728179
 MonoBehaviour:
@@ -39598,6 +39626,8 @@ MonoBehaviour:
   gunBarrelPoint: {fileID: 0}
   enemyBullet: {fileID: 0}
   gm: {fileID: 106750784}
+  isGravel: 0
+  isGrass: 0
   walkCycle: {fileID: 190695251}
   anchorPos: {x: 0, y: 0, z: 0}
   searching: 0
@@ -41318,6 +41348,8 @@ MonoBehaviour:
   gunBarrelPoint: {fileID: 0}
   enemyBullet: {fileID: 0}
   gm: {fileID: 106750784}
+  isGravel: 0
+  isGrass: 0
   walkCycle: {fileID: 1063350872}
   anchorPos: {x: 0, y: 0, z: 0}
   searching: 0
@@ -43933,6 +43965,8 @@ MonoBehaviour:
   gunBarrelPoint: {fileID: 0}
   enemyBullet: {fileID: 0}
   gm: {fileID: 106750784}
+  isGravel: 0
+  isGrass: 0
   walkCycle: {fileID: 1327223770}
   anchorPos: {x: 0, y: 0, z: 0}
   searching: 0
@@ -45818,6 +45852,8 @@ MonoBehaviour:
   gunBarrelPoint: {fileID: 0}
   enemyBullet: {fileID: 0}
   gm: {fileID: 106750784}
+  isGravel: 0
+  isGrass: 0
   walkCycle: {fileID: 77593769}
   anchorPos: {x: 0, y: 0, z: 0}
   searching: 0
@@ -49522,6 +49558,8 @@ MonoBehaviour:
   gunBarrelPoint: {fileID: 0}
   enemyBullet: {fileID: 0}
   gm: {fileID: 106750784}
+  isGravel: 0
+  isGrass: 0
   walkCycle: {fileID: 955242892}
   anchorPos: {x: 0, y: 0, z: 0}
   searching: 0
