@@ -55,8 +55,8 @@ public class EnemyAI : MonoBehaviour
     float waitTime;
     [SerializeField]
     float shootDelayTime;
-  
- 
+
+    float soundRange = 25f;
 
     [SerializeField]
     int count;
@@ -95,6 +95,8 @@ public class EnemyAI : MonoBehaviour
         walkCycle.SetBool("isEnemyWalk", false);
 
         navigator = this.GetComponent<NavMeshAgent>();
+
+      
 
         // checks if the enemy has a patrol path or not and then decides its behavior according to state or function
 
@@ -342,9 +344,9 @@ public class EnemyAI : MonoBehaviour
         if (Player.gameObject.tag.Equals("Player"))
         {
 
-
             playerTracker = Player.gameObject; // sets player tracker when player is in range
 
+            float distance = Vector3.Distance(gameObject.transform.position,Player.transform.position);
 
             if (playerSeen == true && shooting == false)
             {
@@ -353,7 +355,7 @@ public class EnemyAI : MonoBehaviour
                 currentState = AISTATE.PURSUE; // calles pursue if player is seen
             }
 
-            if (Player.gameObject.GetComponent<FPCharacterController>().stableVol >= 0.4f && playerSeen == false)
+            if (Player.gameObject.GetComponent<FPCharacterController>().stableVol >= 0.4f && playerSeen == false && distance <= 25)
             {
 
                 soundPos = Player.gameObject.transform.position;
