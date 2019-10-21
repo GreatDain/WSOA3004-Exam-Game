@@ -23,6 +23,8 @@ public class EnemyAI : MonoBehaviour
     public GameObject gunBarrelPoint;
     public GameObject enemyBullet;
     public GameObject gm;
+    public bool isGravel = false;
+    public bool isGrass = false;
 
     public Animator walkCycle;
 
@@ -365,6 +367,15 @@ public class EnemyAI : MonoBehaviour
             }
         }
 
+        if (Player.gameObject.tag == "Gravel")
+        {
+            isGravel = true;
+        }
+        else if (Player.gameObject.tag == "Grass")
+        {
+            isGrass = true;
+        } 
+
     }
 
 
@@ -372,6 +383,15 @@ public class EnemyAI : MonoBehaviour
     {
 
         playerTracker = null; // resets tracker if enemy leaves enemy range
+
+        if (Player.gameObject.tag == "Gravel")
+        {
+            isGravel = false;
+        }
+        else if(Player.gameObject.tag == "Grass")
+        {
+            isGrass = false;
+        }
 
     }
 
