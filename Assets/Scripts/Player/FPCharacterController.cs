@@ -11,8 +11,11 @@ public class FPCharacterController : MonoBehaviour
     private float speed = 15f;
     private float sneak = 8f;
     private float jump = 20f;
+    public float sprintTime;
+    private float sprintDuration = 5f;
     public bool isSprint = false;
     public bool isSneak = false;
+    public bool cooldown = false;
     public AudioSource audioSource;
     public float stableVol;
     public bool isClimb = false;
@@ -120,17 +123,31 @@ public class FPCharacterController : MonoBehaviour
         }
         // transform.Translate(0, 0, translation);
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        /*if (Input.GetKeyDown(KeyCode.Space))
         {
             //transform.Translate(0, jump * speed, 0);
             gameObject.GetComponent<Rigidbody>().velocity += jump * Vector3.up;
             isGrounded = false;
+        }*/
+
+        if (Input.GetKey(KeyCode.LeftShift) && cooldown == false)
+        {
+            sprintTime += Time.deltaTime;
+        }
+        else if (cooldown == true)
+        {
+            sprintTime -= Time.deltaTime;
+        }
+
+        if (sprintTime <= 0)
+        {
+            cooldown = false;
         }
 
         //Adds sprint functionality. Speeds up animation accordingly.
         if (GM.GetComponent<Tutorial>().sprintAbility == true)
         {
-            if (translation > 0 && Input.GetKeyDown(KeyCode.LeftShift))
+            if (!isSprint && translation > 0 && Input.GetKeyDown(KeyCode.LeftShift) && cooldown == false)
             {
                 speed = sprint;
                 isSprint = true;
@@ -138,13 +155,15 @@ public class FPCharacterController : MonoBehaviour
                 stableVol = audioSource.volume;
                 walkCycle.speed = 2f;
             }
-            else if (Input.GetKeyUp(KeyCode.LeftShift))
+            else if (isSprint && (Input.GetKeyUp(KeyCode.LeftShift) || (sprintTime > sprintDuration)))
             {
                 speed = speedNorm;
                 isSprint = false;
                 audioSource.volume = stableVol;
                 walkCycle.speed = 1f;
+                cooldown = true;
             }
+            sprintTime = Mathf.Clamp(sprintTime, 0, sprintDuration);
         }
 
         //Adds enhanced sneak functionality. Slows down animation accordingly.

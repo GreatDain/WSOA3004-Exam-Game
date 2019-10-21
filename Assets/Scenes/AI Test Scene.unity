@@ -3579,11 +3579,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kobus (4)
       objectReference: {fileID: 0}
-    - target: {fileID: -6057140222963153312, guid: ac69e65aa8ad85a46915c9692cd19d73,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: b8b6712d4391e354f9206362d7b37945, type: 2}
     - target: {fileID: -4216859302048453862, guid: ac69e65aa8ad85a46915c9692cd19d73,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3654,6 +3649,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.2000022
       objectReference: {fileID: 0}
+    - target: {fileID: -6057140222963153312, guid: ac69e65aa8ad85a46915c9692cd19d73,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: b8b6712d4391e354f9206362d7b37945, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac69e65aa8ad85a46915c9692cd19d73, type: 3}
 --- !u!1 &75850996
@@ -3773,11 +3773,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kobus (1)
       objectReference: {fileID: 0}
-    - target: {fileID: -6057140222963153312, guid: ac69e65aa8ad85a46915c9692cd19d73,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: b8b6712d4391e354f9206362d7b37945, type: 2}
     - target: {fileID: -4216859302048453862, guid: ac69e65aa8ad85a46915c9692cd19d73,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3848,6 +3843,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.2000008
       objectReference: {fileID: 0}
+    - target: {fileID: -6057140222963153312, guid: ac69e65aa8ad85a46915c9692cd19d73,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: b8b6712d4391e354f9206362d7b37945, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac69e65aa8ad85a46915c9692cd19d73, type: 3}
 --- !u!1 &84526329
@@ -4292,11 +4292,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kobus (5)
       objectReference: {fileID: 0}
-    - target: {fileID: -6057140222963153312, guid: ac69e65aa8ad85a46915c9692cd19d73,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: b8b6712d4391e354f9206362d7b37945, type: 2}
     - target: {fileID: -4216859302048453862, guid: ac69e65aa8ad85a46915c9692cd19d73,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4367,6 +4362,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.2000027
       objectReference: {fileID: 0}
+    - target: {fileID: -6057140222963153312, guid: ac69e65aa8ad85a46915c9692cd19d73,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: b8b6712d4391e354f9206362d7b37945, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac69e65aa8ad85a46915c9692cd19d73, type: 3}
 --- !u!1 &122518092
@@ -8823,7 +8823,7 @@ PrefabInstance:
     - target: {fileID: -7637035542496960528, guid: a1b8edb31ed78d84bbfc917dcafa5388,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.7
+      value: 2.2
       objectReference: {fileID: 0}
     - target: {fileID: -7637035542496960528, guid: a1b8edb31ed78d84bbfc917dcafa5388,
         type: 3}
@@ -8848,7 +8848,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: a1b8edb31ed78d84bbfc917dcafa5388,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.2166667
+      value: 2.3
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: a1b8edb31ed78d84bbfc917dcafa5388,
         type: 3}
@@ -8978,7 +8978,7 @@ PrefabInstance:
     - target: {fileID: 6751135276634019622, guid: a1b8edb31ed78d84bbfc917dcafa5388,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.85
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 7060313678762885831, guid: a1b8edb31ed78d84bbfc917dcafa5388,
         type: 3}
@@ -9643,8 +9643,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbddf43ba54731240b410972630688c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprintTime: 0
   isSprint: 0
   isSneak: 0
+  cooldown: 0
   audioSource: {fileID: 0}
   stableVol: 0
   isClimb: 0
@@ -10750,11 +10752,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kobus (8)
       objectReference: {fileID: 0}
-    - target: {fileID: -6057140222963153312, guid: ac69e65aa8ad85a46915c9692cd19d73,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: b8b6712d4391e354f9206362d7b37945, type: 2}
     - target: {fileID: -4216859302048453862, guid: ac69e65aa8ad85a46915c9692cd19d73,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10825,6 +10822,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.2000041
       objectReference: {fileID: 0}
+    - target: {fileID: -6057140222963153312, guid: ac69e65aa8ad85a46915c9692cd19d73,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: b8b6712d4391e354f9206362d7b37945, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac69e65aa8ad85a46915c9692cd19d73, type: 3}
 --- !u!1 &358540454 stripped
@@ -11140,11 +11142,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kobus (1)
       objectReference: {fileID: 0}
-    - target: {fileID: -6057140222963153312, guid: ac69e65aa8ad85a46915c9692cd19d73,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: b8b6712d4391e354f9206362d7b37945, type: 2}
     - target: {fileID: -4216859302048453862, guid: ac69e65aa8ad85a46915c9692cd19d73,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11215,6 +11212,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.2000008
       objectReference: {fileID: 0}
+    - target: {fileID: -6057140222963153312, guid: ac69e65aa8ad85a46915c9692cd19d73,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: b8b6712d4391e354f9206362d7b37945, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac69e65aa8ad85a46915c9692cd19d73, type: 3}
 --- !u!1 &394598431
@@ -12822,11 +12824,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kobus (7)
       objectReference: {fileID: 0}
-    - target: {fileID: -6057140222963153312, guid: ac69e65aa8ad85a46915c9692cd19d73,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: b8b6712d4391e354f9206362d7b37945, type: 2}
     - target: {fileID: -4216859302048453862, guid: ac69e65aa8ad85a46915c9692cd19d73,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12897,6 +12894,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.2000036
       objectReference: {fileID: 0}
+    - target: {fileID: -6057140222963153312, guid: ac69e65aa8ad85a46915c9692cd19d73,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: b8b6712d4391e354f9206362d7b37945, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac69e65aa8ad85a46915c9692cd19d73, type: 3}
 --- !u!1001 &469945744
@@ -20872,11 +20874,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kobus (1)
       objectReference: {fileID: 0}
-    - target: {fileID: -6057140222963153312, guid: ac69e65aa8ad85a46915c9692cd19d73,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: b8b6712d4391e354f9206362d7b37945, type: 2}
     - target: {fileID: -4216859302048453862, guid: ac69e65aa8ad85a46915c9692cd19d73,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -20947,6 +20944,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.2000008
       objectReference: {fileID: 0}
+    - target: {fileID: -6057140222963153312, guid: ac69e65aa8ad85a46915c9692cd19d73,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: b8b6712d4391e354f9206362d7b37945, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac69e65aa8ad85a46915c9692cd19d73, type: 3}
 --- !u!1 &944592907
@@ -22380,11 +22382,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kobus (7)
       objectReference: {fileID: 0}
-    - target: {fileID: -6057140222963153312, guid: ac69e65aa8ad85a46915c9692cd19d73,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: b8b6712d4391e354f9206362d7b37945, type: 2}
     - target: {fileID: -4216859302048453862, guid: ac69e65aa8ad85a46915c9692cd19d73,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -22455,6 +22452,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.2000036
       objectReference: {fileID: 0}
+    - target: {fileID: -6057140222963153312, guid: ac69e65aa8ad85a46915c9692cd19d73,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: b8b6712d4391e354f9206362d7b37945, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac69e65aa8ad85a46915c9692cd19d73, type: 3}
 --- !u!1 &967661511
@@ -24041,8 +24043,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbddf43ba54731240b410972630688c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprintTime: 0
   isSprint: 0
   isSneak: 0
+  cooldown: 0
   audioSource: {fileID: 1000796956}
   stableVol: 0
   isClimb: 0
@@ -24225,7 +24229,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1000796954}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -71.8, y: 6.59, z: -530.8}
+  m_LocalPosition: {x: 394, y: 6.59, z: 144}
   m_LocalScale: {x: 1, y: 0.7, z: 1}
   m_Children:
   - {fileID: 517063040}
@@ -25088,11 +25092,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kobus (3)
       objectReference: {fileID: 0}
-    - target: {fileID: -6057140222963153312, guid: ac69e65aa8ad85a46915c9692cd19d73,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: b8b6712d4391e354f9206362d7b37945, type: 2}
     - target: {fileID: -4216859302048453862, guid: ac69e65aa8ad85a46915c9692cd19d73,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -25163,6 +25162,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.2000017
       objectReference: {fileID: 0}
+    - target: {fileID: -6057140222963153312, guid: ac69e65aa8ad85a46915c9692cd19d73,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: b8b6712d4391e354f9206362d7b37945, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac69e65aa8ad85a46915c9692cd19d73, type: 3}
 --- !u!1 &1059642257
@@ -26537,11 +26541,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kobus (7)
       objectReference: {fileID: 0}
-    - target: {fileID: -6057140222963153312, guid: ac69e65aa8ad85a46915c9692cd19d73,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: b8b6712d4391e354f9206362d7b37945, type: 2}
     - target: {fileID: -4216859302048453862, guid: ac69e65aa8ad85a46915c9692cd19d73,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -26612,6 +26611,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.2000036
       objectReference: {fileID: 0}
+    - target: {fileID: -6057140222963153312, guid: ac69e65aa8ad85a46915c9692cd19d73,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: b8b6712d4391e354f9206362d7b37945, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac69e65aa8ad85a46915c9692cd19d73, type: 3}
 --- !u!1 &1153936700
@@ -32375,11 +32379,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kobus (1)
       objectReference: {fileID: 0}
-    - target: {fileID: -6057140222963153312, guid: ac69e65aa8ad85a46915c9692cd19d73,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: b8b6712d4391e354f9206362d7b37945, type: 2}
     - target: {fileID: -4216859302048453862, guid: ac69e65aa8ad85a46915c9692cd19d73,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -32450,6 +32449,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.2000008
       objectReference: {fileID: 0}
+    - target: {fileID: -6057140222963153312, guid: ac69e65aa8ad85a46915c9692cd19d73,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: b8b6712d4391e354f9206362d7b37945, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac69e65aa8ad85a46915c9692cd19d73, type: 3}
 --- !u!1 &1304018296
@@ -33533,11 +33537,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kobus (7)
       objectReference: {fileID: 0}
-    - target: {fileID: -6057140222963153312, guid: ac69e65aa8ad85a46915c9692cd19d73,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: b8b6712d4391e354f9206362d7b37945, type: 2}
     - target: {fileID: -4216859302048453862, guid: ac69e65aa8ad85a46915c9692cd19d73,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -33608,6 +33607,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.2000036
       objectReference: {fileID: 0}
+    - target: {fileID: -6057140222963153312, guid: ac69e65aa8ad85a46915c9692cd19d73,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: b8b6712d4391e354f9206362d7b37945, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac69e65aa8ad85a46915c9692cd19d73, type: 3}
 --- !u!1 &1381112528
@@ -36284,16 +36288,31 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 129350255495253916, guid: b6ec7cf33a6929e4c9089ea8087e051d,
+    - target: {fileID: -6319087941529794808, guid: b6ec7cf33a6929e4c9089ea8087e051d,
         type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 64ddf4e9dec53fc4fb22f24be6778098, type: 2}
     - target: {fileID: -6057140222963153312, guid: b6ec7cf33a6929e4c9089ea8087e051d,
         type: 3}
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: b54c07788d5df124ab9d9550629ba41a, type: 2}
+    - target: {fileID: -5669444362896587519, guid: b6ec7cf33a6929e4c9089ea8087e051d,
+        type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -5669444362896587519, guid: b6ec7cf33a6929e4c9089ea8087e051d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4345819602115048159, guid: b6ec7cf33a6929e4c9089ea8087e051d,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 64ddf4e9dec53fc4fb22f24be6778098, type: 2}
     - target: {fileID: -4216859302048453862, guid: b6ec7cf33a6929e4c9089ea8087e051d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -36364,26 +36383,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: -6319087941529794808, guid: b6ec7cf33a6929e4c9089ea8087e051d,
+    - target: {fileID: 129350255495253916, guid: b6ec7cf33a6929e4c9089ea8087e051d,
         type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 64ddf4e9dec53fc4fb22f24be6778098, type: 2}
-    - target: {fileID: -5669444362896587519, guid: b6ec7cf33a6929e4c9089ea8087e051d,
-        type: 3}
-      propertyPath: m_Convex
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -5669444362896587519, guid: b6ec7cf33a6929e4c9089ea8087e051d,
-        type: 3}
-      propertyPath: m_Enabled
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -4345819602115048159, guid: b6ec7cf33a6929e4c9089ea8087e051d,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 64ddf4e9dec53fc4fb22f24be6778098, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6ec7cf33a6929e4c9089ea8087e051d, type: 3}
 --- !u!1 &1534715074
@@ -36415,8 +36419,8 @@ Transform:
   m_Children:
   - {fileID: 1022236948}
   - {fileID: 427253889}
-  - {fileID: 1559005429}
   - {fileID: 2058003182}
+  - {fileID: 1559005429}
   - {fileID: 488277153}
   - {fileID: 1093431928}
   m_Father: {fileID: 0}
@@ -36440,11 +36444,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kobus (8)
       objectReference: {fileID: 0}
-    - target: {fileID: -6057140222963153312, guid: ac69e65aa8ad85a46915c9692cd19d73,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: b8b6712d4391e354f9206362d7b37945, type: 2}
     - target: {fileID: -4216859302048453862, guid: ac69e65aa8ad85a46915c9692cd19d73,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -36515,6 +36514,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.2000041
       objectReference: {fileID: 0}
+    - target: {fileID: -6057140222963153312, guid: ac69e65aa8ad85a46915c9692cd19d73,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: b8b6712d4391e354f9206362d7b37945, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac69e65aa8ad85a46915c9692cd19d73, type: 3}
 --- !u!1 &1539625847
@@ -36903,13 +36907,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1559005424}
-  m_LocalRotation: {x: -0.0026295043, y: -0, z: -0, w: 0.99999654}
-  m_LocalPosition: {x: -203.62, y: -6, z: -968.47864}
-  m_LocalScale: {x: 1000, y: 1, z: 200}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -203.62, y: 0, z: -968.47864}
+  m_LocalScale: {x: 1000, y: 1, z: 200.00006}
   m_Children: []
   m_Father: {fileID: 1534715075}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: -0.30100003, y: 0, z: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1569186958
 GameObject:
   m_ObjectHideFlags: 0
@@ -38216,11 +38220,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kobus (1)
       objectReference: {fileID: 0}
-    - target: {fileID: -6057140222963153312, guid: ac69e65aa8ad85a46915c9692cd19d73,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: b8b6712d4391e354f9206362d7b37945, type: 2}
     - target: {fileID: -4216859302048453862, guid: ac69e65aa8ad85a46915c9692cd19d73,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -38291,6 +38290,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.2000008
       objectReference: {fileID: 0}
+    - target: {fileID: -6057140222963153312, guid: ac69e65aa8ad85a46915c9692cd19d73,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: b8b6712d4391e354f9206362d7b37945, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac69e65aa8ad85a46915c9692cd19d73, type: 3}
 --- !u!1001 &1620879032
@@ -44846,11 +44850,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kobus
       objectReference: {fileID: 0}
-    - target: {fileID: -6057140222963153312, guid: ac69e65aa8ad85a46915c9692cd19d73,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: b8b6712d4391e354f9206362d7b37945, type: 2}
     - target: {fileID: -4216859302048453862, guid: ac69e65aa8ad85a46915c9692cd19d73,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -44921,6 +44920,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.2000003
       objectReference: {fileID: 0}
+    - target: {fileID: -6057140222963153312, guid: ac69e65aa8ad85a46915c9692cd19d73,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: b8b6712d4391e354f9206362d7b37945, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac69e65aa8ad85a46915c9692cd19d73, type: 3}
 --- !u!1 &1895556788
@@ -47367,11 +47371,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kobus (2)
       objectReference: {fileID: 0}
-    - target: {fileID: -6057140222963153312, guid: ac69e65aa8ad85a46915c9692cd19d73,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: b8b6712d4391e354f9206362d7b37945, type: 2}
     - target: {fileID: -4216859302048453862, guid: ac69e65aa8ad85a46915c9692cd19d73,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -47442,6 +47441,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.2000012
       objectReference: {fileID: 0}
+    - target: {fileID: -6057140222963153312, guid: ac69e65aa8ad85a46915c9692cd19d73,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: b8b6712d4391e354f9206362d7b37945, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac69e65aa8ad85a46915c9692cd19d73, type: 3}
 --- !u!1 &2003744006
@@ -48745,11 +48749,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kobus (7)
       objectReference: {fileID: 0}
-    - target: {fileID: -6057140222963153312, guid: ac69e65aa8ad85a46915c9692cd19d73,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: b8b6712d4391e354f9206362d7b37945, type: 2}
     - target: {fileID: -4216859302048453862, guid: ac69e65aa8ad85a46915c9692cd19d73,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -48820,6 +48819,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.2000036
       objectReference: {fileID: 0}
+    - target: {fileID: -6057140222963153312, guid: ac69e65aa8ad85a46915c9692cd19d73,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: b8b6712d4391e354f9206362d7b37945, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac69e65aa8ad85a46915c9692cd19d73, type: 3}
 --- !u!1 &2058003177
@@ -48927,7 +48931,7 @@ Transform:
   m_LocalScale: {x: 1000, y: 1, z: 40}
   m_Children: []
   m_Father: {fileID: 1534715075}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2063825287
 GameObject:
@@ -50411,11 +50415,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kobus (6)
       objectReference: {fileID: 0}
-    - target: {fileID: -6057140222963153312, guid: ac69e65aa8ad85a46915c9692cd19d73,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: b8b6712d4391e354f9206362d7b37945, type: 2}
     - target: {fileID: -4216859302048453862, guid: ac69e65aa8ad85a46915c9692cd19d73,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -50486,6 +50485,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.2000031
       objectReference: {fileID: 0}
+    - target: {fileID: -6057140222963153312, guid: ac69e65aa8ad85a46915c9692cd19d73,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: b8b6712d4391e354f9206362d7b37945, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac69e65aa8ad85a46915c9692cd19d73, type: 3}
 --- !u!1001 &2111599661
@@ -50500,11 +50504,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kobus (7)
       objectReference: {fileID: 0}
-    - target: {fileID: -6057140222963153312, guid: ac69e65aa8ad85a46915c9692cd19d73,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: b8b6712d4391e354f9206362d7b37945, type: 2}
     - target: {fileID: -4216859302048453862, guid: ac69e65aa8ad85a46915c9692cd19d73,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -50575,6 +50574,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.2000036
       objectReference: {fileID: 0}
+    - target: {fileID: -6057140222963153312, guid: ac69e65aa8ad85a46915c9692cd19d73,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: b8b6712d4391e354f9206362d7b37945, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac69e65aa8ad85a46915c9692cd19d73, type: 3}
 --- !u!1 &2112310942
@@ -54884,7 +54888,7 @@ PrefabInstance:
     - target: {fileID: 2888084671728983043, guid: 2578ecf551b99264a9eed99eedb0d9e1,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -20.455532
+      value: -18.9
       objectReference: {fileID: 0}
     - target: {fileID: 2888084671728983043, guid: 2578ecf551b99264a9eed99eedb0d9e1,
         type: 3}
