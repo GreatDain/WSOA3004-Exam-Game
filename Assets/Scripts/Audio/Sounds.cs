@@ -39,7 +39,7 @@ public class Sounds : MonoBehaviour
             walkAudioSource.Stop();
         }*/
         //controller.walkCycle.GetBool("isMove") == true &&
-        if (controller.isSprint == true)
+        if (controller.isSprint == true || controller.cooldown == true)
         {
             breatheAudioSource.pitch = 1.8f;
             breatheAudioSource.volume = 0.7f;
