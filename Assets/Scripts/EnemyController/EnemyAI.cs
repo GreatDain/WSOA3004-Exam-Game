@@ -493,6 +493,9 @@ public class EnemyAI : MonoBehaviour
 
         ReloadSource.PlayOneShot(ReloadSource.clip);
 
+        //walkCycle.SetBool("isEnemyWalk", false);
+        walkCycle.SetBool("isShooting", true);
+
         yield return new WaitForSeconds(shootDelayTime);
 
         shootAtPlayer();
