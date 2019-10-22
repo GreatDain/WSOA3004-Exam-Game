@@ -463,11 +463,14 @@ public class EnemyAI : MonoBehaviour
 
             Debug.Log("hit player with raycast");
             ShootingSource.Play();
-            gm.GetComponent<GM>().StartCoroutine("Fade");
+            //gm.GetComponent<GM>().StartCoroutine("Fade");
+            //walkCycle.SetBool("isShooting", true);
+            gm.GetComponent<GM>().health -= 1;
         }
 
         //gm.GetComponent<GM>().StartCoroutine("Fade");
         shooting = false;
+        //walkCycle.SetBool("isShooting", false);
         currentState = AISTATE.PURSUE;
 
     }

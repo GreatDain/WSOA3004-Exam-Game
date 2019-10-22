@@ -29,7 +29,7 @@ public class GM : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Quit();
+            StartCoroutine("FadeMenu");
         }
 
         if (health > numberOfGorillas)
@@ -76,6 +76,13 @@ public class GM : MonoBehaviour
     }
 
     public IEnumerator Fade()
+    {
+        float fadeTime = gameObject.GetComponent<Fading>().BeginFade(1);
+        yield return new WaitForSeconds(fadeTime);
+        SceneManager.LoadScene(1);
+    }
+
+    public IEnumerator FadeMenu()
     {
         float fadeTime = gameObject.GetComponent<Fading>().BeginFade(1);
         yield return new WaitForSeconds(fadeTime);
