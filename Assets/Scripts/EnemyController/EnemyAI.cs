@@ -335,7 +335,14 @@ public class EnemyAI : MonoBehaviour
         if (playerSeen == false && playerInShootingRange == false)// if any player exits range
         {
             StopAllCoroutines(); // cancels shooting function
+
+            walkCycle.SetBool("isShooting", false);
+            walkCycle.SetBool("isEnemyWalk", true);
+
+            currentState = AISTATE.SEARCH;
         }
+
+
     }
 
     void OnTriggerStay(Collider Player) // trigger for detecting and tracking player information
@@ -493,9 +500,15 @@ public class EnemyAI : MonoBehaviour
 
         ReloadSource.PlayOneShot(ReloadSource.clip);
 
+        walkCycle.SetBool("isShooting", true);
+
+
         yield return new WaitForSeconds(shootDelayTime);
 
         shootAtPlayer();
+
+        walkCycle.SetBool("isShooting", false);
+        walkCycle.SetBool("isEnemyWalk", true);
 
     }
 
