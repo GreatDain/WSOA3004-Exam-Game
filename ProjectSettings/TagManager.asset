@@ -12,6 +12,7 @@ TagManager:
   - Waypoint
   - Enemy
   - Gate
+  - Gate2
   layers:
   - Default
   - TransparentFX

@@ -21,10 +21,12 @@ public class FPCharacterController : MonoBehaviour
     public bool isClimb = false;
     public bool cageOpen = false;
     public bool gateOpen = false;
+    public bool gateOpen2 = false;
     public GameObject GM;
     public Animator animator;
     public Animator walkCycle;
     public Animator gateAnim;
+    public Animator gateAnim2;
     public Text interactCage;
     public Text interactGate;
     public bool isGrounded;
@@ -41,6 +43,7 @@ public class FPCharacterController : MonoBehaviour
         walkCycle.SetBool("walkToStrafeL", false);
         walkCycle.SetBool("walkToStrafeR", false);
         gateAnim.SetBool("gateOpen", false);
+        gateAnim2.SetBool("gateOpen", false);
 
         interactCage.enabled = false;
         interactGate.enabled = false;
@@ -226,6 +229,14 @@ public class FPCharacterController : MonoBehaviour
             gateOpen = true;
             interactGate.enabled = false;
         }
+
+        if (other.gameObject.tag == "Gate2" && Input.GetKeyUp(KeyCode.E))
+        {
+            other.gameObject.GetComponent<Collider>().enabled = false;
+            gateAnim2.SetBool("gateOpen", true);
+            gateOpen2 = true;
+            interactGate.enabled = false;
+        }
     }
 
     //Trigger to allow for cage interaction within a certain distance.
@@ -236,7 +247,7 @@ public class FPCharacterController : MonoBehaviour
             interactCage.enabled = true;
         }
 
-        if (other.gameObject.tag == "Gate")
+        if (other.gameObject.tag == "Gate" || other.gameObject.tag == "Gate2")
         {
             interactGate.enabled = true;
         }
@@ -249,7 +260,7 @@ public class FPCharacterController : MonoBehaviour
             interactCage.enabled = false;
         }
 
-        if (other.gameObject.tag == "Gate")
+        if (other.gameObject.tag == "Gate" || other.gameObject.tag == "Gate2")
         {
             interactGate.enabled = false;
         }
