@@ -105,10 +105,10 @@ public class Tutorial : MonoBehaviour
             ObjectiveSeven();
         }
 
-        else if (prefab.GetComponent<PlayerWaypoint>().checkpoint == true && counter == 6f)
+        /*else if (prefab.GetComponent<PlayerWaypoint>().checkpoint == true && counter == 6f)
         {
             ObjectiveEight();
-        }
+        }*/
     }
 
     public void ObjectiveOne()
@@ -146,7 +146,7 @@ public class Tutorial : MonoBehaviour
         counter++;
     }
 
-    public void ObjectiveFour()
+    /*public void ObjectiveFour()
     {
         //StartCoroutine("Objectives");
         oldPrefab = prefab;
@@ -155,9 +155,9 @@ public class Tutorial : MonoBehaviour
         Destroy(GameObject.Find("WaypointMarker(Clone)"));
         Destroy(oldPrefab);
         counter++;
-    }
+    }*/
 
-    public void ObjectiveFive()
+    public void ObjectiveFour()
     {
         StartCoroutine("Objectives");
         oldPrefab = prefab;
@@ -172,7 +172,7 @@ public class Tutorial : MonoBehaviour
         counter++;
     }
 
-    public void ObjectiveSix()
+    public void ObjectiveFive()
     {
         //banana.SetActive(true);
         StartCoroutine("Objectives");
@@ -186,7 +186,7 @@ public class Tutorial : MonoBehaviour
         counter++;
     }
 
-    public void ObjectiveSeven()
+    public void ObjectiveSix()
     {
         StartCoroutine("Objectives");
         foodObjective.enabled = false;
@@ -199,7 +199,7 @@ public class Tutorial : MonoBehaviour
         counter++;
     }
 
-    public void ObjectiveEight()
+    public void ObjectiveSeven()
     {
         StartCoroutine("objectives");
         gateObjective.enabled = false;
