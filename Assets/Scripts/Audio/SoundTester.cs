@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
-
+/// <summary>
+/// Sound Testing Script for player
+/// </summary>
 public class SoundTester : MonoBehaviour
 {
 
@@ -70,22 +72,17 @@ public class SoundTester : MonoBehaviour
 
         }
         else
-
             walkAudioSource.Stop();
 
         ////////////////////////////////////////////////////////////////////////////////////
         ///
         //Chck if player is on Grass
-        if((Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0) && isMoving == true)
+        if((Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0))
         {
             if (onGrass == true)
             {
-                //Check if player is moving on grass
-                if (onGrass == true)
-                {
-                    print("Player is moving on Grass");
-                    onGravel = false;                   //player is onGrass not Gravel
-                }
+                onGravel = false;                   //player is onGrass not Gravel
+                
 
                 //if player is moving play audio else stop audio
                 if (onGrass)
@@ -101,13 +98,8 @@ public class SoundTester : MonoBehaviour
             //chek if player is walking on gravel
             if (onGravel == true)
             {
-                //playe stomb + grass texture
-                if (onGravel == true)
-                {
-                    print("Player is moving on Gravel");
-                    onGrass = false;                   //player is onGrass not Gravel
-                }
-
+                 onGrass = false;                   //player is onGrass not Gravel
+                
                 //if player is moving play audio else stop audio
                 if (onGravel)
                 {
