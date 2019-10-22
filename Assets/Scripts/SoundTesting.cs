@@ -8,85 +8,83 @@ using UnityEngine.Audio;
 /// </summary>
 public class SoundTesting : MonoBehaviour
 {
-    public AudioSource chaseAudio, grassWalkAudio, gravelWalkAudio, searchAudio;
-    public AudioClip chaseClip, grassWalk, gravelWalk, searchClip;
+    public AudioSource idleAudio, chaseAudio, searchAudio, grassWalkAudio, gravelWalkAudio;
+    public AudioClip idleClip, chaseClip, searchClip, grassWalk, gravelWalk;
 
     //Must be serialized or private
-    public bool idling = true;          //enemy's normal state is idle
-    public bool chasing = false;        //Check if the enemy has spotted player
-    public bool searching = false;
+    public bool idling;          //enemy's normal state is idle
+    public bool chasing;        //Check if the enemy has spotted player
+    public bool searching;
+    public bool onGrass = true;      //Where is the enemy located
+    public bool onGravel = false;
+
+    private EnemyAI enemyScript;
+
+    //
+    private GameObject enemy;           //Referencing the enemy
+    public Transform enemyPos;         //Enemy's postuon
+    private Vector3 lastPos;            //Enemy's previous positio
+    public float hasmoved = 0.01f;      //minimum float to recognise as 'moved'
     // Start is called before the first frame update
     void Start()
     {
-        //source = GetComponent<AudioSource>();
+        enemyScript = GetComponent<EnemyAI>();
+       
+        //lastPos = enemyPos.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Play sound to be identified by the player where the enemy is
-        if (Input.GetKeyDown(KeyCode.O))
+        /////////////////////// THESE IF STATEMENTS BELOW MUST BE CALLED ACCORDING THE ENEMY'S 'CURRENT STATE' TO TEST SOUND//////////////////////////////////////
+
+        //CheckEnemyPos();
+
+        if (gameObject.GetComponent<EnemyAI>().currentState == EnemyAI.AISTATE.PATROL)
         {
-            searching = true;
-            //if enemy is chasing (chase= true) player check if sound not playing > if true then play sound else stop sound
-            if (searching)
-            {
-                if (!searchAudio.isPlaying)
-                    searchAudio.Play();
+            Patrol();
 
-            }
-            else
-                searchAudio.Stop();
+            
         }
-        else
-            searching = false;
 
-        //play sound to alert the player is beinng chased
-        if (Input.GetKeyDown(KeyCode.P))
+            //Play audio corresponding to enemy state
+        if (gameObject.GetComponent<EnemyAI>().currentState == EnemyAI.AISTATE.PURSUE)
         {
-            chasing = true;
-            //if enemy is chasing (chase= true) player check if sound not playing > if true then play sound else stop sound
-            if (chasing)
-            {
-                if (!chaseAudio.isPlaying)
-                    chaseAudio.Play();
-
-            }
-            else
-
-                chaseAudio.Stop();
+           
         }
-        else
-            chasing = false;
 
-        //play sound when the player is being caught (Lose)
-        if (Input.GetKeyDown(KeyCode.I))
+        //Enemy checks if its seaching while on grass or gravel
+        if (gameObject.GetComponent<EnemyAI>().currentState == EnemyAI.AISTATE.SEARCH)
         {
-
-            //Idling sound is jjust a chat (whispers or threats)
-            //Replace with States (idle; search etc.)
-
-            idling = true;                          //Enemy is now idling
-            //NO sound yet || Temporary Sound
-            if (idling)
-            {
-                // idling = false;                //Enemy is not chasing but just idling
-
-                if (!grassWalkAudio.isPlaying)
-                    grassWalkAudio.Play();
-
-            }
-            else
-
-                grassWalkAudio.Stop();
-                
+           
         }
-        else
-            idling = false;
+
+
     }
 
-    /*
-    void Idle()
+    /// <summary>
+    /// Enemies do not collide with planes (Grass & gravel)
+    /// </summary>
+
+    private void OnTriggerStay(Collider other)
+    {
+        //check when to play grass audio
+        if (other.gameObject.tag == "Grass")
+        {
+            onGrass = true;                         //Check if player has collided with grass
+            onGravel = false;
+            print("OnTrigger is called");
+        }
+        else if (other.gameObject.tag == "Gravel")
+        {
+            onGrass = false;
+            onGravel = true;                        //If player is OnGravel, it is not on grass
+
+        }
+
+    }
+
+    void Patrolx()
     {
         //Replace with States (idle; search etc.)
 
@@ -106,40 +104,42 @@ public class SoundTesting : MonoBehaviour
         chasing = false;
         searching = false;
 
-    }*/
-    
-        /*
-    void Search()
-    {
-        searching = true;
-        //if enemy is chasing (chase= true) player check if sound not playing > if true then play sound else stop sound
-        if (searching)
-        {
-            if (!searchAudio.isPlaying)
-                searchAudio.Play();
-
-        }
-        else
-
-            searchAudio.Stop();
-        searching = false;
     }
-    */
 
-        /*
-    void Chasing()
+    void Patrol()
     {
-        chasing = true;
-        //if enemy is chasing (chase= true) player check if sound not playing > if true then play sound else stop sound
-        if (chasing)
+        print("Trying to playe enemy texture sound");
+
+        if (onGrass)
         {
-            if (!chaseAudio.isPlaying)
-                chaseAudio.Play();
-
+            print("OnGrass sir");
+            //if enemy is onGrass and enemy is moving == play walking on grass texture sfx
+            if (!grassWalkAudio.isPlaying)
+            {
+                grassWalkAudio.Play();          //play grass audion if its !playing
+                print("enemy is walking on grass");
+            }
+            else
+            {
+                grassWalkAudio.Stop();            //stop grass audio
+            }
         }
-        else
 
-            chaseAudio.Stop();
-        chasing = false;
-    } */
+
+        if (onGravel)
+        {
+            //if enemy is onGrass and enemy is moving == play walking on grass texture sfx
+            if (!gravelWalkAudio.isPlaying)
+            {
+                gravelWalkAudio.Play();          //play grass audion if its !playing
+                print("enemy is walking on gravel");
+            }
+            else
+            {
+                gravelWalkAudio.Stop();            //stop grass audio
+            }
+        }
+    }
+
+
 }

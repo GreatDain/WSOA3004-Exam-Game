@@ -91,7 +91,7 @@
             {
                 "type": "System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
                 "key": "RaiseLowerBrush.Strength",
-                "value": "{\"m_Value\":25.0}"
+                "value": "{\"m_Value\":150.0}"
             },
             {
                 "type": "System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
@@ -121,7 +121,7 @@
             {
                 "type": "UnityEditor.Polybrush.PrefabLoadout, Unity.Polybrush.Editor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                 "key": "ScatteringEditor.userLoadout",
-                "value": "{\"m_Value\":{\"infos\":[{\"palette\":{\"fileID\":11400000,\"guid\":\"14903049454ec344eb29b195b00e9046\",\"type\":2},\"prefab\":{\"fileID\":930242881409804256,\"guid\":\"f1caefe664b1aea48b0c76eb8921bd9b\",\"type\":3}}]}}"
+                "value": "{\"m_Value\":{\"infos\":[{\"palette\":{\"fileID\":11400000,\"guid\":\"14903049454ec344eb29b195b00e9046\",\"type\":2},\"prefab\":{\"fileID\":3893515211802671635,\"guid\":\"1963ada89f88b6141bc2cbc1a5879d78\",\"type\":3}}]}}"
             }
         ]
     }
