@@ -22,17 +22,14 @@ public class SoundTester : MonoBehaviour
     public AudioClip breatheSFX;
     public AudioClip bgSFX;
     //TEXTURE BOOLEANS
-    public bool onGrass = false;            //is the player on grass?
-    public bool onGravel = false;
+    public bool onGrass;            //is the player on grass?
+    public bool onGravel;
     //SPRINT TOGGLE
     private bool isRunning = false;
-    //CONSTANT AUDIO LEVELING
-    /*
-    [Range (1f, 3f)]
-    public float runPitch, sneakPitch, normPitch;           //
-    [Range(0.1f, 10f)]
-    public float runVol, sneakVol, normVol;                 //
-   */
+    /// <summary>
+    /// Moved some of Sounds scripts code to here
+    /// </summary>
+    FPCharacterController controller;
     //road to beta soundtesting
     bool isMoving = false;                  //is is not moving when game starts
 
@@ -42,19 +39,29 @@ public class SoundTester : MonoBehaviour
     void Start()
     {
         bgSound.Play();                 //play background sound
+        controller = gameObject.GetComponent<FPCharacterController>();
     }
 
     // Update is called once per frame
    
     void Update()
     {
-
-        //Check if player is sprinting - increase pitch and volume
-        if (gameObject.GetComponent<FPCharacterController>().isSprint == true)
+        if (controller.isSprint == true || controller.cooldown == true)
         {
-            //Running();
+            breatheAudioSource.pitch = 1.8f;
+            breatheAudioSource.volume = 0.7f;
         }
-       
+        else if (controller.isSneak == true)
+        {
+            breatheAudioSource.pitch = 0.8f;
+            breatheAudioSource.volume = 0.3f;
+        }
+        else
+        {
+            breatheAudioSource.pitch = 1.15f;
+            breatheAudioSource.volume = 0.5f;
+        }
+
         //Road to beta SoundTesting
 
         //CHECK IF PLAYER IS MOVING: Stmp sound
