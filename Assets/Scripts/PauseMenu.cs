@@ -9,6 +9,10 @@ public class PauseMenu : MonoBehaviour
 
     public GameObject pauseMenuUI;
     public GameObject gm;
+    public GameObject QuitCheck;
+    public GameObject Controls;
+    public GameObject helpfulTips;
+    public GameObject player;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,11 +27,13 @@ public class PauseMenu : MonoBehaviour
             if (GameIsPaused)
             {
                 Cursor.visible = false;
+                player.GetComponent<MouseLook>().enabled = true;
                 Resume();
             }
             else
             {
                 Cursor.visible = true;
+                player.GetComponent<MouseLook>().enabled = false;
                 Pause();
             }
         }
@@ -38,12 +44,12 @@ public class PauseMenu : MonoBehaviour
         
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
+        player.GetComponent<MouseLook>().enabled = true;
         GameIsPaused = false;
     }
 
     void Pause()
     {
-        
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;
@@ -52,12 +58,44 @@ public class PauseMenu : MonoBehaviour
     public void LoadControl()
     {
         Debug.Log("Controls Loading...");
+        pauseMenuUI.SetActive(false);
+        Controls.SetActive(true);
     }
 
     public void QuitGame()
     {
         Debug.Log("Quitting Game ...");
+        pauseMenuUI.SetActive(false);
+        QuitCheck.SetActive(true);
+    }
+
+    public void NoQuit()
+    {
+        QuitCheck.SetActive(false);
+        pauseMenuUI.SetActive(true);
+    }
+
+    public void YesQuit()
+    {
         StartCoroutine("FadeMenu");
+    }
+
+    public void ReturnControls()
+    {
+        pauseMenuUI.SetActive(true);
+        Controls.SetActive(false);
+    }
+
+    public void Tips()
+    {
+        Controls.SetActive(false);
+        helpfulTips.SetActive(true);
+    }
+
+    public void ReturnTips()
+    {
+        Controls.SetActive(true);
+        helpfulTips.SetActive(false);
     }
 
     public IEnumerator FadeMenu()

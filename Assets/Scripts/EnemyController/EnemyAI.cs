@@ -96,7 +96,7 @@ public class EnemyAI : MonoBehaviour
 
         navigator = this.GetComponent<NavMeshAgent>();
 
-      
+
 
         // checks if the enemy has a patrol path or not and then decides its behavior according to state or function
 
@@ -182,10 +182,10 @@ public class EnemyAI : MonoBehaviour
             patrol();
             //walkCycle.SetBool("isEnemyWalk", false);
 
-            
+
         }
 
-        else if(navigator.remainingDistance == 0 && patrolPath.Count == 0)
+        else if (navigator.remainingDistance == 0 && patrolPath.Count == 0)
         {
 
             currentState = AISTATE.DETECT;// if not patrolling returns to origin for rotating patrol
@@ -248,15 +248,16 @@ public class EnemyAI : MonoBehaviour
             StartCoroutine("callRotationDelay");
         }
 
-        if (currentCount == 3) {
+        if (currentCount == 3)
+        {
             rotated = true;
-            
+
         }
 
         if (patrolPath.Count > 0 && rotated == true)
         { // continues with patrol path if it exists
 
-            
+
             currentCount = 0;
             rotated = false;
             patrol();
@@ -302,12 +303,12 @@ public class EnemyAI : MonoBehaviour
 
         anchorPos = gameObject.transform.position; // updates origin position while patrolling for when enemy needs to return to patrol
 
-        
+
 
         if (navigator.remainingDistance == 0)
         { // checks if destination has been reached
 
-              
+
 
             currentState = AISTATE.CHANGE; // switchs state to change for next destination
 
@@ -353,7 +354,7 @@ public class EnemyAI : MonoBehaviour
 
             playerTracker = Player.gameObject; // sets player tracker when player is in range
 
-            float distance = Vector3.Distance(gameObject.transform.position,Player.transform.position);
+            float distance = Vector3.Distance(gameObject.transform.position, Player.transform.position);
 
             if (playerSeen == true && shooting == false)
             {
@@ -528,7 +529,7 @@ public class EnemyAI : MonoBehaviour
         }
 
         changing = false;
-    }    
+    }
 
     IEnumerator searchSound()
     {// coroutine for delay before enemy seeks sound position
@@ -546,7 +547,8 @@ public class EnemyAI : MonoBehaviour
 
     }
 
-    IEnumerator callRotationDelay() {
+    IEnumerator callRotationDelay()
+    {
 
         rotating = false;
 
