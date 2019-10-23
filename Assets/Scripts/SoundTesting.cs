@@ -28,7 +28,7 @@ public class SoundTesting : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        enemyScript = GetComponent<EnemyAI>();
+        enemyScript = enemyPos.GetComponent<EnemyAI>();
        
         //lastPos = enemyPos.position;
     }
@@ -40,7 +40,7 @@ public class SoundTesting : MonoBehaviour
 
         //CheckEnemyPos();
 
-        if (gameObject.GetComponent<EnemyAI>().currentState == EnemyAI.AISTATE.PATROL)
+        if (enemyScript.currentState == EnemyAI.AISTATE.PATROL)
         {
             Patrol();
 
@@ -48,16 +48,16 @@ public class SoundTesting : MonoBehaviour
         }
 
             //Play audio corresponding to enemy state
-        if (gameObject.GetComponent<EnemyAI>().currentState == EnemyAI.AISTATE.PURSUE)
+        /*if (enemyScript.currentState == EnemyAI.AISTATE.PURSUE)
         {
            
         }
 
         //Enemy checks if its seaching while on grass or gravel
-        if (gameObject.GetComponent<EnemyAI>().currentState == EnemyAI.AISTATE.SEARCH)
+        if (enemyScript.currentState == EnemyAI.AISTATE.SEARCH)
         {
            
-        }
+        }*/
 
 
     }
@@ -73,7 +73,7 @@ public class SoundTesting : MonoBehaviour
         {
             onGrass = true;                         //Check if player has collided with grass
             onGravel = false;
-            print("OnTrigger is called");
+            //print("OnTrigger is called");
         }
         else if (other.gameObject.tag == "Gravel")
         {
@@ -99,8 +99,8 @@ public class SoundTesting : MonoBehaviour
 
         }
         else
-
             grassWalkAudio.Stop();
+
         chasing = false;
         searching = false;
 
