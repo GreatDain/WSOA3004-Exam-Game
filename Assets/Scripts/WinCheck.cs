@@ -24,11 +24,10 @@ public class WinCheck : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag.Equals("Player"))
+        if (other.gameObject.tag == "Player")
         {
 
             StartCoroutine(delayReturn());
-
         }
     }
 
@@ -39,6 +38,6 @@ public class WinCheck : MonoBehaviour
 
         yield return new WaitForSeconds(5);
 
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene(0);
     }
 }

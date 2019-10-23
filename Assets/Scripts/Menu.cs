@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
+using UnityEngine.UI;
 
 public class Menu : MonoBehaviour
 {
@@ -14,5 +17,34 @@ public class Menu : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void Play()
+    {
+        StartCoroutine("FadePlay");
+    }
+
+    public void Controls()
+    {
+        StartCoroutine("FadeControls");
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
+
+    public IEnumerator FadePlay()
+    {
+        float fadeTime = gameObject.GetComponent<Fading>().BeginFade(1);
+        yield return new WaitForSeconds(fadeTime);
+        SceneManager.LoadScene(1);
+    }
+
+    public IEnumerator FadeControls()
+    {
+        float fadeTime = gameObject.GetComponent<Fading>().BeginFade(1);
+        yield return new WaitForSeconds(fadeTime);
+        SceneManager.LoadScene(2);
     }
 }

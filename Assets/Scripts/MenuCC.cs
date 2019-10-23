@@ -179,6 +179,11 @@ public class MenuCC : MonoBehaviour
                 controlsPanel.SetActive(true);
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            StartCoroutine("FadeMenu");
+        }
     }
 
     public void OnTriggerStay(Collider other)
@@ -204,19 +209,26 @@ public class MenuCC : MonoBehaviour
         }
     }
 
-        /*private void OnTriggerEnter(Collider other)
-        {
-            if (other.gameObject.name == "Play")
-            {
-                SceneManager.LoadScene(1);
-            }
-            else if (other.gameObject.name == "Controls" && Input.GetKeyDown(KeyCode.E))
-            {
-                print("Do something");
-            }
-            else if (other.gameObject.name == "Quit" && Input.GetKeyDown(KeyCode.E))
-            {
-                Application.Quit();
-            }
-        }*/
+    public IEnumerator FadeMenu()
+    {
+        float fadeTime = gameObject.GetComponent<Fading>().BeginFade(1);
+        yield return new WaitForSeconds(fadeTime);
+        SceneManager.LoadScene(0);
     }
+
+    /*private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.name == "Play")
+        {
+            SceneManager.LoadScene(1);
+        }
+        else if (other.gameObject.name == "Controls" && Input.GetKeyDown(KeyCode.E))
+        {
+            print("Do something");
+        }
+        else if (other.gameObject.name == "Quit" && Input.GetKeyDown(KeyCode.E))
+        {
+            Application.Quit();
+        }
+    }*/
+}
