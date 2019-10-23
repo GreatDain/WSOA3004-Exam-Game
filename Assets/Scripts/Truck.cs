@@ -13,7 +13,7 @@ public class Truck : MonoBehaviour
     List<Waypoint> patrolPath;
 
     [SerializeField]
-    float moveSpeed = 15f;
+    float moveSpeed = 30f;
 
     [SerializeField]
     float waitTime;
