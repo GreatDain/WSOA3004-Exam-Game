@@ -21,14 +21,15 @@ public class SoundTesting : MonoBehaviour
     private EnemyAI enemyScript;
 
     //
-    private GameObject enemy;           //Referencing the enemy
-    public Transform enemyPos;         //Enemy's postuon
-    private Vector3 lastPos;            //Enemy's previous positio
-    public float hasmoved = 0.01f;      //minimum float to recognise as 'moved'
+    public GameObject enemy;           //Referencing the enemy
+    public bool isMoving = false;
+    //public Transform enemyPos;         //Enemy's postuon
+    //private Vector3 lastPos;            //Enemy's previous positio
+    //public float hasmoved = 0.01f;      //minimum float to recognise as 'moved'
     // Start is called before the first frame update
     void Start()
     {
-        enemyScript = enemyPos.GetComponent<EnemyAI>();
+        enemyScript = enemy.GetComponent<EnemyAI>();
        
         //lastPos = enemyPos.position;
     }
@@ -40,11 +41,13 @@ public class SoundTesting : MonoBehaviour
 
         //CheckEnemyPos();
 
-        if (enemyScript.currentState == EnemyAI.AISTATE.PATROL)
+        if (enemyScript.currentState == EnemyAI.AISTATE.PATROL || enemyScript.currentState == EnemyAI.AISTATE.PURSUE)
         {
-            Patrol();
-
-            
+            isMoving = true;
+        }
+        else
+        {
+            isMoving = false;
         }
 
             //Play audio corresponding to enemy state
@@ -84,7 +87,7 @@ public class SoundTesting : MonoBehaviour
 
     }
 
-    void Patrolx()
+    /*void Patrolx()
     {
         //Replace with States (idle; search etc.)
 
@@ -139,7 +142,18 @@ public class SoundTesting : MonoBehaviour
                 gravelWalkAudio.Stop();            //stop grass audio
             }
         }
+    }*/
+
+    public void Step()
+    {
+        if (onGrass && isMoving == true)
+        {
+            grassWalkAudio.Play();
+        }
+
+        else if (onGravel && isMoving == true)
+        {
+            gravelWalkAudio.Play();
+        }
     }
-
-
 }
