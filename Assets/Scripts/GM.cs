@@ -13,23 +13,26 @@ public class GM : MonoBehaviour
     public Image[] gorillas;
     public Sprite fullHP;
     public Sprite emptyHP;
-    public bool damage = false;
+
     // Start is called before the first frame update
     void Start()
     {
         Cursor.visible = false;
         health = 1;
-        var postProcessing = Camera.main.GetComponent<PostProcessingBehaviour>().profile;
-        postProcessing.vignette.enabled = false;
+        
+        //pp.vignette.enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        var pp = Camera.main.GetComponent<PostProcessingBehaviour>().profile;
+
         if (Input.GetKeyDown(KeyCode.L) && health < 3)
         {
             health++;
         }
+
 
         /*if (Input.GetKeyDown(KeyCode.Escape))
         {
