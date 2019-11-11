@@ -8,8 +8,8 @@ using UnityEngine.Audio;
 /// </summary>
 public class SoundTesting : MonoBehaviour
 {
-    public AudioSource idleAudio, chaseAudio, searchAudio, grassWalkAudio, gravelWalkAudio;
-    public AudioClip idleClip, chaseClip, searchClip, grassWalk, gravelWalk;
+    public AudioSource grassWalkAudio, gravelWalkAudio;
+    public AudioClip grassWalk, gravelWalk;
 
     //Must be serialized or private
     public bool idling;          //enemy's normal state is idle

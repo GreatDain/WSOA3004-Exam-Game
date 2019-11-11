@@ -13,6 +13,7 @@ TagManager:
   - Enemy
   - Gate
   - Gate2
+  - Hidden
   layers:
   - Default
   - TransparentFX
