@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.PostProcessing;
 
 public class GM : MonoBehaviour
 {
@@ -12,11 +13,14 @@ public class GM : MonoBehaviour
     public Image[] gorillas;
     public Sprite fullHP;
     public Sprite emptyHP;
+    public bool damage = false;
     // Start is called before the first frame update
     void Start()
     {
         Cursor.visible = false;
         health = 1;
+        var postProcessing = Camera.main.GetComponent<PostProcessingBehaviour>().profile;
+        postProcessing.vignette.enabled = false;
     }
 
     // Update is called once per frame
