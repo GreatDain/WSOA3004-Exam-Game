@@ -47,6 +47,9 @@ public class FPCharacterController : MonoBehaviour
 
         interactCage.enabled = false;
         interactGate.enabled = false;
+
+        gameObject.tag = "Hidden";
+        gameObject.layer = 10;
     }
 
     // Update is called once per frame
@@ -215,6 +218,10 @@ public class FPCharacterController : MonoBehaviour
         //Player interaction with the cage
         if (other.gameObject.tag == "Cage" && Input.GetKeyUp(KeyCode.E))
         {
+            gameObject.tag = "Player";
+            gameObject.layer = 8;
+
+
             other.gameObject.GetComponent<Collider>().enabled = false;
             //other.gameObject.transform.rotation = Quaternion.Slerp(other.gameObject.transform.rotation, Quaternion.Euler(-90, 0, 0), 2 * Time.deltaTime);
             animator.SetBool("isOpen", true);
