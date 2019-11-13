@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.PostProcessing;
 
 public class GM : MonoBehaviour
 {
@@ -12,20 +13,26 @@ public class GM : MonoBehaviour
     public Image[] gorillas;
     public Sprite fullHP;
     public Sprite emptyHP;
+
     // Start is called before the first frame update
     void Start()
     {
         Cursor.visible = false;
         health = 1;
+        
+        //pp.vignette.enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        var pp = Camera.main.GetComponent<PostProcessingBehaviour>().profile;
+
         if (Input.GetKeyDown(KeyCode.L) && health < 3)
         {
             health++;
         }
+
 
         /*if (Input.GetKeyDown(KeyCode.Escape))
         {

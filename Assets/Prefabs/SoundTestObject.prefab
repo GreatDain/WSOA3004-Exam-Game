@@ -48,14 +48,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b29930f854f32be419c7b46f4215841d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  idleAudio: {fileID: 0}
-  chaseAudio: {fileID: 5326970972673694323}
-  searchAudio: {fileID: 5326970972673694320}
   grassWalkAudio: {fileID: 5326970972673694334}
   gravelWalkAudio: {fileID: 5326970972673694333}
-  idleClip: {fileID: 0}
-  chaseClip: {fileID: 8300000, guid: 6a2fc9e4e13ba764f81e58dba7c4619a, type: 3}
-  searchClip: {fileID: 8300000, guid: 982279df7d03dcd458af3d68d3322bc7, type: 3}
   grassWalk: {fileID: 8300000, guid: 69455f6658d38024f84dee046ddb423c, type: 3}
   gravelWalk: {fileID: 8300000, guid: 77a586a1225e4124a87c4a06e0105a8d, type: 3}
   idling: 0
@@ -72,7 +66,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5326970972673694330}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -1025227575993679521, guid: be690f2cbbbe9df4c93dbc9e241b3f02,
     type: 2}
@@ -169,7 +163,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5326970972673694330}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -8548221407408368015, guid: be690f2cbbbe9df4c93dbc9e241b3f02,
     type: 2}
@@ -266,7 +260,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5326970972673694330}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -1025227575993679521, guid: be690f2cbbbe9df4c93dbc9e241b3f02,
     type: 2}
@@ -363,7 +357,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5326970972673694330}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 6a2fc9e4e13ba764f81e58dba7c4619a, type: 3}
@@ -459,7 +453,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5326970972673694330}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 982279df7d03dcd458af3d68d3322bc7, type: 3}

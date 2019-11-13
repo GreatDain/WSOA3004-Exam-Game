@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Models/TextureMaps/Car AO Map.png.meta
 guid: 29911ec6c20323a498f713045c3c776c
+=======
+guid: 6f5a76fcc1135ea4f87f827a087163ed
+>>>>>>> 800d7264687349bd184f50b22a38f22668d124c0:Assets/Models/Albedo Maps/Kobus Albedo Map.png.meta
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}

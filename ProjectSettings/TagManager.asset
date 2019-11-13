@@ -13,6 +13,7 @@ TagManager:
   - Enemy
   - Gate
   - Gate2
+<<<<<<< HEAD
   - ResumeTicket
   - ControlsTicket
   - BackToPauseTicket
@@ -21,6 +22,9 @@ TagManager:
   - QuitTicket
   - NoTicket
   - YesTicket
+=======
+  - Hidden
+>>>>>>> 800d7264687349bd184f50b22a38f22668d124c0
   layers:
   - Default
   - TransparentFX
