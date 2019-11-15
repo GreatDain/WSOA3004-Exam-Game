@@ -14,6 +14,8 @@ public class GM : MonoBehaviour
     public Sprite fullHP;
     public Sprite emptyHP;
 
+    public GameObject player;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,7 +48,11 @@ public class GM : MonoBehaviour
 
         if (health == 0 || Input.GetKeyDown(KeyCode.R))
         {
+
+            player.GetComponent<FPCharacterController>().setShot();
+
             StartCoroutine("Fade");
+
         }
 
         for (int i = 0; i < gorillas.Length; i++)

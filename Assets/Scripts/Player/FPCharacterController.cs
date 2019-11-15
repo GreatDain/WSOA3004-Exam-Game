@@ -31,6 +31,11 @@ public class FPCharacterController : MonoBehaviour
     public Text interactGate;
     public bool isGrounded;
 
+
+    float translation;
+    float strafe;
+    public bool isShot = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -57,13 +62,20 @@ public class FPCharacterController : MonoBehaviour
     {
         //Detecting axes and initiating movement
         audioSource.volume = stableVol;
-        float translation = Input.GetAxis("Vertical") * speed;
 
-        float strafe = Input.GetAxis("Horizontal") * speed;
+        if(isShot == false) {
+
+        translation = Input.GetAxis("Vertical") * speed;
+
+        strafe = Input.GetAxis("Horizontal") * speed;
         translation *= Time.deltaTime;
         strafe *= Time.deltaTime;
 
         transform.Translate(strafe, 0, translation);
+
+        }
+
+       
 
         //Checks that the player is/isnt moving and either starts or stops the walk cycle animation
         /*if (translation != 0 || strafe != 0)
@@ -276,5 +288,22 @@ public class FPCharacterController : MonoBehaviour
         {
             isGrounded = false;
         }
+    }
+
+    public void setShot() {
+
+        if (isShot == false)
+        {
+
+            isShot = true;
+        }
+
+        else {
+
+            isShot = false;
+
+        }
+
+
     }
 }
