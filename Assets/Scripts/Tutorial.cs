@@ -24,7 +24,6 @@ public class Tutorial : MonoBehaviour
     public bool sprintAbility = false;
     public bool sneakAbility = false;
     public int counter;
-    public GameObject objectiveTicket;
     // Start is called before the first frame update
 
     void Start()
@@ -52,15 +51,6 @@ public class Tutorial : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (objectivesTab.enabled == true)
-        {
-            objectiveTicket.SetActive(true);
-        }
-        else if (objectivesTab.enabled == false)
-        {
-            objectiveTicket.SetActive(false);
-        }
-
         if (Input.GetKeyDown(KeyCode.P))
         {
             sprintAbility = true;

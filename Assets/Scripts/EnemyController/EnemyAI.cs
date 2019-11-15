@@ -470,6 +470,7 @@ public class EnemyAI : MonoBehaviour
         {
 
             Debug.Log("hit player with raycast");
+
             ShootingSource.Play();
             //gm.GetComponent<GM>().StartCoroutine("Fade");
             //walkCycle.SetBool("isShooting", true);
