@@ -17,6 +17,7 @@ public class Tutorial : MonoBehaviour
     public Text gateObjective;
     public Text escapeObjective;
     public Canvas objectivesTab;
+    public GameObject ticket;
     GameObject FPS;
     public GameObject prefab;
     GameObject oldPrefab;
@@ -37,6 +38,7 @@ public class Tutorial : MonoBehaviour
         gateObjective.enabled = false;
         escapeObjective.enabled = false;
 
+
         counter = 0;
         constantObjText.enabled = true;
 
@@ -51,6 +53,15 @@ public class Tutorial : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (objectivesTab.enabled == true)
+        {
+            ticket.SetActive(true);
+        }
+        else if (objectivesTab.enabled == false)
+        {
+            ticket.SetActive(false);
+        }
+
         if (Input.GetKeyDown(KeyCode.P))
         {
             sprintAbility = true;
@@ -69,10 +80,11 @@ public class Tutorial : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Tab) && objectivesTab.enabled == true)
         {
             objectivesTab.enabled = false;
+            StopCoroutine("Objectives");
         }
         else if (Input.GetKeyDown(KeyCode.Tab) && objectivesTab.enabled == false)
         {
-            objectivesTab.enabled = true;
+            StartCoroutine("Objectives");
         }
 
         if (FPS.GetComponent<FPCharacterController>().cageOpen == true && counter == 0)
