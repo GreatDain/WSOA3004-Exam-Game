@@ -199,7 +199,11 @@ public class EnemyAI : MonoBehaviour
 
         if (playerSeen == true && playerInShootingRange == false)
         {
+            StopAllCoroutines();
+            shooting = false;
+            walkCycle.SetBool("isShooting", false);
             trackPlayer();// tracks player position and follows when in line of sight
+
         }
 
         else if (playerSeen == true && playerInShootingRange == true)
@@ -214,12 +218,14 @@ public class EnemyAI : MonoBehaviour
 
             }
 
-
+            
         }
 
         if (playerSeen == false && playerInShootingRange == false)// if any player exits range
         {
             StopAllCoroutines(); // cancels shooting function
+            shooting = false;
+            walkCycle.SetBool("isShooting", false);
             currentState = AISTATE.SEARCH; // sets player to search for sound
         }
     }
@@ -336,7 +342,7 @@ public class EnemyAI : MonoBehaviour
         if (playerSeen == false && playerInShootingRange == false)// if any player exits range
         {
             StopAllCoroutines(); // cancels shooting function
-
+            shooting = false;
             walkCycle.SetBool("isShooting", false);
             walkCycle.SetBool("isEnemyWalk", true);
 
@@ -363,7 +369,7 @@ public class EnemyAI : MonoBehaviour
                 currentState = AISTATE.PURSUE; // calles pursue if player is seen
             }
 
-            if (Player.gameObject.GetComponent<FPCharacterController>().stableVol >= 0.4f && playerSeen == false)
+            if (Player.gameObject.GetComponent<FPCharacterController>().stableVol >= 0.4f && playerSeen == false )
             {
 
                 soundPos = Player.gameObject.transform.position;
@@ -453,6 +459,9 @@ public class EnemyAI : MonoBehaviour
         {
 
             playerInShootingRange = false;
+            StopAllCoroutines();
+            walkCycle.SetBool("isShooting", false);
+            shooting = false;
 
         }
 
