@@ -26,7 +26,7 @@ public class WinCheck : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-
+            print("WEEENER");
             StartCoroutine(delayReturn());
         }
     }

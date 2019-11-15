@@ -37,7 +37,6 @@ public class Truck : MonoBehaviour
         if (navigator.remainingDistance == 0 && changing == false) {
 
             StartCoroutine(callDelay());
-
         }
     }
 

@@ -41,7 +41,8 @@ public class SoundTesting : MonoBehaviour
 
         //CheckEnemyPos();
 
-        if (enemyScript.currentState == EnemyAI.AISTATE.PATROL || enemyScript.currentState == EnemyAI.AISTATE.PURSUE)
+        if (enemyScript.currentState == EnemyAI.AISTATE.PATROL || enemyScript.currentState == EnemyAI.AISTATE.PURSUE 
+            || enemyScript.currentState == EnemyAI.AISTATE.SEARCH)
         {
             isMoving = true;
         }
