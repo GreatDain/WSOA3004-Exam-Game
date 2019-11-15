@@ -363,7 +363,7 @@ public class EnemyAI : MonoBehaviour
                 currentState = AISTATE.PURSUE; // calles pursue if player is seen
             }
 
-            if (Player.gameObject.GetComponent<FPCharacterController>().stableVol >= 0.4f && playerSeen == false && distance <= 25)
+            if (Player.gameObject.GetComponent<FPCharacterController>().stableVol >= 0.4f && playerSeen == false)
             {
 
                 soundPos = Player.gameObject.transform.position;

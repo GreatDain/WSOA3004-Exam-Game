@@ -90,6 +90,7 @@ public class GM : MonoBehaviour
 
     public IEnumerator Fade()
     {
+        yield return new WaitForSeconds(2f);
         float fadeTime = gameObject.GetComponent<Fading>().BeginFade(1);
         yield return new WaitForSeconds(fadeTime);
         SceneManager.LoadScene(1);

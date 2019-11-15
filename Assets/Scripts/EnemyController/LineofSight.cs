@@ -131,7 +131,7 @@ public class LineofSight : MonoBehaviour
 
             else
             {
-                gameObject.GetComponent<EnemyAI>().setSeen(false);
+                gameObject.GetComponent<EnemyAI>().setInRange(false);
             }
         }
 

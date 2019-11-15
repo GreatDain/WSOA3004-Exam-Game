@@ -12,6 +12,15 @@ TagManager:
   - BackToPauseTicket
   - ResumeTicket
   - YesTicket
+  - Hidden
+  - Enemy
+  - Cage
+  - Grass
+  - Gate2
+  - Wall
+  - Waypoint
+  - Gate
+  - Gravel
   layers:
   - Default
   - TransparentFX
@@ -21,9 +30,9 @@ TagManager:
   - UI
   - 
   - 
+  - Player
   - 
-  - 
-  - 
+  - Obstacles
   - 
   - 
   - 

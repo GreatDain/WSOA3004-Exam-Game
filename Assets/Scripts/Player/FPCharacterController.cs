@@ -65,13 +65,13 @@ public class FPCharacterController : MonoBehaviour
 
         if(isShot == false) {
 
-        translation = Input.GetAxis("Vertical") * speed;
+            translation = Input.GetAxis("Vertical") * speed;
 
-        strafe = Input.GetAxis("Horizontal") * speed;
-        translation *= Time.deltaTime;
-        strafe *= Time.deltaTime;
+            strafe = Input.GetAxis("Horizontal") * speed;
+            translation *= Time.deltaTime;
+            strafe *= Time.deltaTime;
 
-        transform.Translate(strafe, 0, translation);
+            transform.Translate(strafe, 0, translation);
 
         }
 
