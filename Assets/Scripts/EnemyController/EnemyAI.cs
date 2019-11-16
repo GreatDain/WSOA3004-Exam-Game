@@ -228,7 +228,7 @@ public class EnemyAI : MonoBehaviour
 
         if (playerSeen == false && playerInShootingRange == false)// if any player exits range
         {
-            StopCoroutine("enemyShoot"); ; // cancels shooting function
+            StopCoroutine("enemyShoot"); // cancels shooting function
             shooting = false;
             walkCycle.SetBool("isShooting", false);
             currentState = AISTATE.SEARCH; // sets player to search for sound
@@ -301,7 +301,7 @@ public class EnemyAI : MonoBehaviour
             trackSound(); // updates sound position due to new sounds
 
 
-            if (navigator.remainingDistance == 0) // if reaches sound destination and has not detected the player, enemy returns to patrol
+            if (navigator.remainingDistance == 0 && playerSeen == false && playerInShootingRange == false) // if reaches sound destination and has not detected the player, enemy returns to patrol
             {
 
                 currentState = AISTATE.RETURN;
@@ -399,20 +399,25 @@ public class EnemyAI : MonoBehaviour
 
     public void trackPlayer()//function that makes enemy follow player position
     {
-
         playerPos = playerTracker.gameObject.transform.position;
 
-        navigator.SetDestination(playerPos);
-        walkCycle.SetBool("isEnemyWalk", true);
+        if(shooting == false) {
+
+            navigator.SetDestination(playerPos);
+            walkCycle.SetBool("isEnemyWalk", true);
+
+        }
 
     }
 
     public void trackSound()
     { // function for enemy to follow sound position
 
-        navigator.SetDestination(soundPos);
-        walkCycle.SetBool("isEnemyWalk", true);
-
+        if (shooting == false)
+        {
+            navigator.SetDestination(soundPos);
+            walkCycle.SetBool("isEnemyWalk", true);
+        }
     }
 
     public void patrol()
@@ -483,15 +488,21 @@ public class EnemyAI : MonoBehaviour
         Vector3 dirToTarget = (playerTracker.transform.position - transform.position).normalized;
         float targetDistance = Vector3.Distance(transform.position, playerTracker.transform.position);
 
-        if (Physics.Raycast(transform.position, dirToTarget, targetDistance, targetMask))
+        if (Physics.Raycast(transform.position, dirToTarget, targetDistance,targetMask))
         {
+            if(playerSeen == true && playerInShootingRange == true)
+            {
 
-            Debug.Log("hit player with raycast");
+                Debug.Log("hit player with raycast");
+
+                //gm.GetComponent<GM>().StartCoroutine("Fade");
+                //walkCycle.SetBool("isShooting", true);
+                gm.GetComponent<GM>().health -= 1;
+
+            }
 
             ShootingSource.Play();
-            //gm.GetComponent<GM>().StartCoroutine("Fade");
-            //walkCycle.SetBool("isShooting", true);
-            gm.GetComponent<GM>().health -= 1;
+
         }
 
         //gm.GetComponent<GM>().StartCoroutine("Fade");
