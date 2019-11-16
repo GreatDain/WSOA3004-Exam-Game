@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Audio;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Truck : MonoBehaviour
 {
@@ -21,12 +23,22 @@ public class Truck : MonoBehaviour
     bool changing = false;
 
     public int currentPath = 0;
+
+    public AudioSource source;
+
     // Start is called before the first frame update
+
+    private void Awake()
+    {
+        currentPath = 0;
+    }
+
     void Start()
     {
         navigator.speed = moveSpeed;
 
         navigator.Warp(gameObject.transform.position);
+
     }
 
     // Update is called once per frame
@@ -37,6 +49,14 @@ public class Truck : MonoBehaviour
         if (navigator.remainingDistance == 0 && changing == false) {
 
             StartCoroutine(callDelay());
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "EndPath")
+        {
+            Destroy(gameObject);
         }
     }
 

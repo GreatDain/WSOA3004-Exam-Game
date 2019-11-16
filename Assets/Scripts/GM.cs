@@ -28,6 +28,7 @@ public class GM : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         var pp = Camera.main.GetComponent<PostProcessingBehaviour>().profile;
 
         if (Input.GetKeyDown(KeyCode.L) && health < 3)

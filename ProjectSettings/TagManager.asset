@@ -21,6 +21,8 @@ TagManager:
   - Waypoint
   - Gate
   - Gravel
+  - EndPath
+  - Car
   layers:
   - Default
   - TransparentFX

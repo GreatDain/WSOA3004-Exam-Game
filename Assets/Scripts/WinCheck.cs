@@ -2,17 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class WinCheck : MonoBehaviour
 {
 
-    public GameObject winText;
+    public Text winText;
 
     // Start is called before the first frame update
 
     void Start()
     {
-        
+        winText.enabled = false;
     }
 
     // Update is called once per frame
@@ -22,9 +23,9 @@ public class WinCheck : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Car")
         {
             print("WEEENER");
             StartCoroutine(delayReturn());
@@ -34,7 +35,7 @@ public class WinCheck : MonoBehaviour
     IEnumerator delayReturn()
     {
 
-        winText.SetActive(true);
+        winText.enabled = true;
 
         yield return new WaitForSeconds(5);
 
