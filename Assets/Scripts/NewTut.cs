@@ -97,6 +97,10 @@ public class NewTut : MonoBehaviour
         {
             ObjectiveThree();
         }
+        else if (prefabR.GetComponent<PlayerWaypoint>().checkpoint == true && counter == 3f)
+        {
+            ObjectiveFour();
+        }
     }
 
     public void ObjectiveOne()
@@ -133,9 +137,9 @@ public class NewTut : MonoBehaviour
 
     public void ObjectiveThree()
     {
-        StartCoroutine("Objectives");
         Debug.Log("Obj 3");
         objective2.enabled = false;
+        StartCoroutine("Objectives");
         oldPrefabR = prefabR;
         prefabR.GetComponent<PlayerWaypoint>().checkpoint = false;
         prefabR = Instantiate(prefabR, new Vector3(-2030.538f, 18.175f, -580.7215f), transform.rotation);
@@ -145,6 +149,17 @@ public class NewTut : MonoBehaviour
         StartCoroutine("Sprint");
         sprintAbility = true;
         foodObjective.enabled = true;
+        counter++;
+    }
+
+    public void ObjectiveFour()
+    {
+        Debug.Log("Obj 4");
+        foodObjective.enabled = false;
+        StartCoroutine("Objectives");
+        prefabR.SetActive(false);
+        Destroy(GameObject.Find("WaypointMarker(Clone)"));
+        escapeObjective.enabled = true;
         counter++;
     }
 
