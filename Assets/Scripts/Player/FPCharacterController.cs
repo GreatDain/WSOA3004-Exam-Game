@@ -17,6 +17,8 @@ public class FPCharacterController : MonoBehaviour
     public bool isSneak = false;
     public bool cooldown = false;
     public AudioSource audioSource;
+    public AudioSource bananaSource;
+    public AudioSource cageSource;
     public float stableVol;
     public bool isClimb = false;
     public bool cageOpen = false;
@@ -163,7 +165,7 @@ public class FPCharacterController : MonoBehaviour
         }
 
         //Adds sprint functionality. Speeds up animation accordingly.
-        if (GM.GetComponent<Tutorial>().sprintAbility == true)
+        if (GM.GetComponent<NewTut>().sprintAbility == true)
         {
             if (!isSprint && translation > 0 && Input.GetKeyDown(KeyCode.LeftShift) && cooldown == false)
             {
@@ -185,7 +187,7 @@ public class FPCharacterController : MonoBehaviour
         }
 
         //Adds enhanced sneak functionality. Slows down animation accordingly.
-        if (GM.GetComponent<Tutorial>().sneakAbility == true)
+        if (GM.GetComponent<NewTut>().sneakAbility == true)
         {
             if (Input.GetKeyDown(KeyCode.LeftControl))
             {
@@ -238,6 +240,7 @@ public class FPCharacterController : MonoBehaviour
             //other.gameObject.transform.rotation = Quaternion.Slerp(other.gameObject.transform.rotation, Quaternion.Euler(-90, 0, 0), 2 * Time.deltaTime);
             animator.SetBool("isOpen", true);
             cageOpen = true;
+            cageSource.Play();
             interactCage.enabled = false;
         }
 
@@ -294,16 +297,17 @@ public class FPCharacterController : MonoBehaviour
 
         if (isShot == false)
         {
-
             isShot = true;
         }
 
         else {
 
             isShot = false;
-
         }
+    }
 
-
+    public void Banana()
+    {
+        bananaSource.Play();
     }
 }

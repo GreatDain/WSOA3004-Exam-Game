@@ -21,7 +21,7 @@ public class Tutorial : MonoBehaviour
     GameObject FPS;
     public GameObject prefab;
     GameObject oldPrefab;
-    public GameObject banana;
+    //public GameObject banana;
     public bool sprintAbility = false;
     public bool sneakAbility = false;
     public int counter;
