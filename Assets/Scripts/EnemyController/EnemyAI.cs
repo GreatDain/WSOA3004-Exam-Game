@@ -26,12 +26,12 @@ public class EnemyAI : MonoBehaviour
 
     public Animator walkCycle;
 
-    public Vector3 anchorPos;
+    Vector3 anchorPos;
     Vector3 playerPos;
-    Vector3 soundPos;
+    public Vector3 soundPos;
 
 
-    bool changing = false;
+    public bool changing = false;
     bool shooting = false;
     bool rotated = false;
     public bool searching = false;
@@ -85,6 +85,8 @@ public class EnemyAI : MonoBehaviour
     private Quaternion currentRotationGoal;
     private Quaternion sourceRotation;
 
+    public Vector3 destination;
+    public float remaining;
 
     void Start()
     {
@@ -172,6 +174,9 @@ public class EnemyAI : MonoBehaviour
 
     private void ReturnUpdate()
     {
+        searching = false;
+        changing = false; // resets for future use
+
         navigator.speed = moveSpeed;
 
         returnToPath();
@@ -199,7 +204,7 @@ public class EnemyAI : MonoBehaviour
 
         if (playerSeen == true && playerInShootingRange == false)
         {
-            StopAllCoroutines();
+            StopCoroutine("enemyShoot");
             shooting = false;
             walkCycle.SetBool("isShooting", false);
             trackPlayer();// tracks player position and follows when in line of sight
@@ -223,7 +228,7 @@ public class EnemyAI : MonoBehaviour
 
         if (playerSeen == false && playerInShootingRange == false)// if any player exits range
         {
-            StopAllCoroutines(); // cancels shooting function
+            StopCoroutine("enemyShoot"); ; // cancels shooting function
             shooting = false;
             walkCycle.SetBool("isShooting", false);
             currentState = AISTATE.SEARCH; // sets player to search for sound
@@ -287,17 +292,20 @@ public class EnemyAI : MonoBehaviour
             StartCoroutine("searchSound"); // interupts patrol to search in the area of the sound
         }
 
+        destination = navigator.destination;
+        remaining = navigator.remainingDistance;
+
         if (searching == true && changing == true)
         {
 
             trackSound(); // updates sound position due to new sounds
 
+
             if (navigator.remainingDistance == 0) // if reaches sound destination and has not detected the player, enemy returns to patrol
             {
 
                 currentState = AISTATE.RETURN;
-                searching = false;
-                changing = false; // resets for future use
+                
                 walkCycle.SetBool("isEnemyWalk", false);
             }
         }
@@ -341,7 +349,7 @@ public class EnemyAI : MonoBehaviour
     {
         if (playerSeen == false && playerInShootingRange == false)// if any player exits range
         {
-            StopAllCoroutines(); // cancels shooting function
+            StopCoroutine("enemyShoot"); ; // cancels shooting function
             shooting = false;
             walkCycle.SetBool("isShooting", false);
             walkCycle.SetBool("isEnemyWalk", true);
@@ -369,7 +377,7 @@ public class EnemyAI : MonoBehaviour
                 currentState = AISTATE.PURSUE; // calles pursue if player is seen
             }
 
-            if (Player.gameObject.GetComponent<FPCharacterController>().stableVol >= 0.4f && playerSeen == false )
+            else if (Player.gameObject.GetComponent<FPCharacterController>().stableVol >= 0.4f )
             {
 
                 soundPos = Player.gameObject.transform.position;
@@ -459,7 +467,7 @@ public class EnemyAI : MonoBehaviour
         {
 
             playerInShootingRange = false;
-            StopAllCoroutines();
+            StopCoroutine("enemyShoot"); ;
             walkCycle.SetBool("isShooting", false);
             shooting = false;
 
