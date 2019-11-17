@@ -9,6 +9,7 @@ public class NewUI2 : MonoBehaviour
     public GameObject healthTicket;
     public GameObject objectiveTicketContainer;
     public GameObject notificationTicket;
+    public GameObject abilityLight;
     public GameObject blueGlass;
     public GameObject redGlass;
     public GameObject greenGlass;
@@ -165,6 +166,8 @@ public class NewUI2 : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Y))// place holder for sprint gaining ability
         {
             notificationTicketAnimator.SetBool("ShowNotification1", true);
+            abilityLight.SetActive(true);
+            Invoke("AbilityLightOff", 1f);
         }
 
         if (Input.GetKeyDown(KeyCode.U))// place holder for how to Sprint.
@@ -175,12 +178,19 @@ public class NewUI2 : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.I))// place holder for gaining sneak ability
         {
             notificationTicketAnimator.SetBool("ShowNotification3", true);
+            abilityLight.SetActive(true);
+            Invoke("AbilityLightOff", 1f);
         }
 
         if (Input.GetKeyDown(KeyCode.O))// place holder for how to sneak
         {
             notificationTicketAnimator.SetBool("ShowNotification4", true);
         }
+    }
+
+    void AbilityLightOff ()
+    {
+        abilityLight.SetActive(false);
     }
 
     //invoking functions that make objective animations false
