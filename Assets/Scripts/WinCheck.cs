@@ -6,14 +6,15 @@ using UnityEngine.UI;
 
 public class WinCheck : MonoBehaviour
 {
-
-    public Text winText;
+   public Text winText;
+   public GameObject promptTicket;
 
     // Start is called before the first frame update
 
     void Start()
     {
         winText.enabled = false;
+        promptTicket.SetActive(false);
     }
 
     // Update is called once per frame
@@ -36,6 +37,7 @@ public class WinCheck : MonoBehaviour
     {
 
         winText.enabled = true;
+        promptTicket.SetActive(true);
 
         yield return new WaitForSeconds(5);
 

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class FPCharacterController : MonoBehaviour
 {
+    public GameObject promptTicket;
     private float speedNorm = 15f;
     private float sprint = 30f;
     private float speed = 15f;
@@ -242,6 +243,7 @@ public class FPCharacterController : MonoBehaviour
             cageOpen = true;
             cageSource.Play();
             interactCage.enabled = false;
+            promptTicket.SetActive(false);
         }
 
         if (other.gameObject.tag == "Gate" && Input.GetKeyUp(KeyCode.E))
@@ -250,6 +252,7 @@ public class FPCharacterController : MonoBehaviour
             gateAnim.SetBool("gateOpen", true);
             gateOpen = true;
             interactGate.enabled = false;
+            promptTicket.SetActive(false);
         }
 
         if (other.gameObject.tag == "Gate2" && Input.GetKeyUp(KeyCode.E))
@@ -258,6 +261,7 @@ public class FPCharacterController : MonoBehaviour
             gateAnim2.SetBool("gateOpen", true);
             gateOpen2 = true;
             interactGate.enabled = false;
+            promptTicket.SetActive(false);
         }
     }
 
@@ -267,11 +271,13 @@ public class FPCharacterController : MonoBehaviour
         if (other.gameObject.tag == "Cage")
         {
             interactCage.enabled = true;
+            promptTicket.SetActive(true);
         }
 
         if (other.gameObject.tag == "Gate" || other.gameObject.tag == "Gate2")
         {
             interactGate.enabled = true;
+            promptTicket.SetActive(true);
         }
     }
 
@@ -280,11 +286,13 @@ public class FPCharacterController : MonoBehaviour
         if (other.gameObject.tag == "Cage")
         {
             interactCage.enabled = false;
+            promptTicket.SetActive(false);
         }
 
         if (other.gameObject.tag == "Gate" || other.gameObject.tag == "Gate2")
         {
             interactGate.enabled = false;
+            promptTicket.SetActive(false);
         }
 
         if (other.gameObject.tag == "Gravel" || other.gameObject.tag == "Grass")

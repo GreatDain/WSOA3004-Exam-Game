@@ -6,6 +6,8 @@ using UnityEngine.Audio;
 
 public class NewTut : MonoBehaviour
 {
+    public GameObject promptTicket;
+    public GameObject abilityLight;
     public Text objective1;
     public Text objective2;
     public Text foodObjective;
@@ -173,20 +175,33 @@ public class NewTut : MonoBehaviour
     private IEnumerator Sprint()
     {
         sprintUnlocked.enabled = true;
+        promptTicket.SetActive(true);
+        abilityLight.SetActive(true);
+
         yield return new WaitForSeconds(1.5f);
         sprintUnlocked.enabled = false;
+        promptTicket.SetActive(false);
+        abilityLight.SetActive(false);
         howToSprint.enabled = true;
+        promptTicket.SetActive(true);
         yield return new WaitForSeconds(3f);
         howToSprint.enabled = false;
+        promptTicket.SetActive(false);
     }
 
     private IEnumerator Sneak()
     {
         sneakUnlocked.enabled = true;
+        promptTicket.SetActive(true);
+        abilityLight.SetActive(true);
         yield return new WaitForSeconds(1.5f);
         sneakUnlocked.enabled = false;
+        promptTicket.SetActive(false);
+        abilityLight.SetActive(false);
         howToSneak.enabled = true;
+        promptTicket.SetActive(true);
         yield return new WaitForSeconds(3f);
         howToSneak.enabled = false;
+        promptTicket.SetActive(false);
     }
 }
