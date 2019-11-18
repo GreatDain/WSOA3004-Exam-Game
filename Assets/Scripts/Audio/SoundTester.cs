@@ -13,37 +13,48 @@ public class SoundTester : MonoBehaviour
     public AudioSource grassAudioSource;         //Audio source ref/var
     public AudioSource gravelAudioSource;         //Audio source ref/var
     public AudioSource walkAudioSource;         //Audio source ref/var
-    public AudioSource bgSound;
+    public AudioSource bgSound, bgSound2, bgSound3; //BG Audi
     public AudioSource breatheAudioSource;
+    public AudioSource eatAudioSource;
+    public AudioSource hideAudioS;              //When player hides in bush audio
     //AUDIO CLIPS
     public AudioClip grassSFX;             //Actual Sound ref/var
     public AudioClip gravelSFX;            //Actual Sound ref/var
     public AudioClip walkSFX;             //Actual Sound ref/var
     public AudioClip breatheSFX;
-    public AudioClip bgSFX;
+    public AudioClip bgSFX1, bgSFX2, bgSFX3;
+    public AudioClip eatSFX;
+    public AudioClip hideClip;
     //TEXTURE BOOLEANS
-    public bool onGrass;            //is the player on grass?
-    public bool onGravel;
+    private bool onGrass;            //is the player on grass?
+    private bool onGravel;
     //SPRINT TOGGLE
     private bool isRunning = false;
     /// <summary>
     /// Moved some of Sounds scripts code to here
     /// </summary>
     FPCharacterController controller;
+    GM health;
     //road to beta soundtesting
     bool isMoving = false;                  //is is not moving when game starts
 
-    
+
 
     // Start is called before the first frame update
     void Start()
     {
+        //Play different sounds in different locations to make up the environment sounds
+
         bgSound.Play();                 //play background sound
+        bgSound2.Play();                 //play background sound
+        bgSound3.Play();                 //play background sound
+
         controller = gameObject.GetComponent<FPCharacterController>();
+        health = gameObject.GetComponent<GM>(); //check monitor player's health for pick up banana & death
     }
 
     // Update is called once per frame
-   
+
     void Update()
     {
         if (controller.isSprint == true || controller.cooldown == true)
@@ -84,18 +95,19 @@ public class SoundTester : MonoBehaviour
         ////////////////////////////////////////////////////////////////////////////////////
         ///
         //Chck if player is on Grass
-        if((Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0))
+        if ((Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0))
         {
             if (onGrass == true)
             {
                 onGravel = false;                   //player is onGrass not Gravel
-                
+
 
                 //if player is moving play audio else stop audio
                 if (onGrass)
                 {
                     if (!grassAudioSource.isPlaying)
                         grassAudioSource.Play();
+                    print("Playing on grass sound");
                 }
                 else
 
@@ -105,8 +117,8 @@ public class SoundTester : MonoBehaviour
             //chek if player is walking on gravel
             if (onGravel == true)
             {
-                 onGrass = false;                   //player is onGrass not Gravel
-                
+                onGrass = false;                   //player is onGrass not Gravel
+
                 //if player is moving play audio else stop audio
                 if (onGravel)
                 {
@@ -118,6 +130,13 @@ public class SoundTester : MonoBehaviour
 
                     gravelAudioSource.Stop();
             }
+        }
+        //Check if player has consumed a banana/health
+        if (Input.GetKeyDown(KeyCode.E) && health.GetComponent<GM>().health < 3f)
+        {
+            //Player gained health
+            if (!eatAudioSource.isPlaying)
+                eatAudioSource.Play();
         }
 
 
@@ -139,69 +158,26 @@ public class SoundTester : MonoBehaviour
         if (other.gameObject.tag == "Gravel")
         {
             onGravel = true;                        //If player is OnGravel, it is not on grass
-            
+
         }
         else
             onGravel = false;
-        
+
     }
-
-
-    /// <summary>
-    /// We might need to delete the functions below
-    /// </summary>
-    /// 
-    /*
-    //Sound Functions
-    //When player is moving
-    void Moving()
+    //Hiding audioFX stuff
+    private void OnTriggerEnter(Collider other)
     {
-        //play/loop sound whenever the player is moving
-        walkAudioSource.volume = .5f;
-        walkAudioSource.Play();
-    }
-
-    //when player is sprinting (pressed shift)
-    void Running()
-    {
-        //IdleBreathing();
-        breatheAudioSource.pitch = 1.8f;
-        breatheAudioSource.volume = 1f;
-        breatheAudioSource.PlayOneShot(breatheSFX, .7f);
-        breatheAudioSource.loop = true;
-    }
-
-    //when player is stationary
-    void IdleBreathing()
-    {
-        //breatheAudioSource.volume = Random.Range(.3f, .7f);
-        breatheAudioSource.pitch = 1.3f;           //randomise pitch
-        breatheAudioSource.PlayOneShot(breatheSFX,.7f);                                      //randomise volume
-        breatheAudioSource.loop = true;
+        //Hiding SFX
+        //Check if player is hiding the bush tagged ("Hidden")
+        if (other.gameObject.tag == "Hidden")
+        {
+            // if (!hideAudioS.isPlaying)
+            //hideAudioS.PlayOneShot(hideClip, 1f);
+            if (!hideAudioS.isPlaying)
+                hideAudioS.Play();
+                print("Played Hidding SFX");
+        }
 
     }
 
-    void RunningBreathe()
-    {
-        //Player is moving
-        breatheAudioSource.volume = .5f;              //randomise volume
-        breatheAudioSource.pitch = 1.7f;           //randomise pitch
-        breatheAudioSource.Play();
-    }
-
-    void OnGrass()
-    {
-        //play/loop sound whenever the player is moving  
-        //grassAudioSource.volume = .7f;           //randomise volume
-        grassAudioSource.pitch = 1.3f;            //randomise pitch
-        grassAudioSource.PlayOneShot(grassSFX, .7f);                //Play Audio  
-    }
-
-    void OnGravel()
-    {
-        //play/loop sound whenever the player is moving
-        gravelAudioSource.PlayOneShot(gravelSFX, 1f);            //randomise volume); 
-        gravelAudioSource.pitch = 1.3f;            //randomise pitch
-    }
-    */
 }
