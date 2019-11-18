@@ -8,6 +8,7 @@ public class PauseMenu : MonoBehaviour
     public static bool GameIsPaused = false;
 
     public GameObject pauseMenuUI;
+    public GameObject ticketBooth;
     public GameObject gm;
     public GameObject QuitCheck;
     public GameObject Controls;
@@ -43,6 +44,7 @@ public class PauseMenu : MonoBehaviour
     {
         
         pauseMenuUI.SetActive(false);
+        ticketBooth.SetActive(false);
         Time.timeScale = 1f;
         player.GetComponent<MouseLook>().enabled = true;
         GameIsPaused = false;
@@ -51,6 +53,7 @@ public class PauseMenu : MonoBehaviour
     void Pause()
     {
         pauseMenuUI.SetActive(true);
+        ticketBooth.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;
     }
